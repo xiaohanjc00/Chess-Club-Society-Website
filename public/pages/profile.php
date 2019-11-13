@@ -1,3 +1,8 @@
+<?php require_once('../../private/initialise.php'); ?>
+
+<?php $page_title = 'Profile'; ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
+
 <!doctype html>
 
 <html lang="en">
@@ -11,3 +16,5 @@
     
   </body>
 </html>
+
+<?php include(SHARED_PATH . '/footer.php'); ?>
