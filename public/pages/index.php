@@ -44,9 +44,6 @@
                     <h1> KCL Chess Society </h1>
                 </div>
             </div>
-
-
-
         </header>
 
         <h1>Welcome to the KCL Chess Club</h1>
