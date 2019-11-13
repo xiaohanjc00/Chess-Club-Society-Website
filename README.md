@@ -4,7 +4,7 @@ Team Albany
 
 Members of the team:
   - Zeineb Bouchamaoui 
-  - Antoine (Antoine) Gosset
+  - Antoine Gosset
   - Xiaohan Jiang Chen
   - Kerun Qian
   - David Spencer
