@@ -7,6 +7,7 @@
   </head>
 
   <body>
-
+    hello, this is the profile page.
+    
   </body>
 </html>
