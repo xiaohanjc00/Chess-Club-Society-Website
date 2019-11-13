@@ -20,9 +20,9 @@
     
     function confirm_db_connect() {
         if(mysqli_connect_errno()) {
-            $messsage = "Failed database connection: ";
-            $messsage .= mysqli_connect_error();
-            $messsage .= " (" . mysqli_connect_errno() . ")";
+            $message = "Failed database connection: ";
+            $message .= mysqli_connect_error();
+            $message .= " (" . mysqli_connect_errno() . ")";
             exit($message);
         }
     }
