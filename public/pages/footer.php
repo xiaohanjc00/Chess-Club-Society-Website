@@ -10,6 +10,7 @@
     <title>KCL Chess Club</title>
   </head>
 
+
   <body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -91,5 +92,6 @@
             </div>
         </div>
   </footer>
+
 
 </html>
