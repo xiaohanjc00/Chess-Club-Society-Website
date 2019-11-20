@@ -1,3 +1,17 @@
+-- Using MySQL on Codenvy:
+
+-- $ sudo service mysql start
+-- > mysql -u root
+-- > create database chessSociety;
+-- > show databases;
+-- > use chessSociety;
+-- > show tables;
+-- > describe users;
+-- > describe posts;
+-- > exit;
+
+-- Set up the database:
+
 CREATE DATABASE chessSociety;
 
 -- create users table
