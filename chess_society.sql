@@ -17,18 +17,20 @@ CREATE DATABASE chessSociety;
 -- create users table
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  admin BIT(1) NOT NULL, -- 1 for admins
-  first_name VARCHAR(255),
-  last_name VARCHAR(255),
-  dob DATE NOT NULL,
-  gender CHAR(1) NOT NULL, -- 'F' OR 'M' OR 'O'
-  phone VARCHAR(15) NOT NULL,
-  address VARCHAR(255),
-  email VARCHAR(255),
-  username VARCHAR(255),
-  hashed_password VARCHAR(255),
-  PRIMARY KEY (id)
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `admin` BIT(1) NOT NULL, -- 1 for admins
+  `first_name` VARCHAR(255),
+  `last_name` VARCHAR(255),
+  `dob` DATE NOT NULL,
+  `gender` CHAR(1) NOT NULL, -- 'F' OR 'M' OR 'O'
+  `phone` VARCHAR(15) NOT NULL,
+  `address` VARCHAR(255),
+  `rating` INT(3) NOT NULL DEFAULT 0,
+  `picture` varchar(255) DEFAULT "https://cdn3.f-cdn.com/contestentries/1376995/30494909/5b566bc71d308_thumb900.jpg",
+  `email` VARCHAR(255),
+  `username` VARCHAR(255),
+  `hashed_password` VARCHAR(255),
+  PRIMARY KEY (`id`)
 );
 
 ALTER TABLE users ADD INDEX index_username (username);
