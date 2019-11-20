@@ -11,8 +11,8 @@
     function editImage($connection){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         try {
-            $article = mysqli_query($connection,'UPDATE posts set articleImage='. $_POST["link"] .'WHERE articleID = ' .$id);
-        } catch(PDOException $e) {
+          mysqli_query($connection,'UPDATE posts set articleTitle= "'. $_POST["title"] .'" WHERE articleID =' .$id.';');
+       } catch(PDOException $e) {
             echo $e->getMessage();
         }
     }
