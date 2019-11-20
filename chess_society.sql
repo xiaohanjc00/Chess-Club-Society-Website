@@ -1,5 +1,27 @@
 CREATE DATABASE chessSociety;
 
+-- create users table
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  admin BIT(1) NOT NULL, -- 1 for admins
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  dob DATE NOT NULL,
+  gender CHAR(1) NOT NULL,
+  phone VARCHAR(15) NOT NULL,
+  address VARCHAR(255),
+  email VARCHAR(255),
+  username VARCHAR(255),
+  hashed_password VARCHAR(255),
+  PRIMARY KEY (id)
+);
+
+ALTER TABLE users ADD INDEX index_username (username);
+
+
+-- create posts table
+DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
   `articleID` int(11) NOT NULL AUTO_INCREMENT,
   `articleTitle` varchar(255) DEFAULT NULL,
@@ -8,6 +30,8 @@ CREATE TABLE `posts` (
   `articleImage` varchar(255) DEFAULT "https://www.kclsu.org/asset/Organisation/6365/36bed7b8-d864-4aec-bb62-ff643dfb4a6c.jpg?thumbnail_width=280&thumbnail_height=280&resize_type=ResizeFitAll",
   PRIMARY KEY (`articleID`)
 );
+
+-- add data to posts table
 
 insert into posts(articleTitle, articleDesc, articleDate, articleImage) values ("News article 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
 tincidunt, diam vitae vulputate feugiat, sapien mauris vehicula lectus, ac ornare ligula ante in mi. Nam eget nunc nec nunc auctor scelerisque. Sed
