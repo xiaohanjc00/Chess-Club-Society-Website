@@ -50,6 +50,7 @@
     text-decoration: underline;
     text-align: left;
   }
+
   p{
     color: #37474f;
     text-indent: 25px;
@@ -61,11 +62,13 @@
     text-indent: 25px;
     font-size: 25px;
   }
+
   img { 
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 30%;
+
   }
   
   .sidenav {
@@ -80,6 +83,7 @@
   padding-top: 20px;
   border-right: 3px solid black;
 }
+
 .sidenav a {
   padding: 12px 16px 20px 32px;
   text-decoration: none;
@@ -87,14 +91,17 @@
   color: #b4c3cb;
   display: block;
 }
+
 .sidenav a:hover {
   color: #f1f1f1;
 }
+
 .main {
   margin-left: 320px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
+
 </style>
 <head>
 	// <link rel="stylesheet" type="text/css" href="bootstrap-grid.css"> To be changed when using the bootstrap documentation instead of the weblink
@@ -120,7 +127,8 @@
       <li>........</li>
       <li>........</li>
       <li>........</li>
+
 </div>
 </body>
 </html>
-
+-->

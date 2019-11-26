@@ -1,4 +1,5 @@
 <?php 
+
     function url_for($path) {
         if($path[0] != '/') {
             // add slash at start
@@ -56,4 +57,5 @@
         }
         return $output;
     }
+
 ?>
