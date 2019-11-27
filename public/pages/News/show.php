@@ -1,5 +1,8 @@
-<link rel="stylesheet" href="/stylesheets/newsStyle.css">
-<div class="title">
+<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+
+
+<link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">
+<div class="header">
   <h2>News</h2>
 </div>
 
@@ -10,11 +13,11 @@
         $dbuser = 'root';
         $dbpass = '';
         $dbname = 'chessSociety';
-
+    
         $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
+      
     try {
-        $article = mysqli_query($connection,'SELECT * FROM posts WHERE articleID =' .$_GET['id']);
+        $article = find_article_by_id($_GET['id']);
         if (mysqli_num_rows($article) > 0) {
             while($row = mysqli_fetch_assoc($article)){
                 date_default_timezone_get();
@@ -30,15 +33,15 @@
                         echo '<h1>'.$row['articleTitle'].'</h1>';
                         echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['articleDate'])).'</p>';
                         echo '<img class="fakeimg" src="' .$row['articleImage'] .'"">';
-                        echo '<p>'.$row['articleDesc'].'</p>';
+                        echo '<p>'.$row['articleDesc'].'</p>';                            
                     echo '</div>';
                 }
             }
         }
         else{
             echo '<div class="card">';
-                    echo '<p> No articles could be found.</p>';
-                echo '</div>';
+                    echo '<p> No articles could be found.</p>';         
+                echo '</div>'; 
         }
 
     } catch(PDOException $e) {
@@ -49,3 +52,4 @@
   </div>
 
   </div>
+</div>

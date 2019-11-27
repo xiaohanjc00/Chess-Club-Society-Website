@@ -1,6 +1,9 @@
-<link rel="stylesheet" href="/stylesheets/eventsStyle.css">
+<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
 
-<div class="title">
+<?php $page_title = 'News'; ?>
+<link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">
+
+<div class="header">
   <h2>News</h2>
 </div>
 
@@ -11,26 +14,18 @@
           preg_match("/(?:\w+(?:\W+|$)){0,$count}/", $sentence, $matches);
           return $matches[0];
       }
-
-        $dbhost = 'localhost';
-        $dbuser = 'root';
-        $dbpass = '';
-        $dbname = 'chessSociety';
-
-        $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
+    
+      
     try {
-
-        $article = mysqli_query($connection,'SELECT * FROM posts ORDER BY articleDate DESC');
+        $article = find_all_articles();
         if (mysqli_num_rows($article) > 0) {
             while($row = mysqli_fetch_assoc($article)){
                 date_default_timezone_get();
                 $currentDateTime = date('Y-m-d');
                 $currentdatetime1 =  date_create($currentDateTime);
-                $articledatetime2 =  date_create(date('Y-m-d',strtotime($row['articleDate'])));
-                $dDiff = $articledatetime2 ->diff($currentdatetime1);;
-                if($dDiff->format('%r%a') > 7){
-                    mysqli_query($connection, 'DELETE FROM posts WHERE articleID='.$row['articleID'] );
+                $articledatetime2 =  date_create(date('Y-m-d',strtotime($row['articleExpiry'])));
+                if($currentdatetime1 == $articledatetime2 ){
+                    delete_article($row['articleID']); 
                 }
                 else{
                     echo '<div class="card">';
@@ -38,41 +33,41 @@
                     echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="arrow down"> </i>';
                     echo '<span class="caret"></span></button>';
                     echo '<div class="dropdown-content ">';
-                    echo  '<a href="editArticle.php?id='.$row['articleID'].'">Edit</a>';
-                    echo '<a href="deleteArticle.php?id='.$row['articleID'].'">Delete</a>';
+                    echo  '<a href="edit.php?id='.$row['articleID'].'">Edit</a>';
+                    echo '<a href="delete.php?id='.$row['articleID'].'">Delete</a>';
+                    echo '</div>';   
                     echo '</div>';
-                    echo '</div>';
-                    echo '<h1><a href=".php?id='.$row['articleID'].'">'.$row['articleTitle'].'</a></h1>';
+                    echo '<h1><a href="show.php?id='.$row['articleID'].'">'.$row['articleTitle'].'</a></h1>';
                     echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['articleDate'])).'</p>';
                     echo '<img class="fakeimg" src="' .$row['articleImage'] .'"">';
-                    echo '<p>'. get_words($row['articleDesc']).'</p>';
-                    echo '<p><a href="viewArticle.php?id='.$row['articleID'].'">Read More</a></p>';
+                    echo '<p>'. get_words($row['articleDesc']).'</p>';                
+                    echo '<p><a href="show.php?id='.$row['articleID'].'">Read More</a></p>';                
                     echo '</div>';
                 }
             }
         }
         else{
             echo '<div class="card">';
-                    echo '<p> No articles could be found.</p>';
-                echo '</div>';
+                    echo '<p> No articles could be found.</p>';         
+                echo '</div>'; 
         }
 
     } catch(PDOException $e) {
         echo $e->getMessage();
     }
-?>
+    ?>
   </div>
   <div class="rightcolumn">
-
+  
     <div class="card">
       <h3>Popular Post</h3>
     </div>
-
+    
     <div class="card">
-     <form action="createArticle.php">
+     <form action="new.php">
         <input type="submit" value="Create new article" />
     </form>
-
+    
 
     </div>
   </div>

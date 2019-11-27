@@ -1,22 +1,22 @@
-<?php
+<?php 
 
     $dbhost = 'localhost';
     $dbuser = 'root';
     $dbpass = '';
     $dbname = 'chessSociety';
-
+    
     $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
+    
 
     function editImage($connection){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         try {
-          mysqli_query($connection,'UPDATE posts set articleTitle= "'. $_POST["title"] .'" WHERE articleID =' .$id.';');
-       } catch(PDOException $e) {
+            $article = mysqli_query($connection,'UPDATE posts set articleImage="'. $_POST["link"] .'" WHERE articleID = ' .$id);
+        } catch(PDOException $e) {
             echo $e->getMessage();
         }
     }
-
+    
     function editTitle($connection){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         echo $id;
@@ -27,7 +27,7 @@
             echo $e->getMessage();
         }
     }
-
+    
     function editDescription($connection){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
          try {
@@ -36,25 +36,25 @@
             echo $e->getMessage();
         }
     }
-
+    
 ?>
 <?php
-    echo "<form  action=editArticle.php?id=".$_GET['id'] ." method='post'>  " ;
+    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'>  " ;
     echo "Image Link: <input type='text' name='link' />  ";
     echo "<input type='submit' name='image' value ='Add/Edit image'/> <br>";
     echo "</form>";
 
-    echo "<form  action= editArticle.php?id=".$_GET['id'] ."  method='post'> ";
+    echo "<form  action= edit.php?id=".$_GET['id'] ."  method='post'> ";  
     echo "Title: <input type='text' name='title' />  ";
     echo "<input type='submit' name='editTitle' value ='Edit title'/> <br>";
     echo "</form>";
 
-    echo "<form  action=editArticle.php?id=".$_GET['id'] ." method='post'> ";
+    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'> ";
     echo "Description: <input type='text' name='description' />"  ;
     echo "<input type='submit' name='editDescription' value ='Edit description'/> <br>";
     echo "</form>";
 
-    echo "<form  action='news.php' method='post'> ";
+    echo "<form  action='index.php' method='post'> ";
     echo "<input type='submit' name='done' value ='Done'/> <br>";
     echo "</form>";
 
@@ -67,5 +67,5 @@
     else if($_POST['editDescription']){
         editDescription($connection);
     }
-
+    
     ?>
