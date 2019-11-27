@@ -34,6 +34,11 @@
       <a href="<?php echo url_for('/edit_profile.php?id=' . h(u($user['id']))); ?>">Edit Profile</a></br>
       <a href="<?php echo url_for('/delete_profile.php?id=' . h(u($admin['id']))); ?>">Cancel membership</a></br>
     </p>
+</div>
+
+<!-- <?php include(SHARED_PATH . '/footer.php'); ?> -->
+
+=======
   </div>
 </div>
 

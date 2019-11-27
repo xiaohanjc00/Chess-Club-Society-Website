@@ -15,6 +15,7 @@
     define("PUBLIC_PATH", PROJECT_PATH . '/public');
     define("SHARED_PATH", PRIVATE_PATH . '/shared');
     
+    /** 
     // Assign root URL to a PHP constant
     $public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7;
     $doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
@@ -27,5 +28,5 @@
     
     $db = db_connect();
     $errors = [];    
-
+    */
 ?>
