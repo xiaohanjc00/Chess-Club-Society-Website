@@ -30,7 +30,7 @@
             $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
             try {
                 echo $_POST["title"];
-                $insertqry='INSERT INTO posts(articleTitle, articleDesc, articleDate) values ("' . $_POST["title"] . '","' . $_POST["description"] . '", now());';
+                $insertqry='INSERT INTO posts(articleTitle, articleDesc, articleDate) values ("' . $_POST["title"] . '","' . $_POST["date"] . '", now());';
                 $article = mysqli_query($connection, $insertqry);
             } catch(PDOException $e) {
                 echo $e->getMessage();
@@ -51,9 +51,9 @@
 
   <form  action="createEvent.php" method="post">
   
-    Event Name:  <input type="text" name="Ename"/><br><br>
+    Event Title:  <input type="text" name="title"/><br><br>
   
-    Event Date: <input type="datetime-local" name="Edaytime"/><br><br>
+    Event Date: <input type="datetime-local" name="date"/><br><br>
 
     <!--Article Title: <input type="text" name="title" /><br>
 
