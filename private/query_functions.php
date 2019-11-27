@@ -48,7 +48,7 @@
   function insert_article($title, $description) {
     global $db;
     
-    $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate) values ("' . $title . '","' . $description . '", now());'
+    $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate) values ("' . $title . '","' . $description . '", now());';
     $result = mysqli_query($db, $sql);
     if($result) {
       return true;
@@ -60,10 +60,10 @@
     }
   }
   
-  function insert_article($title, $description, $link) {
+  function insert_article_image($title, $description, $link) {
     global $db;
     
-    $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate, articleImage) values ("' . $title . '","' . $description . '", now());'
+    $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate, articleImage) values ("' . $title . '","' . $description . '", now());';
     $result = mysqli_query($db, $sql);
     if($result) {
       return true;
@@ -73,10 +73,27 @@
       db_disconnect($db);
       exit;
     }
-  }function insert_tournament($tournamentOrganizer, $tournamentName, $tournamentDate, $deadl) {
+  }
+  
+  function insert_tournament($tournamentOrganizer, $tournamentName, $tournamentDate, $deadline) {
     global $db;
     
-    $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate, articleImage) values ("' . $title . '","' . $description . '", now());'
+    $sql = 'INSERT INTO tournament(tournamentOrganizer, tournamentName, tournamentDate, deadline) values ("' . $tournamentOrganizer . '","' . $tournamentName . '", "' .$tournamentDate . '", "'. $deadline. '");';
+    $result = mysqli_query($db, $sql);
+    if($result) {
+      return true;
+    } else {
+      // DELETE failed
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
+    }
+  }
+  
+  function delete_tournament($id) {
+    global $db;
+    
+    $sql = 'DELETE FROM tournament WHERE tournamentID =' . $id;
     $result = mysqli_query($db, $sql);
     if($result) {
       return true;
