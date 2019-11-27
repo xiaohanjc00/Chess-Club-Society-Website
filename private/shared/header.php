@@ -9,18 +9,18 @@
     <title>KCL Chess Club</title>
 
     <style>
-    
+
         .topContainer{
             width:100%;
         }
 
         .centeredTitle{
-            font-size:50px; 
-            font-weight:bold; 
-            color:white; 
-            position: absolute; 
-            left: 50%; top: 20%; 
-            transform: translate(-50%, -50%); 
+            font-size:50px;
+            font-weight:bold;
+            color:white;
+            position: absolute;
+            left: 50%; top: 20%;
+            transform: translate(-50%, -50%);
             text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
         }
 
@@ -29,9 +29,9 @@
         }
 
         #kclImage{
-            position:absolute; 
-            left: 0; 
-            top: 0; 
+            position:absolute;
+            left: 0;
+            top: 0;
             width:150px;
         }
 
@@ -77,6 +77,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Member Login</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo url_for('/profile.php'); ?>">Profile</a>
+                </li>
                 <!-- Contact us -->
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact Us</a>
@@ -84,7 +87,7 @@
             </ul>
         </div>
     </nav>
- 
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
