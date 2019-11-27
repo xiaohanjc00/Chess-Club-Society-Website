@@ -25,8 +25,6 @@
 <?php include(SHARED_PATH . '/footer.php'); ?>
 </html>
 =======
-<!-- <?php require_once('../../private/initialise.php'); ?> -->
-<!-- <?php include(SHARED_PATH . '/header.php'); ?> -->
 <!--
 <!doctype html>
 <html>
