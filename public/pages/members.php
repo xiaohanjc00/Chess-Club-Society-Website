@@ -1,12 +1,9 @@
-<!doctype html>
-<html>
-<head>
-	<!-- <link rel="stylesheet" type="text/css" href="bootstrap-grid.css"> To be changed when using the bootstrap documentation instead of the weblink -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
+<?php require_once('../../private/initialise.php'); ?>
 
-	<h1 style="font-size: 50px;", align="center">Team Members</h1>
+<?php include(SHARED_PATH . '/header.php'); ?>
+<?php include(SHARED_PATH . '/navigation.php'); ?>
+
+<h1 style="font-size: 50px;", align="center">Team Members</h1>
 
 <table class="table table-hover table-dark">	<!-- style="width:100%" -->
 	<thead>
@@ -47,6 +44,3 @@
   </tbody>
 	<!-- <?php showMembers(); ?> To Implement in Functions.php to display team members -->
 </table>
-<br>
-</body>
-</html>

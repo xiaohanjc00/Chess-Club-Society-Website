@@ -16,6 +16,7 @@
 
 <?php $page_title = 'Profile'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
+<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <div>
   <div>
