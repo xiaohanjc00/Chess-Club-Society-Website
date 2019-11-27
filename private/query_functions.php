@@ -7,9 +7,9 @@
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
-        $admin = mysqli_fetch_assoc($result);
+        $user = mysqli_fetch_assoc($result);
         mysqli_free_result($result);
-        return $admin;
+        return $user;
     }
 
     function validate_user($user, $options=[]) {

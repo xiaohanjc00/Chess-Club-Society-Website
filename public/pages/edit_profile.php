@@ -9,7 +9,7 @@
 
   if (is_post_request()) {
     // new user details were just submitted
-    $user = []
+    $user = [];
     $user['id'] = $id;
     $user['first_name'] = $_POST['first_name'] ?? '';
     $user['last_name'] = $_POST['last_name'] ?? '';
@@ -34,13 +34,14 @@
 
 <?php $page_title = 'Edit Profile'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
+<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <div>
-  <a href="<?php echo url_for('/profile.php'); ?>">&laquo; Back to Profile</a>
+  <a href="<?php echo url_for('pages/profile.php'); ?>">&laquo; Back to Profile</a>
   <div>
     <h2>Edit Profile</h2>
     <?php echo display_errors($errors); ?>
-    <form action="<?php echo url_for('/edit_profile.php?id=' . h(u($id))); ?>" method="post">
+    <form action="<?php echo url_for('pages/edit_profile.php?id=' . h(u($id))); ?>" method="post">
       <dl>
         <dt>First name</dt><dd><input type="text" name="first_name" value="<?php echo h($user['first_name']); ?>" /></dd>
       </dl>

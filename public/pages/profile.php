@@ -1,4 +1,4 @@
-<?php
+<?php 
   require_once('../../private/initialise.php');
   // require_login();
   $id = $_GET['id'] ?? '1';
