@@ -29,6 +29,14 @@
     return $result;
   }
   
+  function find_tournament_by_id($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournament WHERE tournamentID =" . $id;
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
   
   function delete_article($id) {
     global $db;
@@ -83,7 +91,7 @@
     if($result) {
       return true;
     } else {
-      // DELETE failed
+      // INSERT failed
       echo mysqli_error($db);
       db_disconnect($db);
       exit;
