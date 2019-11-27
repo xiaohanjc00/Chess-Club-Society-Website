@@ -65,9 +65,13 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <!-- News and Events -->
+                <!-- News -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">News and Events</a>
+                    <a class="nav-link" href="#">News</a>
+                </li>
+                <!-- Events -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Events</a>
                 </li>
                 <!-- Members Login -->
                 <li class="nav-item">
