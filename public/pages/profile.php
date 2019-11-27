@@ -1,4 +1,4 @@
-<?php
+<?php 
   require_once('../../private/initialise.php');
   // require_login();
   $id = $_GET['id'] ?? '1';
@@ -16,6 +16,7 @@
 
 <?php $page_title = 'Profile'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
+<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <div>
   <div>
@@ -31,15 +32,9 @@
   </div>
   <div>
     <p>
-      <a href="<?php echo url_for('/edit_profile.php?id=' . h(u($user['id']))); ?>">Edit Profile</a></br>
-      <a href="<?php echo url_for('/delete_profile.php?id=' . h(u($admin['id']))); ?>">Cancel membership</a></br>
+      <a href="<?php echo url_for('pages/edit_profile.php?id=' . h(u($user['id']))); ?>">Edit Profile</a></br>
+      <a href="<?php echo url_for('pages/delete_profile.php?id=' . h(u($admin['id']))); ?>">Cancel membership</a></br>
     </p>
-</div>
-
-<!-- <?php include(SHARED_PATH . '/footer.php'); ?> -->
-
-=======
-  </div>
 </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>

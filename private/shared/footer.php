@@ -1,19 +1,18 @@
-    <!-- Footer -->
     <footer class="page-footer font-small pt-4">
-
+    
         <div style="background-color: #21d192;">
             <div class="container">
-
+    
                 <!-- First row -->
                 <div class="row py-4 mt-3">
-
+    
                     <!-- First grid -->
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <h6 class="text-uppercase font-weight-bold">KCL Chess Club</h6>
                     <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 125px;">
                     <p>Come and join our Chess Club and learn how to play chess as a PRO</p>   
                     </div>
-
+    
                     <!-- Second grid -->
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <h6 class="text-uppercase font-weight-bold">Useful Links</h6>
@@ -22,9 +21,9 @@
                         <p><a href="#!" style="color:black;">News and events</a></p>
                         <p><a href="#!" style="color:black;">Members</a></p>
                         <p><a href="#!" style="color:black;">Contact Us</a></p>
-
+    
                     </div>
-
+    
                     <!-- Grid column -->
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <h6 class="text-uppercase font-weight-bold">Contact</h6>
@@ -33,23 +32,23 @@
                         <p><i class="fa fa-envelope mr-3"></i> kclchessclub.kcl.ac.uk</p>
                         <p><i class="fa fa-phone mr-3"></i> + 44 020 7848 1588</p>
                         <p><i class="fa fa-print mr-3"></i> + 44 020 7836 5454</p>
-
+    
                     </div>
                 </div>
-
+    
                 <!-- Second row -->
                 <div class="row py-4 d-flex align-items-center">
-
+    
                     <!-- First Grid -->
                     <div class="col-md-6 col-lg-7 text-center text-md-left mb-4 mb-md-0">
                     <h6 class="mb-0" style="font-weight:bold;">Get connected with us on social networks!</h6>
                     </div>
-
+    
                     <!-- Second Grid -->
                     <div class="col-md-6 col-lg-5 text-center text-md-right">
                         <!-- Add icon library -->
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    
                         <a href="https://www.facebook.com/kclsupage/" class="fb-ic" style="color:black;">
                             <i class="fa fa-facebook-f white-text mr-4"> </i>
                         </a>
@@ -59,10 +58,10 @@
                         <a href="https://www.instagram.com/kclsu/" class="ins-ic" style="color:black;">
                             <i class="fa fa-instagram white-text"> </i>
                         </a>
-
+    
                     </div>
                 </div>
-
+    
                 <!-- Third row -->
                 <div class="footer-copyright text-center py-3" style="font-size:12px;font-weight:bold;">© 2019 Copyright:
                     <a href="#" style="color:black;"> kclchessclub.com</a>
@@ -70,4 +69,8 @@
                 
             </div>
         </div>
-  </footer>
+    </footer>
+  </body>
+</html>
+
+<?php db_disconnect($db); ?>
