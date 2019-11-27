@@ -44,8 +44,20 @@
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
+.error {color: #FF0000;}
 
 input[type=text], select {
+  width: 100%;
+  color: #37474f;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #37474f;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=password]{
   width: 100%;
   color: #37474f;
   padding: 12px 20px;
@@ -89,15 +101,22 @@ input[type=submit]:hover {
   <h1 style="font-size: 40px;">Join the Chess Society now !</h1>
   
   <p>Tell us a bit about yourself</p>
-  <form width=" 800px;" margin="auto;" style="font-size:18px; color: #37474f;" align="left" action="......TO BE CHANGED....../.php" method="post">
-    Name : <input type="text" name="Name"><br>
-    Address : <input type="text" name="Address"><br>
+  <form width=" 800px;" margin="auto;" style="font-size:17px; color: #37474f;" align="left" action="......TO BE CHANGED....../.php" method="post">
+    Name : <span class="error">* <?php echo $nameErr;?></span><input type="text" name="Name"><br>
+    Username : <span class="error">* <?php echo $usernameErr;?></span><input type="text" name="username"><br>
+    Password : <span class="error">* <?php echo $usernameErr;?></span><input type="password" name="password"><br>
+    Date of Birth : <span class="error">* <?php echo $dobErr;?></span><input type="text" name="DOB"><br>
     Phone Number : <input type="text" name="Phone Number"><br>
-    Date of Birth : <input type="text" name="Date of Birth"><br>
-    Gender : <input type="text" name="Gender"><br>
-    username : <input type="text" name="username"><br>
-    Ever played chess before ? <input type="checkbox"><br>
-
+    Address : <input type="text" name="Address"><br>
+    Gender: 
+      <input type="radio" name="gender"> <?php if (isset($gender) && $gender=="male") echo "checked";?> <value="male">Male
+      <input type="radio" name="gender"><?php if (isset($gender) && $gender=="female") echo "checked";?> <value="female">Female
+      <input type="radio" name="gender" ><?php if (isset($gender) && $gender=="other") echo "checked";?> <value="other">Other  
+      <span class="error">* <?php echo $genderErr;?></span><br>
+    Ever played chess before ? <input type="radio" name="skill"> <?php if (isset($skill) && $skill=="never") echo "checked";?><value="never">Never
+      <input type="radio" name="skill"><?php if (isset($skill) && $gender=="yes") echo "checked";?> <value="yes">Yes, few times
+      <input type="radio" name="skill"><?php if (isset($skill) && $gender=="pro") echo "checked";?> <value="pro">I'm a pro  
+      <br>
     
     <input type="submit">
 </form>
