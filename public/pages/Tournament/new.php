@@ -1,5 +1,7 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
+<?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php
        function  createNewArticle(){
             $dbhost = 'localhost';
@@ -26,19 +28,17 @@
 
 
   <div class="leftcolumn">
+    <form  action="new.php" method="post">
 
- 
-  <form  action="new.php" method="post">
-
-    Tournament organizer: <input type="text" name="organizer" /><br>
-
-    Tournament Name: <input type="text" name="name" /><br>
+        Tournament organizer: <input type="text" name="organizer" /><br>
     
-    Tournament Date: <input type="datetime-local" name="date" /><br><br>
-    
-    Registration deadline: <input type="datetime-local" name="deadline" /><br><br>
-    
-    <input type="submit" name="Create" />
+        Tournament Name: <input type="text" name="name" /><br>
+        
+        Tournament Date: <input type="datetime-local" name="date" /><br><br>
+        
+        Registration deadline: <input type="datetime-local" name="deadline" /><br><br>
+        
+        <input type="submit" name="Create" />
     
     </form>
     <?php
@@ -48,5 +48,5 @@
             }
         } 
     ?>
-    
-  </div>
+  
+  <?php include(SHARED_PATH . '/footer.php'); ?>

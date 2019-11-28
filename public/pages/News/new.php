@@ -1,3 +1,8 @@
+<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+
+<?php include(SHARED_PATH . '/header.php'); ?>
+
+<?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php
        function  createNewArticle(){
             $dbhost = 'localhost';
@@ -32,17 +37,17 @@
   <div class="leftcolumn">
 
  
-  <form  action="new.php" method="post">
+    <form  action="new.php" method="post">
 
-    Article Title: <input type="text" name="title" /><br>
-
-    Article Description: <input type="text" name="description" /><br>
+        Article Title: <input type="text" name="title" /><br>
     
-    Image Link: <input type="text" name="link" /><br><br>
-    
-    Expiry date: <input type="datetime-local" name="date" /><br><br>
-    
-    <input type="submit" name="Create" />
+        Article Description: <input type="text" name="description" /><br>
+        
+        Image Link: <input type="text" name="link" /><br><br>
+        
+        Expiry date: <input type="datetime-local" name="date" /><br><br>
+        
+        <input type="submit" name="Create" />
     
     </form>
     <?php
@@ -63,4 +68,5 @@
         } 
     ?>
     
-  </div>
+  
+  <?php include(SHARED_PATH . '/footer.php'); ?>

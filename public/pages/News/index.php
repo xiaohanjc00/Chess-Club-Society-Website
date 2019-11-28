@@ -1,6 +1,8 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
-<?php $page_title = 'News'; ?>
+<?php include(SHARED_PATH . '/navigation.php'); ?>
+
 <link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">
 
 <div class="header">
@@ -30,7 +32,7 @@
                 else{
                     echo '<div class="card">';
                     echo '<div class="dropdown">';
-                    echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="arrow down"> </i>';
+                    echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></i>';
                     echo '<span class="caret"></span></button>';
                     echo '<div class="dropdown-content ">';
                     echo  '<a href="edit.php?id='.$row['articleID'].'">Edit</a>';
@@ -72,3 +74,6 @@
     </div>
   </div>
 </div>
+
+    
+<?php include(SHARED_PATH . '/footer.php'); ?>
