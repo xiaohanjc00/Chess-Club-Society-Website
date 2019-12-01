@@ -1,4 +1,4 @@
-<?php
+<?php 
 
     function find_user_by_id($id) {
         global $db;
@@ -10,6 +10,18 @@
         $user = mysqli_fetch_assoc($result);
         mysqli_free_result($result);
         return $user;
+    }
+    
+    function find_user_by_username($username) {
+        global $db;
+        $sql = "SELECT * FROM users ";
+        $sql .= "WHERE username='" . db_escape($db, $username) . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+        confirm_result_set($result);
+        $user = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
+        return $user;   // assocative array containing all user data
     }
 
     function validate_user($user, $options=[]) {
@@ -69,7 +81,34 @@
     }
 
     function insert_user($user) {
-        // TODO: insert new user into database
+        global $db;
+        $errors = validate_user($user);
+        if (!empty($errors)) {
+            return $errors;
+        }
+        $hashed_password = password_hash($user['password'], PASSWORD_BCRYPT);
+        $sql = "INSERT INTO users ";
+        $sql .= "(first_name, last_name, dob, gender, phone, address, email, username, hashed_password) ";
+        $sql .= "VALUES (";
+        $sql .= "'" . db_escape($db, $admin['first_name']) . "',";
+        $sql .= "'" . db_escape($db, $admin['last_name']) . "',";
+        $sql .= "'" . db_escape($db, $admin['dob']) . "',";
+        $sql .= "'" . db_escape($db, $admin['gender']) . "',";
+        $sql .= "'" . db_escape($db, $admin['phone']) . "',";
+        $sql .= "'" . db_escape($db, $admin['address']) . "',";
+        $sql .= "'" . db_escape($db, $admin['email']) . "',";
+        $sql .= "'" . db_escape($db, $admin['username']) . "',";
+        $sql .= "'" . db_escape($db, $hashed_password) . "'";
+        $sql .= ")";
+        $result = mysqli_query($db, $sql);
+        if($result) {
+            return true;
+        } else {
+            // failed to insert user
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
     }
 
     function update_user($user) {
