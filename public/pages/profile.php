@@ -1,11 +1,10 @@
-<?php 
+<?php
   require_once('../../private/initialise.php');
   // require_login();
   $id = $_GET['id'] ?? '1';
   $user = find_user_by_id($id);
   $first_name = h($user['first_name']);
   $last_name = h($user['last_name']);
-  $picture = "<a><img src=\"" . h($user['picture']) . "\" alt=\"profile picture\" width=110></a>";
   $rating = h($user['rating']);
   $dob = h($user['dob']);
   $gender = h($user['gender']);
@@ -22,7 +21,6 @@
   <div>
       <dl><dt>First name: </dt><dd><?php echo $first_name ?></dd></dl>
       <dl><dt>Last name: </dt><dd><?php echo $last_name ?></dd></dl>
-      <dl><dt>Profile picture: </dt><dd><?php echo $picture ?></dd></dl>
       <dl><dt>Chess rating: </dt><dd><?php echo $rating ?></dd></dl>
       <dl><dt>Date of birth: </dt><dd><?php echo $dob ?></dd></dl>
       <dl><dt>Gender: </dt><dd><?php echo $gender ?></dd></dl>
