@@ -20,7 +20,7 @@
   // needs to check the user is logged in before showing.
   function require_login() {
     if(!is_logged_in()) {
-      redirect_to(url_for('index.php'));
+      redirect_to(url_for('pages/index.php'));
     } else {
       // display page (user is logged in)
     }
