@@ -25,7 +25,7 @@
         }
         if(is_blank($user['dob'])) {
             $errors[] = "Please enter your date of birth.";
-        } elseif (!has_length($user['dob'], array('min' => 7, 'max' => 10))) {
+        } elseif (!has_length_exactly($user['dob'], 10)) {
             $errors[] = "Please enter your date of birth as YYYY-MM-DD.";
         }
         if(is_blank($user['gender'])) {
