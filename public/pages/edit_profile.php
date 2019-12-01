@@ -21,7 +21,7 @@
 
     $result = update_user($user);
     if($result === true) {
-      // $_SESSION['message'] = 'User profile updated';
+      $_SESSION['message'] = 'Your profile was successfully updated!';
       redirect_to(url_for('/pages/profile.php?id=' . $id));
     } else {
       $errors = $result;

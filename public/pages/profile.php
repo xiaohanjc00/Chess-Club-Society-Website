@@ -1,6 +1,6 @@
 <?php
   require_once('../../private/initialise.php');
-  // require_login();
+  require_login();
   $id = $_GET['id'] ?? '1';
   $user = find_user_by_id($id);
   $first_name = h($user['first_name']);
@@ -17,6 +17,7 @@
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php include(SHARED_PATH . '/navigation.php'); ?>
 
+<?php echo display_session_message(); ?>
 <div>
   <div>
       <dl><dt>First name: </dt><dd><?php echo $first_name ?></dd></dl>
