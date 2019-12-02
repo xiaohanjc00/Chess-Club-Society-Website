@@ -5,19 +5,14 @@
 <?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php
        function  createNewEvent(){
-            $dbhost = 'localhost';
-            $dbuser = 'root';
-            $dbpass = '';
-            $dbname = 'chess_society';  
-            $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
       
             try {
                 $insertqry;
-                if(empty($_EVENT["link"])){
-                    $insertqry='INSERT INTO opening_event(eventTitle, eventDesc, eventDate) values ("' . $_EVENT["title"] . '","' . $_EVENT["description"] . '", now());';                    
+                if(empty($_POST["link"])){
+                    $insertqry='INSERT INTO opening_event(eventTitle, eventDesc, eventDate) values ("' . $_POST["title"] . '","' . $_POST["description"] . '", now());';                    
                 }
                 else{
-                    $insertqry='INSERT INTO opening_event(eventTitle, eventDesc, eventDate, eventImage@) values ("' . $_EVENT["title"] . '","' . $_EVENT["description"] . '", now(),"'. $_EVENT["link"] .'" );';
+                    $insertqry='INSERT INTO opening_event(eventTitle, eventDesc, eventDate, eventImage@) values ("' . $_POST["title"] . '","' . $_POST["description"] . '", now(),"'. $_POST["link"] .'" );';
                 }
                 $event = mysqli_query($connection, $insertqry);
             } catch(PDOException $e) {
@@ -28,20 +23,20 @@
 ?>
 
 
-<link rel="stylesheet" href=".../.../newsStyle.css">
+<link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">
 <div class="header">
-  <h2>Events</h2>
+  <h2>New Event</h2>
 </div>
 
 
   <div class="leftcolumn">
 
  
-    <form  action="new.php" method="event">
+    <form  action="new.php" method="post">
 
         Event Title: <input type="text" name="title" /><br>
     
-        Event Description: <input type="text" name="description" /><br>
+        Event Detail: <input type="text" name="description" /><br>
         
         Image Link: <input type="text" name="link" /><br><br>
         
@@ -51,14 +46,14 @@
     
     </form>
     <?php
-        if($_SERVER['REQUEST_METHOD']=='EVENT'){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
             $currentDateTime = date('Y-m-d');
             $currentdatetime1 =  date_create($currentDateTime);
-            if($_EVENT["date"] < $currentdatetime1){
+            if($_POST["date"] < $currentdatetime1){
                 $message = "The expiry date can't come before the date it's displayed on !";
                 echo "<script type='text/javascript'>alert('$message');</script>";
             }
-            if(!empty($_EVENT["description"]) && !empty($_EVENT["title"])){
+            if(!empty($_POST["description"]) && !empty($_POST["title"])){
                 createNewEvent();
             }
             else{

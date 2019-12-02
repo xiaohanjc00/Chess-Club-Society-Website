@@ -1,37 +1,32 @@
+<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
+
+<?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php 
 
-    $dbhost = 'localhost';
-    $dbuser = 'root';
-    $dbpass = '';
-    $dbname = 'chess_society';
-    
-    $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-    
-
-    function editImage($connection){
+    function editImage(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         try {
-            $event = mysqli_query($connection,'UPDATE events set eventImage="'. $_EVENT["link"] .'" WHERE eventID = ' .$id);
+            update_event_image($_POST["link"], $id);
         } catch(PDOException $e) {
             echo $e->getMessage();
         }
     }
     
-    function editTitle($connection){
+    function editTitle(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         echo $id;
          try {
-             echo $_EVENT["title"];
-            mysqli_query($connection,'UPDATE events set eventTitle= "'. $_EVENT["title"] .'" WHERE eventID =' .$id.';');
-        } catch(PDOException $e) {
+         update_event_title($_POST["title"], $id);
+       } catch(PDOException $e) {
             echo $e->getMessage();
         }
     }
     
-    function editDescription($connection){
+    function editDescription(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
          try {
-            $event = mysqli_query($connection,'UPDATE events set eventDescription="'. $_EVENT["description"] .'" WHERE eventID = ' .$id);
+             update_event_description($_POST["description"], $id);
         } catch(PDOException $e) {
             echo $e->getMessage();
         }
@@ -39,33 +34,33 @@
     
 ?>
 <?php
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='event'>  " ;
+    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'>  " ;
     echo "Image Link: <input type='text' name='link' />  ";
     echo "<input type='submit' name='image' value ='Add/Edit image'/> <br>";
     echo "</form>";
 
-    echo "<form  action= edit.php?id=".$_GET['id'] ."  method='event'> ";  
+    echo "<form  action= edit.php?id=".$_GET['id'] ."  method='post'> ";  
     echo "Title: <input type='text' name='title' />  ";
     echo "<input type='submit' name='editTitle' value ='Edit title'/> <br>";
     echo "</form>";
 
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='event'> ";
+    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'> ";
     echo "Description: <input type='text' name='description' />"  ;
     echo "<input type='submit' name='editDescription' value ='Edit description'/> <br>";
     echo "</form>";
 
-    echo "<form  action='index.php' method='event'> ";
+    echo "<form  action='index.php' method='post'> ";
     echo "<input type='submit' name='done' value ='Done'/> <br>";
     echo "</form>";
 
-    if( $_EVENT['image'] ) {
-        editImage($connection);
+    if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['image'] ){
+        editImage();
     }
-    else if( $_EVENT['editTitle'] ) {
-        editTitle($connection);
+    else if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['editTitle'] ) {
+        editTitle();
     }
-    else if($_EVENT['editDescription']){
-        editDescription($connection);
+    else if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['editDescription']){
+        editDescription();
     }
     
     ?>
