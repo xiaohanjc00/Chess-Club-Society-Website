@@ -32,7 +32,6 @@ CREATE TABLE `users` (
   `phone` VARCHAR(15) NOT NULL,
   `address` VARCHAR(255),
   `rating` INT(3) NOT NULL DEFAULT 0,
-  `picture` varchar(255) DEFAULT "https://cdn3.f-cdn.com/contestentries/1376995/30494909/5b566bc71d308_thumb900.jpg",
   `email` VARCHAR(255),
   `username` VARCHAR(255),
   `hashed_password` VARCHAR(255),

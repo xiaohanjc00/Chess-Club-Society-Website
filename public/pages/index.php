@@ -7,7 +7,13 @@
         <br>
         <h1 style="font-size: 50px;">Chess Society</h1>
         <br>
-        <p>Whether you’re the next Magnus Carlsen or a complete beginner just hoping to learn the rules of chess, the chess society has something for you. In our relaxed weekly sessions beginners will be able to learn the rules and basic strategies of the game, while more experienced players can test their skills against worthy opposition.
+        <p>
+            Whether you’re the next Magnus Carlsen or a complete beginner 
+            just hoping to learn the rules of chess, the chess society has 
+            something for you. In our relaxed weekly sessions beginners 
+            will be able to learn the rules and basic strategies of the game, 
+            while more experienced players can test their skills against 
+            worthy opposition.
         </p>
         <img id="subImage" src="../Images/Chess.jpg">
         <br>
