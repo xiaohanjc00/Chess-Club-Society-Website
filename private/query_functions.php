@@ -364,8 +364,74 @@ function update_article_image($link, $id) {
         }
     }
 
-    function delete_user($user) {
-        // TODO: delete a user from the database
+    function get_user($user) {
+        global $db;
+
+        $errors = validate_user($user, ['password_required' => $password_sent]);
+        if (!empty($errors)) {
+            return $errors;
+        }
+
+        if($password_sent) {
+            $hashed_password = password_hash($user['password'], PASSWORD_DEFAULT);
+            $sql .= "hashed_password='" . db_escape($db, $hashed_password) . "', ";
+        }
+
+        $query = "SELECT * FROM users WHERE id='" . db_escape($db, $user['id']) . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $query);
+        
+        if($result) {
+            while($value = mysqli_fetch_assoc($result)) {
+            echo "<br>";
+            echo "<li>Username :" . $value["username"] ."</li>";
+            echo "<li>Email :" . $value["email"] ."</li>";
+            echo "<li>Current Elo :" . $value["current_elo"] ."</li>" ;  //add current_elo to db
+            echo "<li>Last match :" . $value["last_match"] ."</li>";
+              //add last_match to db
+            echo "<p>Forgot password ?</p>";
+            echo "<br>";
+
+            echo "<h3>About myself</h3>";
+            echo "<br>";
+            echo "<li>First Name :" . $value["first_name"] ."</li>";
+            echo "<li>Last Name :" . $value["last_name"] ."</li>";
+            echo "<li>Gender :" . $value["gender"] ."</li>";
+            echo "<li>Address :" . $value["address"] ."</li>";
+            echo "<li>Phone number :" . $value["phone"] ."</li>";
+            echo "<li>Date of Birth :" . $value["dob"] ."</li>";
+            echo "<br>";
+        }
+        } else {
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+
+        mysqli_free_result($result);
     }
 
+    function delete_user($user) {
+        global $db;
+        $password_sent = !is_blank($user['password']);
+        $errors = validate_user($user, ['password_required' => $password_sent]);
+        if (!empty($errors)) {
+            return $errors;
+        }
+        $sql = "DELETE * FROM users";
+        if($password_sent) {
+            $hashed_password = password_hash($user['password'], PASSWORD_DEFAULT);
+            $sql .= "hashed_password='" . db_escape($db, $hashed_password) . "', ";
+        }
+        $sql .= "WHERE id='" . db_escape($db, $user['id']) . "' ";
+        $sql .= "LIMIT 1";
+        $result = mysqli_query($db, $sql);
+        if($result) {
+            return true;
+        } else {
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }
 ?>
