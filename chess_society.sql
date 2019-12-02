@@ -1,5 +1,27 @@
-CREATE DATABASE chessSociety;
 
+-- Using MySQL on Codenvy:
+
+-- $ 
+sudo service mysql start
+-- > mysql -u root
+-- > show databases;
+-- > use chess_society;
+s;
+-- > show tables;
+-- > describe users;
+-- > describe posts;
+-- > describe tournament;
+-- > describe tournamentCoOrganizers;
+-- > describe tournamentParticipant;
+-- > exit;
+
+
+-- Set up the database:
+
+CREATE DATABASE chess_society;
+USE chess_society;
+
+-- create users table
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -29,12 +51,15 @@ INSERT INTO users(admin, first_name, last_name, dob, gender, phone, address, ema
 
 
 
+-- create posts table
+DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
   `articleID` int(11) NOT NULL AUTO_INCREMENT,
   `articleTitle` varchar(255) DEFAULT NULL,
   `articleDesc` TEXT DEFAULT NULL,
   `articleDate` varchar(255) DEFAULT NULL,
   `articleImage` varchar(255) DEFAULT "https://www.kclsu.org/asset/Organisation/6365/36bed7b8-d864-4aec-bb62-ff643dfb4a6c.jpg?thumbnail_width=280&thumbnail_height=280&resize_type=ResizeFitAll",
+
   `articleExpiry` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`articleID`)
 );
@@ -42,12 +67,14 @@ CREATE TABLE `posts` (
 CREATE TRIGGER expiryDate BEFORE INSERT ON posts
     FOR EACH ROW SET NEW.articleExpiry = IFNULL(NEW.articleExpiry,DATE_ADD(STR_TO_DATE(NEW.articleDate, '%Y-%m-%d'), INTERVAL 14 DAY));
 
+-- add data to posts table
 insert into posts(articleTitle, articleDesc, articleDate, articleImage) values ("News article 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
 tincidunt, diam vitae vulputate feugiat, sapien mauris vehicula lectus, ac ornare ligula ante in mi. Nam eget nunc nec nunc auctor scelerisque. Sed
 suscipit maximus interdum. Donec suscipit laoreet velit, eu interdum lorem ultrices in. Etiam dapibus dapibus purus, ut imperdiet velit scelerisque e
 get. Phasellus consequat massa at eros gravida volutpat. Maecenas sollicitudin pharetra felis, et mattis arcu facilisis eu. Vestibulum vitae magna se
 d leo tristique egestas. Phasellus aliquam purus eu justo commodo semper. Morbi sed ipsum tempor, facilisis justo non, facilisis urna. Vivamus lacus
 quam, lobortis quis ipsum a, varius tincidunt arcu. Proin eu pretium quam. Mauris commodo mauris eu purus tempor, in rutrum elit gravida.", NOW(), "https://cdn.pixabay.com/photo/2018/06/10/22/48/pawns-3467512_1280.jpg");
+
 
 insert into posts(articleTitle, articleDesc, articleDate, articleImage, articleExpiry) values ("News article 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
 tincidunt, diam vitae vulputate feugiat, sapien mauris vehicula lectus, ac ornare ligula ante in mi. Nam eget nunc nec nunc auctor scelerisque. Sed
@@ -105,7 +132,7 @@ CREATE TABLE `tournamentCoOrganizers` (
   `tournamentID`int(11) NOT NULL,
   PRIMARY KEY (`organizerID`, `tournamentID`),
   FOREIGN KEY (`tournamentID`)
-    REFERENCES `tournament`(`tournamentID`)
+    REFERENCES `tournament`(`tournamentID`) 
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   FOREIGN KEY (organizerID)
@@ -114,21 +141,8 @@ CREATE TABLE `tournamentCoOrganizers` (
     ON UPDATE CASCADE
 );
 
-CREATE TABLE `event` (
-  `tournamentID` int(11) NOT NULL AUTO_INCREMENT,
-  `tournamentOrganizer` int(11) DEFAULT NULL,
-  `tournamentName` varchar(255) DEFAULT NULL,
-  `tournamentDate` varchar(255) DEFAULT NULL,
-  `deadline` varchar(255) DEFAULT NULL,
-  `winnerID` int(11) DEFAULT NULL,
-  `firstRunnerUpID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`tournamentID`),
-  FOREIGN KEY (tournamentOrganizer)
-    REFERENCES users(id)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE
-);
 
+-- create event table
  CREATE TABLE `opening_event` (
   `eventID` int(11) NOT NULL AUTO_INCREMENT,
   `eventTitle` varchar(255) DEFAULT NULL,
