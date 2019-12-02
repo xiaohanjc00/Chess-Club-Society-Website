@@ -1,37 +1,32 @@
+<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
+
+<?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php 
 
-    $dbhost = 'localhost';
-    $dbuser = 'root';
-    $dbpass = '';
-    $dbname = 'chessSociety';
-    
-    $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-    
-
-    function editImage($connection){
+    function editImage(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         try {
-            $article = mysqli_query($connection,'UPDATE posts set articleImage="'. $_POST["link"] .'" WHERE articleID = ' .$id);
+            update_article_image($_POST["link"], $id);
         } catch(PDOException $e) {
             echo $e->getMessage();
         }
     }
     
-    function editTitle($connection){
+    function editTitle(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         echo $id;
          try {
-             echo $_POST["title"];
-            mysqli_query($connection,'UPDATE posts set articleTitle= "'. $_POST["title"] .'" WHERE articleID =' .$id.';');
-        } catch(PDOException $e) {
+         update_article_title($_POST["title"], $id);
+       } catch(PDOException $e) {
             echo $e->getMessage();
         }
     }
     
-    function editDescription($connection){
+    function editDescription(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
          try {
-            $article = mysqli_query($connection,'UPDATE posts set articleDescription="'. $_POST["description"] .'" WHERE articleID = ' .$id);
+             update_article_description($_POST["description"], $id);
         } catch(PDOException $e) {
             echo $e->getMessage();
         }
@@ -58,14 +53,14 @@
     echo "<input type='submit' name='done' value ='Done'/> <br>";
     echo "</form>";
 
-    if( $_POST['image'] ) {
-        editImage($connection);
+    if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['image'] ){
+        editImage();
     }
-    else if( $_POST['editTitle'] ) {
-        editTitle($connection);
+    else if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['editTitle'] ) {
+        editTitle();
     }
-    else if($_POST['editDescription']){
-        editDescription($connection);
+    else if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['editDescription']){
+        editDescription();
     }
     
     ?>

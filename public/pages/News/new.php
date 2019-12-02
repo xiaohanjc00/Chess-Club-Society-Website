@@ -5,11 +5,6 @@
 <?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php
        function  createNewArticle(){
-            $dbhost = 'localhost';
-            $dbuser = 'root';
-            $dbpass = '';
-            $dbname = 'chessSociety';  
-            $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
       
             try {
                 $insertqry;

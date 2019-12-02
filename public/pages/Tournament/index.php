@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">
 
-        <?php include(SHARED_PATH . '/navigation.php'); ?>
+<?php include(SHARED_PATH . '/navigation.php'); ?>
 <div class="header">
   <h2>Tournament</h2>
 </div>

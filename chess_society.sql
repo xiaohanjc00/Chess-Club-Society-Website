@@ -9,6 +9,9 @@
 -- > show tables;
 -- > describe users;
 -- > describe posts;
+-- > describe tournament;
+-- > describe tournamentCoOrganizers;
+-- > describe tournamentParticipant;
 -- > exit;
 
 

@@ -3,13 +3,7 @@
 
 <?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php
-       function  createNewArticle(){
-            $dbhost = 'localhost';
-            $dbuser = 'root';
-            $dbpass = '';
-            $dbname = 'chessSociety';  
-            $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-      
+       function  createNewTournament(){
             try {
                 insert_tournament($_POST["organizer"], $_POST["name"],$_POST["date"], $_POST["deadline"]);
                 
