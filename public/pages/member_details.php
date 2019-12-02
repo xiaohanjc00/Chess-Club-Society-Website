@@ -1,11 +1,37 @@
+<?php require_once('../../private/initialise.php'); ?>
 <!doctype html>
 <html>
+
 <style type="text/css">
   
-  h1 {
+  h1{
+    color: #37474f;
+    text-decoration: overline;
+    text-align: center;
+  }
+
+  h2, h3{
+    color: #37474f;
+    text-decoration: underline;
+    text-align: left;
+  }
+
+  h4{
     color: #37474f;
     text-decoration: underline;
     text-align: center;
+  }
+
+  h4:hover{
+    color: red;
+    text-decoration: underline;
+    text-align: center;
+  }
+
+  li{
+    color: #37474f;
+    text-indent: 25px;
+    font-size: 25px;
   }
 
   p{
@@ -98,31 +124,15 @@ input[type=submit]:hover {
   </div>
   <div class="main">
   <br>
-  <h1 style="font-size: 40px;">Join the Chess Society now !</h1>
+  <h1 style="font-size: 50px;">My Profile</h1>
   
-  <p>Tell us a bit about yourself</p>
-  <form width=" 800px;" margin="auto;" style="font-size:17px; color: #37474f;" align="left" action="......TO BE CHANGED....../.php" method="post">
-    Name : <span class="error">* <?php echo $nameErr;?></span><input type="text" name="Name"><br>
-    Username : <span class="error">* <?php echo $usernameErr;?></span><input type="text" name="username"><br>
-    Password : <span class="error">* <?php echo $usernameErr;?></span><input type="password" name="password"><br>
-    Date of Birth : <span class="error">* <?php echo $dobErr;?></span><input type="text" name="DOB"><br>
-    Phone Number : <input type="text" name="Phone Number"><br>
-    Address : <input type="text" name="Address"><br>
-    Gender: 
-      <input type="radio" name="gender"> <?php if (isset($gender) && $gender=="male") echo "checked";?> <value="male">Male
-      <input type="radio" name="gender"><?php if (isset($gender) && $gender=="female") echo "checked";?> <value="female">Female
-      <input type="radio" name="gender" ><?php if (isset($gender) && $gender=="other") echo "checked";?> <value="other">Other  
-      <span class="error">* <?php echo $genderErr;?></span><br>
-    Ever played chess before ? <input type="radio" name="skill"> <?php if (isset($skill) && $skill=="never") echo "checked";?><value="never">Never
-      <input type="radio" name="skill"><?php if (isset($skill) && $gender=="yes") echo "checked";?> <value="yes">Yes, few times
-      <input type="radio" name="skill"><?php if (isset($skill) && $gender=="pro") echo "checked";?> <value="pro">I'm a pro  
-      <br>
-    
-    <input type="submit">
-</form>
+  <h2>Chess society account</h2>
+  <?php get_user() ?>
   <br>
-  
   <br>
+  <br>
+  <a style="font-size: 20px;">Delete My Chess Society Account</a>
+  <!-- add popup confirmation deletion -->
       
 
 </div>
