@@ -1,40 +1,43 @@
 <?php require_once('../../private/initialise.php'); ?>
-
-<?php include(SHARED_PATH . '/header.php'); ?>
-
-<?php include(SHARED_PATH . '/navigation.php'); ?>
-
 <!doctype html>
 <html>
+
 <style type="text/css">
+  
   h1{
     color: #37474f;
     text-decoration: overline;
     text-align: center;
   }
-  
-  h2 {
+
+  h2, h3{
     color: #37474f;
     text-decoration: underline;
     text-align: left;
   }
 
-  h3{
+  h4{
     color: #37474f;
     text-decoration: underline;
     text-align: center;
   }
 
-  h3:hover{
-    color: #45a049;
+  h4:hover{
+    color: red;
     text-decoration: underline;
     text-align: center;
+  }
+
+  li{
+    color: #37474f;
+    text-indent: 25px;
+    font-size: 25px;
   }
 
   p{
     color: #37474f;
-    text-indent: 25px;
-    font-size: 20px;
+    font-size: 25px;
+    text-indent: -25px;
   }
   
   .sidenav {
@@ -67,8 +70,20 @@
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
+.error {color: #FF0000;}
 
 input[type=text], select {
+  width: 100%;
+  color: #37474f;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #37474f;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=password]{
   width: 100%;
   color: #37474f;
   padding: 12px 20px;
@@ -109,26 +124,17 @@ input[type=submit]:hover {
   </div>
   <div class="main">
   <br>
-    <h1 style="font-size: 50px;">Chess Society</h1>
-  <br>
-    <h2 style="font-size: 30px;">Log In</h2>
+  <h1 style="font-size: 50px;">My Profile</h1>
   
-  <form width=" 800px;" margin="auto;" style="color: #37474f; font-size:25px;" align="left" action="......TO BE CHANGED....../.php" method="post">
-    Username : <input type="text" name="Username"><br>
-    Password : <input type="text" name="Password"><br>
-      <p style="text-decoration: underline;">Forgot password ?</p>
-    
-    <input type="submit">
-</form>
+  <h2>Chess society account</h2>
+  <?php get_user() ?>
   <br>
-  <p>Whether you’re the next Magnus Carlsen or a complete beginner just hoping to learn the rules of chess, the chess society has something for you. In our relaxed weekly sessions beginners will be able to learn the rules and basic strategies of the game, while more experienced players can test their skills against worthy opposition.
-  </p>
   <br>
-    <h3 style="font-size: 30px;">Join the Chess Society now !</h3>
+  <br>
+  <a style="font-size: 20px;">Delete My Chess Society Account</a>
+  <!-- add popup confirmation deletion -->
       
 
 </div>
 </body>
 </html>
-
-<?php include(SHARED_PATH . '/footer.php'); ?>
