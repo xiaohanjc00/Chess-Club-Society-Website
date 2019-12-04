@@ -34,7 +34,7 @@ tr:nth-child(odd) {
   <tr>
     <td> <?php echo $event["E_Title"]; ?></td>
     <td> <?php echo $event["MemberName"]; ?></td>
-    <td> <?php echo $event["E_date"]; ?></td>
+    <td> <?php echo $event["E_Date"]; ?></td>
   </tr>
 
 </table>
