@@ -129,7 +129,6 @@ CREATE TABLE `tournamentCoOrganizers` (
   PRIMARY KEY (`organizerID`, `tournamentID`),
   FOREIGN KEY (`tournamentID`)
     REFERENCES `tournament`(`tournamentID`)
-    REFERENCES `tournament`(`tournamentID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   FOREIGN KEY (organizerID)
