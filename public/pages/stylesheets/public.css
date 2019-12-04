@@ -1,69 +1,58 @@
-.topContainer{
-    width:100%;
-}
+  body{
+    background-color: #b4c3cb;
+  }
 
-.centeredTitle{
-    font-size:50px;
-    font-weight:bold;
-    color:white;
-    position: absolute;
-    left: 50%; top: 20%;
-    transform: translate(-50%, -50%);
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-#chessImage{
-    filter: brightness(60%);
-}
-
-#kclImage{
-    position:absolute;
-    left: 0;
-    top: 0;
-    width:150px;
-}
-
-.nav-link{
-    font-weight:bold;
-}
-
-.Event {
-  float: left;
-  width: 100%;
-  padding: 8px;
-}
-
-
-h1{
+  h1{
     color: #37474f;
-    text-decoration: overline;
+    text-decoration: underline;
     text-align: center;
   }
-  
-h2 {
+
+  h2 {
     color: #37474f;
     text-decoration: underline;
     text-align: left;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
-h3{
+  h3{
     color: #37474f;
     text-decoration: underline;
     text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
-h3:hover{
+  h3:hover{
     color: #45a049;
     text-decoration: underline;
     text-align: center;
   }
 
-p{
+  p{
     color: #37474f;
-    text-indent: 25px;
     font-size: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: justify;
   }
-  
+
+  li{
+    color: #37474f;
+    font-size: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+
+
+  .Event {
+    float: left;
+    width: 100%;
+    padding: 8px;
+  }
+
 .sidenav {
   height: 100%;
   width: 250px;
@@ -87,12 +76,6 @@ p{
 
 .sidenav a:hover {
   color: #f1f1f1;
-}
-
-.main {
-  margin-left: 300px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
 }
 
 input[type=text], select {
