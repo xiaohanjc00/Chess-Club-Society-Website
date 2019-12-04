@@ -1,18 +1,9 @@
 
 -- Using MySQL on Codenvy:
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
 -- $ sudo service mysql start
 -- > mysql -u root
 -- > show databases;
 -- > use chessSociety;
-<<<<<<< HEAD
-=======
-
->>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
 -- > show tables;
 -- > describe users;
 -- > describe posts;
@@ -39,13 +30,6 @@ CREATE TABLE `users` (
   `phone` VARCHAR(15) NOT NULL,
   `address` VARCHAR(255),
   `rating` INT(3) NOT NULL DEFAULT 0,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  `picture` varchar(255) DEFAULT "https://cdn3.f-cdn.com/contestentries/1376995/30494909/5b566bc71d308_thumb900.jpg",
->>>>>>> d2616689dc419f47d310f61dd7e558336c91d7b4
-=======
->>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
   `email` VARCHAR(255),
   `username` VARCHAR(255),
   `hashed_password` VARCHAR(255),
@@ -144,15 +128,8 @@ CREATE TABLE `tournamentCoOrganizers` (
   `tournamentID`int(11) NOT NULL,
   PRIMARY KEY (`organizerID`, `tournamentID`),
   FOREIGN KEY (`tournamentID`)
-<<<<<<< HEAD
-<<<<<<< HEAD
     REFERENCES `tournament`(`tournamentID`)
-=======
-    REFERENCES `tournament`(`tournamentID`) 
->>>>>>> d2616689dc419f47d310f61dd7e558336c91d7b4
-=======
     REFERENCES `tournament`(`tournamentID`)
->>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   FOREIGN KEY (organizerID)
@@ -173,11 +150,7 @@ CREATE TABLE `tournamentCoOrganizers` (
   PRIMARY KEY (`eventID`)
 );
 
-<<<<<<< HEAD
-CREATE TRIGGER expiryEventDate BEFORE INSERT ON opening_event
-=======
 CREATE TRIGGER expiryDateEvent BEFORE INSERT ON opening_event
->>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
     FOR EACH ROW SET NEW.eventExpiry = IFNULL(NEW.eventExpiry,DATE_ADD(STR_TO_DATE(NEW.eventDate, '%Y-%m-%d'), INTERVAL 14 DAY));
 
 --add data to opening_event table
