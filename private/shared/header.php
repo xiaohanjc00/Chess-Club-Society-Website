@@ -36,3 +36,5 @@
             </div>
 
         </header>
+    
+        <a href="<?php echo url_for('pages/log_out.php'); ?>">Log out</a>
