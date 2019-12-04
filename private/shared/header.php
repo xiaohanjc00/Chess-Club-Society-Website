@@ -32,7 +32,7 @@
             <a href="<?php echo url_for('pages/members.php'); ?>">Member List</a>
             <a href="<?php echo url_for('pages/log_in.php'); ?>">Login</a>
             <a href="<?php echo url_for('pages/profile.php'); ?>">Profile</a>
-            <a href="<?php echo url_for('pages/contact.php'); ?>">Contact Us</a>
-            </div>
+            <a href="<?php echo url_for('pages/AboutUs/index.php'); ?>">About Us</a>
+        </div>
 
         </header>

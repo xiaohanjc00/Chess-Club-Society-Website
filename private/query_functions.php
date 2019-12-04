@@ -1,6 +1,5 @@
+
 <?php 
-
-
 
   function find_all_articles() {
     global $db;
@@ -296,7 +295,6 @@ function update_article_image($link, $id) {
     }
   }
 
-
   function find_all_events() {
     global $db;
 
@@ -403,9 +401,8 @@ function update_event_image($link, $id) {
       db_disconnect($db);
       exit;
     }
-  }
-
-
+  } 
+     
     function find_user_by_id($id) {
         global $db;
         $sql = "SELECT * FROM users ";
@@ -417,7 +414,7 @@ function update_event_image($link, $id) {
         mysqli_free_result($result);
         return $user;
     }
-
+    
     function find_user_by_username($username) {
         global $db;
         $sql = "SELECT * FROM users ";

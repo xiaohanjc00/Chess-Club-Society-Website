@@ -1,11 +1,9 @@
 
 -- Using MySQL on Codenvy:
-
 -- $ sudo service mysql start
 -- > mysql -u root
 -- > show databases;
 -- > use chessSociety;
-
 -- > show tables;
 -- > describe users;
 -- > describe posts;
@@ -130,6 +128,7 @@ CREATE TABLE `tournamentCoOrganizers` (
   `tournamentID`int(11) NOT NULL,
   PRIMARY KEY (`organizerID`, `tournamentID`),
   FOREIGN KEY (`tournamentID`)
+    REFERENCES `tournament`(`tournamentID`)
     REFERENCES `tournament`(`tournamentID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,

@@ -1,14 +1,14 @@
-    
+
     <footer class="page-footer">
 
         <!--Stylesheet for footer-->
-        <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/footer.css'); ?>"/>
+        <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/footer.css'); ?>"/>   
 
         <div style="background-color: #21d192;">
             <div class="container">
 
                 <!-- First row -->
-<<<<<<< HEAD
+
                 <div class="row py-4 mt-3">
 
                     <!-- First grid -->
@@ -26,16 +26,15 @@
                         <p><a href="#!" style="color:black;">News and events</a></p>
                         <p><a href="#!" style="color:black;">Members</a></p>
                         <p><a href="#!" style="color:black;">Contact Us</a></p>
-=======
-                <div class="row py-4 my-2">
 
                     <!-- First grid -->
                     <div class="col-md-4 mx-auto">
                     <h6 class="text-uppercase font-weight-bold">KCL Chess Club</h6>
                     <hr>
-                    <p class="footerP">Come and join our Chess Club and learn how to play chess as a PRO</p>
-                    </div>
 
+                    <p class="footerP">Come and join our Chess Club and learn how to play chess as a PRO</p>   
+                    </div>
+    
                     <!-- Second grid -->
                     <div class="col-md-2 mx-auto">
                         <h6>Useful Links</h6>
@@ -44,7 +43,10 @@
                         <p class="footerP"><a href="<?php echo url_for('pages/News/index.php'); ?>">News</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/events.php'); ?>">Events</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/Tournament/index.php'); ?>">Tournaments</a></p>
->>>>>>> master
+   
+
+                    </div>
+
 
                     </div>
 
@@ -80,6 +82,7 @@
                             <i class="fa fa-twitter white-text mr-4"> </i>
                         </a>
                         <a href="https://www.instagram.com/kclsu/" class="ins-ic">
+
                             <i class="fa fa-instagram white-text"> </i>
                         </a>
 
@@ -89,8 +92,8 @@
                 <!-- Third row -->
                 <div class="footer-copyright text-center py-2" id ="copyright">© 2019 Copyright:
                     <a href="<?php echo url_for('pages/index.php'); ?>"> kclchessclub.com</a>
-                </div>
-
+               </div>
+                
             </div>
         </div>
     </footer>
