@@ -1,0 +1,29 @@
+.footerP{
+    padding: 0px;
+    font-size:16px;
+    color: black;
+}
+
+hr{
+    color: black;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+h6{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+i{
+    margin-right: 10px;
+}
+
+a{
+    color: black;
+}
+
+#copyright{
+    font-size:12px;
+    font-weight:bold;
+}
