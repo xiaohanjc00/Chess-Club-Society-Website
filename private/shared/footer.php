@@ -1,3 +1,4 @@
+  
     
     <footer class="page-footer">
 
@@ -23,7 +24,7 @@
                         <hr>
                         <p class="footerP"><a href="<?php echo url_for('pages/index.php'); ?>">Home</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/News/index.php'); ?>">News</a></p>
-                        <p class="footerP"><a href="<?php echo url_for('pages/events.php'); ?>">Events</a></p>
+                        <p class="footerP"><a href="<?php echo url_for('pages/Event/index.php'); ?>">Events</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/Tournament/index.php'); ?>">Tournaments</a></p>
     
                     </div>

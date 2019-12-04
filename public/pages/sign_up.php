@@ -36,8 +36,6 @@
   }
 ?>
 
-<?php include(SHARED_PATH . '/header.php'); ?>
-
 <div class="main">
   <h2>Join the Chess Society now!</h2>
   <p>Please enter your details:</p>

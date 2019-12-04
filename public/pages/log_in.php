@@ -1,4 +1,5 @@
 <?php require_once('../../private/initialise.php'); ?>
+
 <?php
   $errors = [];
   $username = '';
@@ -28,6 +29,7 @@
     }
   }
 ?>
+
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <div>
