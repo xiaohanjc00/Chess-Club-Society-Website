@@ -1,7 +1,6 @@
 <?php require_once('../../private/initialise.php'); ?>
 
 <?php include(SHARED_PATH . '/header.php'); ?>
-<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <h1 style="font-size: 50px;", align="center">Team Members</h1>
 

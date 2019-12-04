@@ -35,7 +35,6 @@
 
 <?php $page_title = 'Edit Profile'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
-<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <div>
   <a href="<?php echo url_for('pages/profile.php'); ?>">&laquo; Back to Profile</a>
