@@ -1,7 +1,7 @@
 <?php
   require_once('../../private/initialise.php');
   require_login();
-  $id = $_GET['id'];
+  $id = $_SESSION['user_id'];
   $user = find_user_by_id($id);
   $first_name = h($user['first_name']);
   $last_name = h($user['last_name']);

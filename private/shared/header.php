@@ -37,4 +37,4 @@
 
         </header>
     
-        <a href="<?php echo url_for('pages/log_out.php'); ?>">Log out</a>
+        <a href="<?php if (is_logged_in()) echo url_for('pages/log_out.php'); ?>">Log out</a>
