@@ -1,5 +1,8 @@
-<?php require_once('../../private/initialise.php'); ?>
-
+<?php 
+require_once('../../private/initialise.php');
+// require_login();
+// require_admin_login();
+?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <h1 style="font-size: 50px;", text-align="center">Team Members</h1>

@@ -1,5 +1,5 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
-
+<?php // require_login(); ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">

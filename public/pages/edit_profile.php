@@ -18,6 +18,7 @@
     $user['phone'] = $_POST['phone'] ?? '';
     $user['address'] = $_POST['address'] ?? '';
     $user['email'] = $_POST['email'] ?? '';
+    $user['username'] = $_POST['username'] ?? '';
 
     $result = update_user($user);
     if($result === true) {
@@ -34,7 +35,6 @@
 
 <?php $page_title = 'Edit Profile'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
-<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <div>
   <a href="<?php echo url_for('pages/profile.php'); ?>">&laquo; Back to Profile</a>
