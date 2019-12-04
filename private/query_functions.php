@@ -358,6 +358,13 @@ function update_article_image($link, $id) {
         } elseif (!has_valid_email_format($user['email'])) {
             $errors[] = "Please enter a valid email address.";
         }
+        if(is_blank($user['username'])) {
+        	$errors[] = "Please enter a username.";
+        } elseif (!has_length($user['username'], array('min' => 8, 'max' => 255))) {
+        	$errors[] = "Your username must be 8-255 characters in length.";
+        } elseif (!has_unique_username($user['username'], $user['id'] ?? 0)) {
+        	$errors[] = "Username invalid: please try a different username";
+        }
         $password_required = $options['password_required'] ?? true;
         if($password_required) {
             if(is_blank($user['password'])) {
@@ -373,6 +380,11 @@ function update_article_image($link, $id) {
             } elseif (!preg_match('/[^A-Za-z0-9\s]/', $user['password']))
               $errors[] = "Password must contain at least 1 symbol";
             }
+        if(is_blank($user['confirm_password'])) {
+        	$errors[] = "Passwords must match! Please re-enter password to confirm it.";
+        } elseif ($user['password'] !== $user['confirm_password']) {
+        	$errors[] = "Passwords must match! Please confirm your new password.";
+        }
         return $errors;
     }
 

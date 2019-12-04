@@ -18,6 +18,7 @@
     $user['phone'] = $_POST['phone'] ?? '';
     $user['address'] = $_POST['address'] ?? '';
     $user['email'] = $_POST['email'] ?? '';
+    $user['username'] = $_POST['username'] ?? '';
 
     $result = update_user($user);
     if($result === true) {
