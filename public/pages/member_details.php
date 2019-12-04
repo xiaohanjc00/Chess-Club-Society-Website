@@ -159,7 +159,12 @@ input[type=submit]:hover {
   <br>
   <br>
   <form width=" 800px;" margin="auto;" style="font-size:17px; color: #37474f;" align="left" action="profile.php"><input type="submit" value="Delete Chess Society Account" onclick="return confirm('You are about to withdraw as a member of the Chess Society and have all your data removed. Do you want to continue ?')"></form>
-      
+  <br>
+
+  <!-- Admin feature to get the list of all the members in the society -->
+  <form width=" 800px;" margin="auto;" style="font-size:17px; color: #37474f;" align="left" action="members.php" method="post">
+    <input type="submit" value="See the list of all the society members">
+  </form>    
 
 </div>
 </body>
