@@ -15,9 +15,10 @@
 
     $result = insert_user($user);
     if($result === true) {
-      $new_user_id = mysqli_insert_id($db);
+      // $new_user_id = mysqli_insert_id($db);
+      log_in_user($user);
       $_SESSION['message'] = 'User account created.';
-      redirect_to(url_for('pages/profile.php?id=' . $new_user_id));
+      redirect_to(url_for('pages/profile.php'));
     } else {
       $errors = $result;
     }
