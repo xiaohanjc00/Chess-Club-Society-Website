@@ -48,7 +48,7 @@ tr:nth-child(odd) {
    
    <body class = "container"> 
       <div>
-         <a href="event.php" class="waves-effect waves-light btn">Back</a>
+         <a href="events.php" class="waves-effect waves-light btn">Back</a>
       </div>
    </body> 
 </html>
