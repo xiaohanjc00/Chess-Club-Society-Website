@@ -1,17 +1,47 @@
 <?php require_once('../../private/initialise.php'); ?>
+<?php
+  $errors = [];
+  $username = '';
+  $password = '';
+  if(is_post_request()) {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+    if(is_blank($username)) {
+      $errors[] = "Please enter your username";
+    }
+    if(is_blank($password)) {
+      $errors[] = "Please enter your password";
+    }
+    if(empty($errors)) {
+      $login_fail_msg = "Log in failed";
+      $user = find_user_by_username($username);
+      if($user) {
+        if(password_verify($password, $user['hashed_password'])) {
+          log_in_user($user);
+          redirect_to(url_for('profile.php'));
+        } else {
+          $errors[] = $login_fail_msg;
+        }
+      } else {
+        $errors[] = $login_fail_msg;
+      }
+    }
+  }
+?>
+
 <?php include(SHARED_PATH . '/header.php'); ?>
 <?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <div>
-
-  <form width="800px" margin="auto" style="color: #37474f font-size:25px" align="left" action="TODO" method="post">
+  <h2>Log in</h1>
+  <?php echo display_errors($errors); ?>
+  <form width="800px" margin="auto" style="color: #37474f font-size:25px" align="left" action="log_in.php" method="post">
       Username:
-      <input type="text" name="Username"><br>
+      <input type="text" name="username" value="<?php echo h($username); ?>"><br>
       Password:
-      <input type="text" name="Password"><br>    
-      <input type="submit">
+      <input type="password" name="password" value="" >  
+      <input type="submit" name="submit" value="Submit" />
   </form>
-
 </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
