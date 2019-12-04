@@ -131,8 +131,7 @@ input[type=submit]:hover {
   <br>
   <br>
   <br>
-  <a style="font-size: 20px;">Delete My Chess Society Account</a>
-  <!-- add popup confirmation deletion -->
+  <form width=" 800px;" margin="auto;" style="font-size:17px; color: #37474f;" align="left" action="profile.php"><input type="submit" value="Delete Chess Society Account" onclick="return confirm('You are about to withdraw as a member of the Chess Society and have all your data removed. Do you want to continue ?')"></form>
       
 
 </div>
