@@ -1,6 +1,5 @@
 <?php require_once('../../private/initialise.php'); ?>
-<!doctype html>
-<html>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
 <style type="text/css">
   
@@ -136,4 +135,5 @@ input[type=submit]:hover {
 
 </div>
 </body>
-</html>
+
+<?php include(SHARED_PATH . '/footer.php'); ?>
