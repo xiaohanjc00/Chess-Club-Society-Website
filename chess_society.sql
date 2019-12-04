@@ -1,11 +1,11 @@
 
 -- Using MySQL on Codenvy:
 
+<<<<<<< HEAD
 -- $ sudo service mysql start
 -- > mysql -u root
 -- > show databases;
 -- > use chessSociety;
-
 -- > show tables;
 -- > describe users;
 -- > describe posts;
@@ -32,6 +32,10 @@ CREATE TABLE `users` (
   `phone` VARCHAR(15) NOT NULL,
   `address` VARCHAR(255),
   `rating` INT(3) NOT NULL DEFAULT 0,
+<<<<<<< HEAD
+=======
+  `picture` varchar(255) DEFAULT "https://cdn3.f-cdn.com/contestentries/1376995/30494909/5b566bc71d308_thumb900.jpg",
+>>>>>>> d2616689dc419f47d310f61dd7e558336c91d7b4
   `email` VARCHAR(255),
   `username` VARCHAR(255),
   `hashed_password` VARCHAR(255),
@@ -130,7 +134,11 @@ CREATE TABLE `tournamentCoOrganizers` (
   `tournamentID`int(11) NOT NULL,
   PRIMARY KEY (`organizerID`, `tournamentID`),
   FOREIGN KEY (`tournamentID`)
+<<<<<<< HEAD
     REFERENCES `tournament`(`tournamentID`)
+=======
+    REFERENCES `tournament`(`tournamentID`) 
+>>>>>>> d2616689dc419f47d310f61dd7e558336c91d7b4
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   FOREIGN KEY (organizerID)
@@ -139,3 +147,17 @@ CREATE TABLE `tournamentCoOrganizers` (
     ON UPDATE CASCADE
 );
 
+
+-- create event table
+ CREATE TABLE `opening_event` (
+  `eventID` int(11) NOT NULL AUTO_INCREMENT,
+  `eventTitle` varchar(255) DEFAULT NULL,
+  `eventDesc` TEXT DEFAULT NULL,
+  `eventDate` varchar(255) DEFAULT NULL,
+  `eventImage` varchar(255) DEFAULT "https://www.kclsu.org/asset/Organisation/6365/36bed7b8-d864-4aec-bb62-ff643dfb4a6c.jpg?thumbnail_width=280&thumbnail_height=280&resize_type=ResizeFitAll",
+  `eventExpiry` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`eventID`)
+);
+
+CREATE TRIGGER expiryEventDate BEFORE INSERT ON opening_event
+    FOR EACH ROW SET NEW.eventExpiry = IFNULL(NEW.eventExpiry,DATE_ADD(STR_TO_DATE(NEW.eventDate, '%Y-%m-%d'), INTERVAL 14 DAY));

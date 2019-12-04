@@ -2,7 +2,6 @@
 
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <!doctype html>
 <html>
@@ -100,13 +99,6 @@ input[type=submit]:hover {
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-  <div class="sidenav">
-  <a href="#">...</a>
-  <a href="#">...</a>
-  <a href="#">To Be Updated</a>
-  <a href="#">...</a>
-  <a href="#">...</a>
-  </div>
   <div class="main">
   <br>
     <h1 style="font-size: 50px;">Chess Society</h1>

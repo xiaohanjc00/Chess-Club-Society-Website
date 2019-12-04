@@ -1,3 +1,4 @@
+
 <?php
 
   function is_blank($value) {

@@ -42,4 +42,32 @@
         }
     } 
     
+    if(!isset($_GET['id'])) {
+        redirect_to(url_for('index.php'));
+      }
+      $id = $_GET['id'];
+    
+      if (is_post_request()) {
+        // new user details were just submitted
+        $user = [];
+        $user['id'] = $id;
+        $user['first_name'] = $_POST['first_name'] ?? '';
+        $user['last_name'] = $_POST['last_name'] ?? '';
+        $user['dob'] = $_POST['dob'] ?? '';
+        $user['gender'] = $_POST['gender'] ?? '';
+        $user['phone'] = $_POST['phone'] ?? '';
+        $user['address'] = $_POST['address'] ?? '';
+        $user['email'] = $_POST['email'] ?? '';
+    
+        $result = update_user($user);
+        if($result === true) {
+          $_SESSION['message'] = 'Your profile was successfully updated!';
+          redirect_to(url_for('/pages/profile.php?id=' . $id));
+        } else {
+          $errors = $result;
+        }
+      } else {
+        $user = find_user_by_id($id);
+      }
+    
     ?>

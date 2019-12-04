@@ -1,13 +1,13 @@
-    
+
     <footer class="page-footer">
 
         <!--Stylesheet for footer-->
-        <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/footer.css'); ?>"/>
-    
+        <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/footer.css'); ?>"/>   
         <div style="background-color: #21d192;">
             <div class="container">
     
                 <!-- First row -->
+
                 <div class="row py-4 my-2">
     
                     <!-- First grid -->
@@ -25,7 +25,7 @@
                         <p class="footerP"><a href="<?php echo url_for('pages/News/index.php'); ?>">News</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/events.php'); ?>">Events</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/Tournament/index.php'); ?>">Tournaments</a></p>
-    
+   
                     </div>
     
                     <!-- Grid column -->
@@ -36,7 +36,7 @@
                         <p class="footerP"><i class="fa fa-envelope"></i> kclchessclub.kcl.ac.uk</p>
                         <p class="footerP"><i class="fa fa-phone"></i> + 44 020 7848 1588</p>
                         <p class="footerP"><i class="fa fa-print"></i> + 44 020 7836 5454</p>
-    
+   
                     </div>
                 </div>
     
@@ -60,6 +60,7 @@
                             <i class="fa fa-twitter white-text mr-4"> </i>
                         </a>
                         <a href="https://www.instagram.com/kclsu/" class="ins-ic">
+
                             <i class="fa fa-instagram white-text"> </i>
                         </a>
     
@@ -69,7 +70,7 @@
                 <!-- Third row -->
                 <div class="footer-copyright text-center py-2" id ="copyright">© 2019 Copyright:
                     <a href="<?php echo url_for('pages/index.php'); ?>"> kclchessclub.com</a>
-                </div>
+               </div>
                 
             </div>
         </div>
