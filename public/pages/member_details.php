@@ -1,4 +1,31 @@
-<?php require_once('../../private/initialise.php'); ?>
+<?php
+  require_once('../../private/initialise.php');
+  if(!isset($_GET['id'])) {
+    redirect_to(url_for('index.php'));
+  }
+  $id = $_GET['id'];
+  if (is_post_request()) {
+    // new user details were just submitted
+    $user = [];
+    $user['id'] = $id;
+    $user['first_name'] = $_POST['first_name'] ?? '';
+    $user['last_name'] = $_POST['last_name'] ?? '';
+    $user['dob'] = $_POST['dob'] ?? '';
+    $user['gender'] = $_POST['gender'] ?? '';
+    $user['phone'] = $_POST['phone'] ?? '';
+    $user['address'] = $_POST['address'] ?? '';
+    $user['email'] = $_POST['email'] ?? '';
+    $result = delete_user($user);
+    if($result === true) {
+      $_SESSION['message'] = 'Your profile was successfully deleted!';
+      redirect_to(url_for('/pages/profile.php'));
+    } else {
+      $errors = $result;
+    }
+  } else {
+    $user = find_user_by_id($id);
+  }
+?>
 <!doctype html>
 <html>
 
