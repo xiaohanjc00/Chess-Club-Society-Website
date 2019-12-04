@@ -5,7 +5,7 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
+
         <!--Stylesheet for bootstrap-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <!--Stylesheet for public pages-->
@@ -27,7 +27,7 @@
             <div class="topNav">
             <a href="<?php echo url_for('pages/index.php'); ?>">Home</a>
             <a href="<?php echo url_for('pages/News/index.php'); ?>">News</a>
-            <a href="<?php echo url_for('pages/events.php'); ?>">Events</a>
+            <a href="<?php echo url_for('pages/Event/index.php'); ?>">Events</a>
             <a href="<?php echo url_for('pages/Tournament/index.php'); ?>">Tournaments</a>
             <a href="<?php echo url_for('pages/members.php'); ?>">Member List</a>
             <a href="<?php echo url_for('pages/log_in.php'); ?>">Login</a>

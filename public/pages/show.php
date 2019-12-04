@@ -1,3 +1,8 @@
+<?php 
+    $id = $_GET['id'];
+    $event = $Event[$E_Title];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,15 +32,11 @@ tr:nth-child(odd) {
     <th>Date</th>
   </tr>
   <tr>
-    <td>sasfadsfg</td>
-    <td>asdfg</td>
-    <td>2019</td>
+    <td> <?php echo $event["E_Title"]; ?></td>
+    <td> <?php echo $event["MemberName"]; ?></td>
+    <td> <?php echo $event["E_date"]; ?></td>
   </tr>
-  <tr>
-    <td>havfgk</td>
-    <td>asdfgh</td>
-    <td>94</td>
-  </tr>
+
 </table>
 </body>
 
