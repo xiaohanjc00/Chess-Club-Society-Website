@@ -360,7 +360,7 @@ function update_article_image($link, $id) {
         }
         $password_required = $options['password_required'] ?? true;
         if($password_required) {
-            if(is_blank(user['password'])) {
+            if(is_blank($user['password'])) {
               $errors[] = "Please enter a password";
             } elseif (!has_length($user['password'], array('min' => 12))) {
               $errors[] = "Password must contain 12 or more characters";
@@ -373,7 +373,7 @@ function update_article_image($link, $id) {
             } elseif (!preg_match('/[^A-Za-z0-9\s]/', $user['password']))
               $errors[] = "Password must contain at least 1 symbol";
             }
-            return $errors;
+        return $errors;
     }
 
     function insert_user($user) {
@@ -386,14 +386,14 @@ function update_article_image($link, $id) {
         $sql = "INSERT INTO users ";
         $sql .= "(first_name, last_name, dob, gender, phone, address, email, username, hashed_password) ";
         $sql .= "VALUES (";
-        $sql .= "'" . db_escape($db, $admin['first_name']) . "',";
-        $sql .= "'" . db_escape($db, $admin['last_name']) . "',";
-        $sql .= "'" . db_escape($db, $admin['dob']) . "',";
-        $sql .= "'" . db_escape($db, $admin['gender']) . "',";
-        $sql .= "'" . db_escape($db, $admin['phone']) . "',";
-        $sql .= "'" . db_escape($db, $admin['address']) . "',";
-        $sql .= "'" . db_escape($db, $admin['email']) . "',";
-        $sql .= "'" . db_escape($db, $admin['username']) . "',";
+        $sql .= "'" . db_escape($db, $user['first_name']) . "',";
+        $sql .= "'" . db_escape($db, $user['last_name']) . "',";
+        $sql .= "'" . db_escape($db, $user['dob']) . "',";
+        $sql .= "'" . db_escape($db, $user['gender']) . "',";
+        $sql .= "'" . db_escape($db, $user['phone']) . "',";
+        $sql .= "'" . db_escape($db, $user['address']) . "',";
+        $sql .= "'" . db_escape($db, $user['email']) . "',";
+        $sql .= "'" . db_escape($db, $user['username']) . "',";
         $sql .= "'" . db_escape($db, $hashed_password) . "'";
         $sql .= ")";
         $result = mysqli_query($db, $sql);

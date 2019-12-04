@@ -1,130 +1,85 @@
-<!doctype html>
-<html>
-<style type="text/css">
-  
-  h1 {
-    color: #37474f;
-    text-decoration: underline;
-    text-align: center;
+<?php require_once('../../private/initialise.php'); ?>
+<?php
+  if(is_post_request()) {
+    $user = [];
+    $user['first_name'] = $_POST['first_name'] ?? '';
+    $user['last_name'] = $_POST['last_name'] ?? '';
+    $user['dob'] = $_POST['dob'] ?? '';
+    $user['gender'] = $_POST['gender'] ?? '';
+    $user['phone'] = $_POST['phone'] ?? '';
+    $user['address'] = $_POST['address'] ?? '';
+    $user['email'] = $_POST['email'] ?? '';
+    $user['username'] = $_POST['username'] ?? '';
+    $user['password'] = $_POST['password'] ?? '';
+    $user['confirm_password'] = $_POST['confirm_password'] ?? '';
+
+    $result = insert_user($user);
+    if($result === true) {
+      $new_user_id = mysqli_insert_id($db);
+      $_SESSION['message'] = 'User account created.';
+      redirect_to(url_for('pages/profile.php?id=' . $new_user_id));
+    } else {
+      $errors = $result;
+    }
+  } else {
+    $user = [];
+    $user['first_name'] = '';
+    $user['last_name'] = '';
+    $user['dob'] = '';
+    $user['gender'] = '';
+    $user['phone'] = '';
+    $user['address'] = '';
+    $user['email'] = '';
+    $user['username'] = '';
+    $user['password'] = '';
+    $user['confirm_password'] = '';
   }
+?>
 
-  p{
-    color: #37474f;
-    font-size: 25px;
-    text-indent: -25px;
-  }
-  
-  .sidenav {
-  height: 100%;
-  width: 250px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #37474f;
-  overflow-x: hidden;
-  padding-top: 20px;
-  border-right: 3px solid black;
-}
+<?php include(SHARED_PATH . '/header.php'); ?>
 
-.sidenav a {
-  padding: 12px 16px 20px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #b4c3cb;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.main {
-  margin-left: 300px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-.error {color: #FF0000;}
-
-input[type=text], select {
-  width: 100%;
-  color: #37474f;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #37474f;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=password]{
-  width: 100%;
-  color: #37474f;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #37474f;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit] {
-  width: 100%;
-  background-color: #37474f;
-  color: #f1f1f1;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #b4c3cb;
-}
-
-</style>
-<head>
-  <!-- <link rel="stylesheet" type="text/css" href="bootstrap-grid.css"> To be changed when using the bootstrap documentation instead of the weblink -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-  <div class="sidenav">
-  <a href="#">...</a>
-  <a href="#">...</a>
-  <a href="#">To Be Updated</a>
-  <a href="#">...</a>
-  <a href="#">...</a>
-  </div>
-  <div class="main">
-  <br>
-  <h1 style="font-size: 40px;">Join the Chess Society now !</h1>
-  
-  <p>Tell us a bit about yourself</p>
-  <form width=" 800px;" margin="auto;" style="font-size:17px; color: #37474f;" align="left" action="......TO BE CHANGED....../.php" method="post">
-    Name : <span class="error">* <?php echo $nameErr;?></span><input type="text" name="Name"><br>
-    Username : <span class="error">* <?php echo $usernameErr;?></span><input type="text" name="username"><br>
-    Password : <span class="error">* <?php echo $usernameErr;?></span><input type="password" name="password"><br>
-    Date of Birth : <span class="error">* <?php echo $dobErr;?></span><input type="text" name="DOB"><br>
-    Phone Number : <input type="text" name="Phone Number"><br>
-    Address : <input type="text" name="Address"><br>
-    Gender: 
-      <input type="radio" name="gender"> <?php if (isset($gender) && $gender=="male") echo "checked";?> <value="male">Male
-      <input type="radio" name="gender"><?php if (isset($gender) && $gender=="female") echo "checked";?> <value="female">Female
-      <input type="radio" name="gender" ><?php if (isset($gender) && $gender=="other") echo "checked";?> <value="other">Other  
-      <span class="error">* <?php echo $genderErr;?></span><br>
-    Ever played chess before ? <input type="radio" name="skill"> <?php if (isset($skill) && $skill=="never") echo "checked";?><value="never">Never
-      <input type="radio" name="skill"><?php if (isset($skill) && $gender=="yes") echo "checked";?> <value="yes">Yes, few times
-      <input type="radio" name="skill"><?php if (isset($skill) && $gender=="pro") echo "checked";?> <value="pro">I'm a pro  
-      <br>
-    
-    <input type="submit">
-</form>
-  <br>
-  
-  <br>
-      
-
+<div class="main">
+  <h2>Join the Chess Society now!</h2>
+  <p>Please enter your details:</p>
+  <?php echo display_errors($errors); ?>
+    <form width="800px" margin="auto" action="<?php echo url_for('pages/sign_up.php?'); ?>" method="post">
+      <dl>
+        <dt>First name:</dt><dd><input type="text" name="first_name" value="<?php echo h($user['first_name']); ?>" /></dd>
+      </dl>
+      <dl>
+        <dt>Last name:</dt><dd><input type="text" name="last_name" value="<?php echo h($user['last_name']); ?>" /></dd>
+      </dl>
+      <dl>
+        <dt>Date of birth:</dt><dd><input type="text" name="dob" value="<?php echo h($user['dob']); ?>" /></dd>
+      </dl>
+      <dl>
+        <dt>Gender:</dt><dd><input type="text" name="gender" value="<?php echo h($user['gender']); ?>" /></dd>
+      </dl>
+      <dl>
+        <dt>Phone:</dt><dd><input type="text" name="phone" value="<?php echo h($user['phone']); ?>" /></dd>
+      </dl>
+      <dl>
+        <dt>Address:</dt><dd><input type="text" name="address" value="<?php echo h($user['address']); ?>" /></dd>
+      </dl>
+      <dl>
+        <dt>Email:</dt><dd><input type="text" name="email" value="<?php echo h($user['email']); ?>" /><br /></dd>
+      </dl>
+      <dl>
+        <dt>Password:</dt>
+        <dd><input type="password" name="password" value="" /></dd>
+      </dl>
+      <dl>
+        <dt>Confirm Password:</dt>
+        <dd><input type="password" name="confirm_password" value="" /></dd>
+      </dl>
+      <p>
+        Password must be at least 12 characters, with at least one uppercase letter, lowercase letter, number and symbol.
+      </p>
+      <br />
+      <div>
+        <input type="submit" value="Sign up" />
+      </div>
+    </form>
 </div>
-</body>
-</html>
+
+<?php include(SHARED_PATH . '/footer.php'); ?>

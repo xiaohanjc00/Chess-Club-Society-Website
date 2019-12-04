@@ -28,9 +28,7 @@
     }
   }
 ?>
-
 <?php include(SHARED_PATH . '/header.php'); ?>
-<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <div>
   <h2>Log in</h1>
@@ -42,6 +40,7 @@
       <input type="password" name="password" value="" >  
       <input type="submit" name="submit" value="Submit" />
   </form>
+  <a href="<?php echo url_for('pages/sign_up.php'); ?>">Sign up</a>
 </div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>
