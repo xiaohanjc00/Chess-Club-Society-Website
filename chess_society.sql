@@ -2,10 +2,17 @@
 -- Using MySQL on Codenvy:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
 -- $ sudo service mysql start
 -- > mysql -u root
 -- > show databases;
 -- > use chessSociety;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
 -- > show tables;
 -- > describe users;
 -- > describe posts;
@@ -33,9 +40,12 @@ CREATE TABLE `users` (
   `address` VARCHAR(255),
   `rating` INT(3) NOT NULL DEFAULT 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   `picture` varchar(255) DEFAULT "https://cdn3.f-cdn.com/contestentries/1376995/30494909/5b566bc71d308_thumb900.jpg",
 >>>>>>> d2616689dc419f47d310f61dd7e558336c91d7b4
+=======
+>>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
   `email` VARCHAR(255),
   `username` VARCHAR(255),
   `hashed_password` VARCHAR(255),
@@ -135,10 +145,14 @@ CREATE TABLE `tournamentCoOrganizers` (
   PRIMARY KEY (`organizerID`, `tournamentID`),
   FOREIGN KEY (`tournamentID`)
 <<<<<<< HEAD
+<<<<<<< HEAD
     REFERENCES `tournament`(`tournamentID`)
 =======
     REFERENCES `tournament`(`tournamentID`) 
 >>>>>>> d2616689dc419f47d310f61dd7e558336c91d7b4
+=======
+    REFERENCES `tournament`(`tournamentID`)
+>>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   FOREIGN KEY (organizerID)
@@ -159,14 +173,18 @@ CREATE TABLE `tournamentCoOrganizers` (
   PRIMARY KEY (`eventID`)
 );
 
+<<<<<<< HEAD
 CREATE TRIGGER expiryEventDate BEFORE INSERT ON opening_event
+=======
+CREATE TRIGGER expiryDateEvent BEFORE INSERT ON opening_event
+>>>>>>> 64e421b6a17da29cbc64ae2171d536604357bd95
     FOR EACH ROW SET NEW.eventExpiry = IFNULL(NEW.eventExpiry,DATE_ADD(STR_TO_DATE(NEW.eventDate, '%Y-%m-%d'), INTERVAL 14 DAY));
 
 --add data to opening_event table
 insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 1", "Introducing the Guy’s Bar Sports Night Membership Card 19/20!
 From £30 this membership card provides free entry to every sports night throughout the year and a free filter coffee/breakfast tea in The Shed every Thursday following a Sports Night.", "2019-01-09 21:00:00", "2019-01-09 22:00:00");
 
-insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 2", "There are a huge number of ways that you could give your time to disability support charities across London, 
+insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 2", "There are a huge number of ways that you could give your time to disability support charities across London,
 and so to celebrate Disability History Month, here are three SPOTLIGHT opportunities to take a look at!
 You can find even more on our Volunteering Log or get in touch with volunteering@kclsu.org if there’s something else you’re interested in.", "2019-22-11 00:00:00", "2019-23-11 00:00:00");
 
@@ -174,7 +192,7 @@ insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values 
 ming part of ProjectX, the experimental knitting workshop uses the visual language of textile to explore sustainable issues and mental healing.  Suitable for all abilities,
  the session focuses on the potential of simple techniques to create both art and sculpture.", "2019-04-12 13:00:00", "2019-04-12 15:30:00");
 
-insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 4", "In recognition of Disability awareness month, we would like to warmly invite you to our upcoming event 
+insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 4", "In recognition of Disability awareness month, we would like to warmly invite you to our upcoming event
 ‘The Strive to Survive’.We understand how tough it is for many first Generation/ WP students to have to go through unseen disabilities, mental health issues topped with further pressures of being
  the first in their family to go to uni or coming from a WP background. We understand the struggle! The event will be an opportunity to share your experiences and be engulfed in the warm embrace of
  those who have survived. This is also an opportunity to detox from work and relax an a warm and friendly environment with fellow students who understand your struggles.", "2019-04-21 16:00:00", "2019-04-12 18:00:00");

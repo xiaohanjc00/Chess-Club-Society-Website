@@ -1,5 +1,5 @@
 
-<?php  
+<?php 
 
   function find_all_articles() {
     global $db;
@@ -9,7 +9,7 @@
     confirm_result_set($result);
     return $result;
   }
-  
+
   function find_article_by_id($id) {
     global $db;
 
@@ -18,7 +18,7 @@
     confirm_result_set($result);
     return $result;
   }
-  
+
   function delete_article($id) {
     global $db;
 
@@ -33,10 +33,10 @@
       exit;
     }
   }
-  
+
   function insert_article($title, $description) {
     global $db;
-    
+
     $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate) values ("' . $title . '","' . $description . '", now());';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -48,10 +48,10 @@
       exit;
     }
   }
-  
+
   function insert_article_image($title, $description, $link) {
     global $db;
-    
+
     $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate, articleImage) values ("' . $title . '","' . $description . '", now());';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -66,7 +66,7 @@
 
 function update_article_image($link, $id) {
     global $db;
-    
+
     $sql = 'UPDATE posts set articleImage="'. $link .'" WHERE articleID = ' .$id.';';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -78,10 +78,10 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function update_article_title($title, $id) {
     global $db;
-    
+
     $sql = 'UPDATE posts set articleTitle= "'. $title .'" WHERE articleID =' .$id.';';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -93,10 +93,10 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-    
+
   function update_article_description($description, $id) {
     global $db;
-    
+
     $sql = 'UPDATE posts set articleDescription="'. $description .'" WHERE articleID = ' .$id.';';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -107,11 +107,11 @@ function update_article_image($link, $id) {
       db_disconnect($db);
       exit;
     }
-  }  
-  
+  }
+
   function insert_tournament($tournamentOrganizer, $tournamentName, $tournamentDate, $deadline) {
     global $db;
-    
+
     $sql = 'INSERT INTO tournament(tournamentOrganizer, tournamentName, tournamentDate, deadline) values ("' . $tournamentOrganizer . '","' . $tournamentName . '", "' .$tournamentDate . '", "'. $deadline. '");';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -123,7 +123,7 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function find_all_tournaments() {
     global $db;
 
@@ -132,7 +132,7 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function find_tournament_by_id($id) {
     global $db;
 
@@ -141,10 +141,10 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function delete_tournament($id) {
     global $db;
-    
+
     $sql = 'DELETE FROM tournament WHERE tournamentID =' . $id;
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -156,10 +156,10 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function update_tournament($organizer, $name, $date, $deadline, $winner, $firstRunnerUp, $id) {
     global $db;
-    
+
     $sql = "UPDATE tournament SET ";
     $sql .= "tournamentOrganizer='" . $organizer . "', ";
     $sql .= "tournamentName='" . $name . "', ";
@@ -177,11 +177,11 @@ function update_article_image($link, $id) {
       db_disconnect($db);
       exit;
     }
-  }  
-  
+  }
+
   function insert_tournament_organizer($organizerID, $tournamentID) {
     global $db;
-    
+
     $sql = 'INSERT INTO tournamentCoOrganizers(organizerID, tournamentID) values ';
     $sql .= '("' . $organizerID . '","' . $tournamentID .'");';
     $result = mysqli_query($db, $sql);
@@ -194,7 +194,7 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function find_all_tournamentOrganizers() {
     global $db;
 
@@ -203,7 +203,7 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function find_organizers_by_tournament_id($id) {
     global $db;
 
@@ -212,7 +212,7 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function find_tournament_by_organizer_id($id) {
     global $db;
 
@@ -221,10 +221,10 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function delete_tournament_organizer($organizerID) {
     global $db;
-    
+
     $sql = 'DELETE FROM tournamentCoOrganizers WHERE organizerID =' . $organizerID . ' AND tournamentID= '. $tournamentID. ';';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -236,10 +236,10 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function insert_tournament_participant($participantID, $tournamentID) {
     global $db;
-    
+
     $sql = 'INSERT INTO tournamentParticipant(participantID, tournamentID) values ';
     $sql .= '("' . $participantID . '","' . $tournamentID .'");';
     $result = mysqli_query($db, $sql);
@@ -252,7 +252,7 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function find_all_tournamentParticipants() {
     global $db;
 
@@ -261,7 +261,7 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function find_participants_by_tournament_id($id) {
     global $db;
 
@@ -270,7 +270,7 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function find_tournament_by_participant_id($id) {
     global $db;
 
@@ -279,10 +279,10 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function delete_tournament_participant($participantID, $tournamentID) {
     global $db;
-    
+
     $sql = 'DELETE FROM tournamentParticipant WHERE organizerID =' . $participantID . ' AND tournamentID= '. $tournamentID. ';';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -294,7 +294,7 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function find_all_events() {
     global $db;
 
@@ -303,7 +303,7 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function find_event_by_id($id) {
     global $db;
 
@@ -312,7 +312,7 @@ function update_article_image($link, $id) {
     confirm_result_set($result);
     return $result;
   }
-  
+
   function delete_event($id) {
     global $db;
 
@@ -327,10 +327,10 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function insert_event($title, $description) {
     global $db;
-    
+
     $sql = 'INSERT INTO opening_event(eventTitle, eventDesc, eventDate) values ("' . $title . '","' . $description . '", now());';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -342,10 +342,10 @@ function update_article_image($link, $id) {
       exit;
     }
   }
-  
+
   function insert_event_image($title, $description, $link) {
     global $db;
-    
+
     $sql = 'INSERT INTO opening_event(eventTitle, eventDesc, eventDate, eventImage) values ("' . $title . '","' . $description . '", now());';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -360,7 +360,7 @@ function update_article_image($link, $id) {
 
 function update_event_image($link, $id) {
     global $db;
-    
+
     $sql = 'UPDATE opening_event set eventImage="'. $link .'" WHERE eventID = ' .$id.';';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -372,10 +372,10 @@ function update_event_image($link, $id) {
       exit;
     }
   }
-  
+
   function update_event_title($title, $id) {
     global $db;
-    
+
     $sql = 'UPDATE opening_event set eventTitle= "'. $title .'" WHERE eventID =' .$id.';';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -387,10 +387,10 @@ function update_event_image($link, $id) {
       exit;
     }
   }
-    
+
   function update_event_description($description, $id) {
     global $db;
-    
+
     $sql = 'UPDATE opening_event set eventDescription="'. $description .'" WHERE eventID = ' .$id.';';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -562,7 +562,7 @@ function update_event_image($link, $id) {
         $query = "SELECT * FROM users WHERE id='" . db_escape($db, $user['id']) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $query);
-        
+
         if($result) {
             while($value = mysqli_fetch_assoc($result)) {
             echo "<br>";
