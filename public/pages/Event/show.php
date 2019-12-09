@@ -17,6 +17,7 @@
         $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
       
     try {
+        //echo "a";
         $event = find_event_by_id($_GET['id']);
         if (mysqli_num_rows($event) > 0) {
             while($row = mysqli_fetch_assoc($event)){
@@ -48,8 +49,11 @@
         echo $e->getMessage();
     }
 ?>
-
+    
+    
   </div>
-
+  
+<a href="#" onclick="history.go(-1)">Go Back</a>
+    
   </div>
 </div>
