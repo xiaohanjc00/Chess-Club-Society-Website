@@ -13,7 +13,6 @@
 -- > describe opening_event;
 -- > exit;
 
-
 -- Set up the database:
 
 CREATE DATABASE chessSociety;
