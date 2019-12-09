@@ -467,7 +467,14 @@ function update_event_image($link, $id) {
         }
         $password_required = $options['password_required'] ?? true;
         if($password_required) {
-            if(is_blank(user['password'])) {
+			if(is_blank($user['username'])) {
+				$errors[] = "Please enter a username.";
+			} elseif (!has_length($user['username'], array('min' => 8, 'max' => 255))) {
+				$errors[] = "Your username must be 8-255 characters in length.";
+			} elseif (!has_unique_username($user['username'], $user['id'] ?? 0)) {
+				$errors[] = "Username invalid: please try a different username";
+			}
+            if(is_blank($user['password'])) {
               $errors[] = "Please enter a password";
             } elseif (!has_length($user['password'], array('min' => 12))) {
               $errors[] = "Password must contain 12 or more characters";
@@ -477,10 +484,16 @@ function update_event_image($link, $id) {
               $errors[] = "Password must contain at least 1 lowercase letter";
             } elseif (!preg_match('/[0-9]/', $user['password'])) {
               $errors[] = "Password must contain at least 1 number";
-            } elseif (!preg_match('/[^A-Za-z0-9\s]/', $user['password']))
+            } elseif (!preg_match('/[^A-Za-z0-9\s]/', $user['password'])) {
               $errors[] = "Password must contain at least 1 symbol";
-            }
-            return $errors;
+			}
+			if(is_blank($user['confirm_password'])) {
+				$errors[] = "Passwords must match! Please re-enter password to confirm it.";
+			} elseif ($user['password'] !== $user['confirm_password']) {
+				$errors[] = "Passwords must match! Please confirm your new password.";
+			}
+		}
+        return $errors;
     }
 
     function insert_user($user) {
@@ -493,14 +506,14 @@ function update_event_image($link, $id) {
         $sql = "INSERT INTO users ";
         $sql .= "(first_name, last_name, dob, gender, phone, address, email, username, hashed_password) ";
         $sql .= "VALUES (";
-        $sql .= "'" . db_escape($db, $admin['first_name']) . "',";
-        $sql .= "'" . db_escape($db, $admin['last_name']) . "',";
-        $sql .= "'" . db_escape($db, $admin['dob']) . "',";
-        $sql .= "'" . db_escape($db, $admin['gender']) . "',";
-        $sql .= "'" . db_escape($db, $admin['phone']) . "',";
-        $sql .= "'" . db_escape($db, $admin['address']) . "',";
-        $sql .= "'" . db_escape($db, $admin['email']) . "',";
-        $sql .= "'" . db_escape($db, $admin['username']) . "',";
+        $sql .= "'" . db_escape($db, $user['first_name']) . "',";
+        $sql .= "'" . db_escape($db, $user['last_name']) . "',";
+        $sql .= "'" . db_escape($db, $user['dob']) . "',";
+        $sql .= "'" . db_escape($db, $user['gender']) . "',";
+        $sql .= "'" . db_escape($db, $user['phone']) . "',";
+        $sql .= "'" . db_escape($db, $user['address']) . "',";
+        $sql .= "'" . db_escape($db, $user['email']) . "',";
+        $sql .= "'" . db_escape($db, $user['username']) . "',";
         $sql .= "'" . db_escape($db, $hashed_password) . "'";
         $sql .= ")";
         $result = mysqli_query($db, $sql);

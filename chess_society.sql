@@ -22,7 +22,7 @@ USE chessSociety;
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `admin` BIT(1) NOT NULL, -- 1 for admins
+  `admin` BIT(1) NOT NULL DEFAULT 0, -- 1 for admins
   `first_name` VARCHAR(255),
   `last_name` VARCHAR(255),
   `dob` DATE NOT NULL,
