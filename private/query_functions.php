@@ -331,7 +331,7 @@
     }
   }
 
-  function find_all_events() {
+ function find_all_events() {
     global $db;
 
     $sql = "SELECT * FROM opening_event ORDER BY eventDate DESC";
@@ -412,7 +412,7 @@ function update_event_image($link, $id) {
   function update_event_title($title, $id) {
     global $db;
 
-    $sql = 'UPDATE opening_event set eventTitle= "'. $title .'" WHERE eventID =' .$id.';';
+    $sql = 'UPDATE opening_event set articleTitle= "'. $title .'" WHERE articleID =' .$id.';';
     $result = mysqli_query($db, $sql);
     if($result) {
       return true;
@@ -437,7 +437,7 @@ function update_event_image($link, $id) {
       db_disconnect($db);
       exit;
     }
-  } 
+  }
      
     function find_user_by_id($id) {
         global $db;
