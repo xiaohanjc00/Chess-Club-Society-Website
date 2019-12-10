@@ -599,8 +599,7 @@ function update_event_image($link, $id) {
         $sql .= "gender='" . db_escape($db, $user['gender']) . "', ";
         $sql .= "phone='" . db_escape($db, $user['phone']) . "', ";
         $sql .= "address='" . db_escape($db, $user['address']) . "', ";
-        $sql .= "email='" . db_escape($db, $user['email']) . "', ";
-        $sql .= "username='" . db_escape($db, $user['username']) . "' ";
+        $sql .= "email='" . db_escape($db, $user['email']) . "' ";
         if($password_sent) {
             $hashed_password = password_hash($user['password'], PASSWORD_DEFAULT);
             $sql .= "hashed_password='" . db_escape($db, $hashed_password) . "', ";

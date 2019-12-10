@@ -1,15 +1,15 @@
 
 <?php
-    require_once('db_prod_constants.php');
-    // require_once('db_credentials.php');
+    // require_once('db_prod_constants.php');
+    require_once('db_credentials.php');
     
     function db_connect() {
 
         // development credentials:
-        // $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+        $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
         // deployment credentials:
-        $connection = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
+        // $connection = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
         confirm_db_connect();
         return $connection;

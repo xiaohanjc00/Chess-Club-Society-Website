@@ -1,7 +1,7 @@
 <?php 
 require_once('../../private/initialise.php');
-// require_login();
-// require_admin_login();
+require_login();
+require_admin_login();
 ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 

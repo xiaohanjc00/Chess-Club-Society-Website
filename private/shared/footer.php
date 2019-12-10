@@ -22,7 +22,7 @@
                     <div class="col-md-2 mx-auto">
                         <h6>Useful Links</h6>
                         <hr>
-                        <p class="footerP"><a href="<?php echo url_for('pages/index.php'); ?>">Home</a></p>
+                        <p class="footerP"><a href="<?php echo url_for('index.php'); ?>">Home</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/News/index.php'); ?>">News</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/Event/index.php'); ?>">Events</a></p>
                         <p class="footerP"><a href="<?php echo url_for('pages/Tournament/index.php'); ?>">Tournaments</a></p>
@@ -69,7 +69,7 @@
     
                 <!-- Third row -->
                 <div class="footer-copyright text-center py-2" id ="copyright">© 2019 Copyright:
-                    <a href="<?php echo url_for('pages/index.php'); ?>"> kclchessclub.com</a>
+                    <a href="<?php echo url_for('index.php'); ?>"> kclchessclub.com</a>
                 </div>
                 
             </div>
