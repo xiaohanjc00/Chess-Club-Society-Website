@@ -44,4 +44,9 @@
     return (is_logged_in() && $user['admin'] == "1");
   }
 
+  function user_is_member() {
+    $user = find_user_by_id($_SESSION['user_id']);
+    return (is_logged_in() && $user['admin'] == "0");
+  }
+
 ?>

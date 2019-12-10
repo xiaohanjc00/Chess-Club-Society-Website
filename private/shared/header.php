@@ -1,3 +1,4 @@
+<?php require_once(realpath(dirname(__FILE__) . '/..'). '/initialise.php'); ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -29,12 +30,22 @@
             <a href="<?php echo url_for('pages/News/index.php'); ?>">News</a>
             <a href="<?php echo url_for('pages/Event/index.php'); ?>">Events</a>
             <a href="<?php echo url_for('pages/Tournament/index.php'); ?>">Tournaments</a>
-            <a href="<?php echo url_for('pages/members.php'); ?>">Member List</a>
-            <a href="<?php echo url_for('pages/log_in.php'); ?>">Login</a>
-            <a href="<?php echo url_for('pages/profile.php'); ?>">Profile</a>
             <a href="<?php echo url_for('pages/AboutUs/index.php'); ?>">About Us</a>
+            <?php
+                
+                if(is_logged_in()){
+                    if(user_is_admin()){
+                        echo "<a href=" . url_for('pages/members.php'). ">Member List</a>";
+                    }
+                    echo "<a href=" . url_for('pages/profile.php'). ">Profile</a>";
+                    echo "<a href=" . url_for('pages/log_out.php'). ">Log Out</a>";
+                }
+                else{
+                    echo "<a href=" . url_for('pages/log_in.php'). ">Login</a>";
+                }
+            ?>
         </div>
 
         </header>
     
-        <a href="<?php if (is_logged_in()) echo url_for('pages/log_out.php'); ?>">Log out</a>
+       
