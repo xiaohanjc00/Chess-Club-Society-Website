@@ -32,10 +32,11 @@
             <a href="<?php echo url_for('pages/Tournament/index.php'); ?>">Tournaments</a>
             <a href="<?php echo url_for('pages/AboutUs/index.php'); ?>">About Us</a>
             <?php
-                if(user_is_admin()){
-                    echo "<a href=" . url_for('pages/members.php'). ">Member List</a>";
-                }
+                
                 if(is_logged_in()){
+                    if(user_is_admin()){
+                        echo "<a href=" . url_for('pages/members.php'). ">Member List</a>";
+                    }
                     echo "<a href=" . url_for('pages/profile.php'). ">Profile</a>";
                     echo "<a href=" . url_for('pages/log_out.php'). ">Log Out</a>";
                 }

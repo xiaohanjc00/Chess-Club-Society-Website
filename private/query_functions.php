@@ -463,6 +463,14 @@ function update_event_image($link, $id) {
         //confirm_result_set($result);
         return $result;
     }
+
+    function find_members() {
+      global $db;
+      $sql = "SELECT * FROM users WHERE admin = 0; ";
+      $result = mysqli_query($db, $sql);
+      //confirm_result_set($result);
+      return $result;
+    }
     
     function find_user_by_username($username) {
         global $db;
