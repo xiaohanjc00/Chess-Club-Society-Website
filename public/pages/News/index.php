@@ -29,16 +29,16 @@
                 }
                 else{
                     echo '<div class="card">';
-                      if(is_logged_in() && user_is_admin()){
-                        echo '<div class="dropdown">';
-                        echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></i>';
-                        echo '<span class="caret"></span></button>';
-                        echo '<div class="dropdown-content">';
-                        echo  '<a href="edit.php?id='.$row['articleID'].'">Edit</a>';
-                        echo '<a href="delete.php?id='.$row['articleID'].'">Delete</a>';
-                        echo '</div>';   
-                        echo '</div>';
-                      }
+                    if(user_is_admin()){
+                      echo '<div class="dropdown">';
+                      echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></i>';
+                      echo '<span class="caret"></span></button>';
+                      echo '<div class="dropdown-content">';
+                      echo  '<a href="edit.php?id='.$row['articleID'].'">Edit</a>';
+                      echo '<a href="delete.php?id='.$row['articleID'].'">Delete</a>';
+                      echo '</div>';   
+                      echo '</div>';
+                    }
                     echo '<h1><a href="show.php?id='.$row['articleID'].'">'.$row['articleTitle'].'</a></h1>';
                     echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['articleDate'])).'</p>';
                     echo '<img class="fakeimg" src="' .$row['articleImage'] .'"">';
@@ -61,13 +61,12 @@
   </div>
   <div class="right">
   <?php 
-      if(is_logged_in() && user_is_admin()){
-        echo "<div class='card'>";
-        echo "<form action='new.php'>";
-        echo "<input type='submit' value='Create new article' />";
-        echo "</form>";
-      }
-    
+    if(user_is_admin()){
+      echo "<div class='card'>";
+      echo "<form action='new.php'>";
+      echo "<input type='submit' value='Create new article' />";
+      echo "</form>";
+    }
   ?>
 
     </div>
