@@ -17,30 +17,35 @@
             while($row = mysqli_fetch_assoc($article)){
                 echo '<div class="card">';
                     
-                    if(user_is_admin()){
-                      $organizer = find_tournament_organizer($_SESSION['user_id'], $row['tournamentID']);
-                      if (mysqli_num_rows($organizer) > 0) {
-                        echo '<div class="dropdown">';
-                        echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> </i>';
-                        echo '<span class="caret"></span></button>';
-                        echo '<div class="dropdown-content ">';
-                        echo  '<a href="new.php?add=coorganizer&&id='.$row['tournamentID'].'">Add CoOrganizer</a>';
-                        echo  '<a href="edit.php?id='.$row['tournamentID'].'">Edit</a>';
-                        echo '<a href="delete.php?id='.$row['tournamentID'].'">Delete</a>';
-                        echo '</div>';  
+                    
+                      if(is_logged_in() &&user_is_admin()){
+                        $organizer = find_tournament_organizer($_SESSION['user_id'], $row['tournamentID']);
+                        if (mysqli_num_rows($organizer) > 0) {
+                          echo '<div class="dropdown">';
+                          echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> </i>';
+                          echo '<span class="caret"></span></button>';
+                          echo '<div class="dropdown-content ">';
+                          echo  '<a href="new.php?add=coorganizer&&id='.$row['tournamentID'].'">Add CoOrganizer</a>';
+                          echo  '<a href="edit.php?id='.$row['tournamentID'].'">Edit</a>';
+                          echo '<a href="delete.php?id='.$row['tournamentID'].'">Delete</a>';
+                          echo '</div>';  
+                        }
                       }
-                    }
+                   
+                    
                     echo '<p> Name of the tournament :'. $row['tournamentName'].'</p>'; 
                     echo '<p> Date of the tournament :' . $row['tournamentDate'].'</p>';
                     echo '<p> Registration deadline: ' . $row['deadline'].'</p>';
                     
-                    if(user_is_member() ){
-                      $participant = find_tournament_and_participant($_SESSION['user_id'], $row['tournamentID']);
-                      if (mysqli_num_rows($participant) > 0) {
-                        echo "<p> You are already a participant !";
-                      }
-                      else{
-                        echo "<a href='new.php?add=participant&&id=".$row['tournamentID']."&&userid=". $_SESSION['user_id']."'> Join tournament </a>";
+                    if(is_logged_in()){
+                      if(user_is_member() ){
+                        $participant = find_tournament_and_participant($_SESSION['user_id'], $row['tournamentID']);
+                        if (mysqli_num_rows($participant) > 0) {
+                          echo "<p> You are already a participant !";
+                        }
+                        else{
+                          echo "<a href='new.php?add=participant&&id=".$row['tournamentID']."&&userid=". $_SESSION['user_id']."'> Join tournament </a>";
+                        }
                       }
                     }
 
@@ -62,7 +67,7 @@
   <div class ="">
     
     <?php
-        if(user_is_admin()){
+        if(is_logged_in() && user_is_admin()){
           echo "<div class='card'>";
           echo "<a href='new.php?add=tournament&&id=". $_SESSION['user_id']. "'> Create new tournament </a>";
           echo "</div>";
