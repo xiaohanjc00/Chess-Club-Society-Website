@@ -17,7 +17,7 @@
             while($row = mysqli_fetch_assoc($article)){
                 echo '<div class="card">';
                     
-                    if(user_is_admin()){
+                    if(is_logged_in() && user_is_admin()){
                       $organizer = find_tournament_organizer($_SESSION['user_id'], $row['tournamentID']);
                       if (mysqli_num_rows($organizer) > 0) {
                         echo '<div class="dropdown">';
@@ -34,7 +34,7 @@
                     echo '<p> Date of the tournament :' . $row['tournamentDate'].'</p>';
                     echo '<p> Registration deadline: ' . $row['deadline'].'</p>';
                     
-                    if(user_is_member() ){
+                    if(is_logged_in() && user_is_member() ){
                       $participant = find_tournament_and_participant($_SESSION['user_id'], $row['tournamentID']);
                       if (mysqli_num_rows($participant) > 0) {
                         echo "<p> You are already a participant !";
@@ -62,7 +62,7 @@
   <div class ="">
     
     <?php
-        if(user_is_admin()){
+        if(is_logged_in() && user_is_admin()){
           echo "<div class='card'>";
           echo "<a href='new.php?add=tournament&&id=". $_SESSION['user_id']. "'> Create new tournament </a>";
           echo "</div>";

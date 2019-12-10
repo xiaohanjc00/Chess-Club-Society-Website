@@ -29,7 +29,7 @@
                 }
                 else{
                     echo '<div class="card">';
-                    if(user_is_admin()){
+                    if(is_logged_in() && user_is_admin()){
                       echo '<div class="dropdown">';
                       echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></i>';
                       echo '<span class="caret"></span></button>';
@@ -61,7 +61,7 @@
   </div>
   <div class="right">
   <?php 
-    if(user_is_admin()){
+    if(is_logged_in() && user_is_admin()){
       echo "<div class='card'>";
       echo "<form action='new.php'>";
       echo "<input type='submit' value='Create new article' />";
