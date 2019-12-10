@@ -1,9 +1,7 @@
-
 <?php
+    session_start(); // turn on sessions
 
     ob_start(); // output buffering is turned on
-
-    session_start(); // turn on sessions
 
     // switch on all errors (for debugging)
     error_reporting(E_ALL);

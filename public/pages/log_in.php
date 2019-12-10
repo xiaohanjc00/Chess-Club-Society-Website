@@ -1,5 +1,7 @@
 <?php require_once('../../private/initialise.php'); ?>
 
+<?php include(SHARED_PATH . '/header.php'); ?>
+
 <?php
   $errors = [];
   $username = '';
@@ -30,7 +32,6 @@
   }
 ?>
 
-<?php include(SHARED_PATH . '/header.php'); ?>
 
 <div>
   <h2>Log in</h1>

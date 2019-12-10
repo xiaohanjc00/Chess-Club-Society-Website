@@ -34,93 +34,114 @@
     }
   }
 
-  function insert_article($title, $description) {
+  function validate_article($article, $options=[]) {
+    $errors = [];
+    if(is_blank($article['article_title'])) {
+        $errors[] = "Please enter the title of the article.";
+    } elseif (!has_length($article['article_title'], array('min' => 2, 'max' => 255))) {
+        $errors[] = "Please enter a valid title.";
+    }
+    if(is_blank($article['article_description'])) {
+        $errors[] = "Please enter the description of the article.";
+    } elseif (!has_length($article['article_description'], array('min' => 15, 'max' => 5000))) {
+        $errors[] = "Please enter a valid description.";
+    }
+    return $errors;
+  }
+
+  function insert_article($article) {
     global $db;
 
-    $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate) values ("' . $title . '","' . $description . '", now());';
+    $errors = validate_article($article);
+    if (!empty($errors)) {
+        return $errors;
+    }
+    $sql = 'INSERT INTO';
+    $sql .=' posts(articleTitle, articleDesc, articleDate ';
+    if(!is_blank($article['image_link'])){ $sql.= ', articleImage' ;}
+    if(!is_blank($article['expiry_date'])) {$sql .= ', articleExpiry';}
+    $sql .= ')values ("' ;
+    $sql .= db_escape($db,$article['article_title']) ;
+    $sql .= '", "' . db_escape($db, $article['article_description']) ;
+    $sql .= '", current_date()';
+    if(!is_blank($article['image_link'])) $sql.= ', "' . db_escape($db, $article['image_link']) ;
+    if(!is_blank($article['expiry_date'])) $sql .= '", "' . db_escape($db,$article['expiry_date']) . '"';
+    $sql .= ');';
     $result = mysqli_query($db, $sql);
     if($result) {
       return true;
     } else {
-      // DELETE failed
       echo mysqli_error($db);
       db_disconnect($db);
       exit;
     }
   }
 
-  function insert_article_image($title, $description, $link) {
+  function update_article($article, $id) {
     global $db;
 
-    $sql = 'INSERT INTO posts(articleTitle, articleDesc, articleDate, articleImage) values ("' . $title . '","' . $description . '", now());';
-    $result = mysqli_query($db, $sql);
-    if($result) {
-      return true;
-    } else {
-      // DELETE failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+    $sql;
+    if(!is_blank($article['article_title'])) $sql .= 'UPDATE posts set articleTitle= "'.  db_escape($db, $article['article_title']) . '" WHERE articleID =' .$id.';';
+    if(!is_blank($article['image_link'])) $sql .= 'UPDATE posts set articleImage= "'.  db_escape($db, $article['image_link']) . '" WHERE articleID =' .$id.';';
+    if(!is_blank($article['expiry_date'])) $sql .=  'UPDATE posts set articleExpiry= "'.  db_escape($db, $article['expiry_date']) . '" WHERE articleID =' .$id.';';
+    if(!is_blank($article['article_description'])) $sql .= 'UPDATE posts set articleDesc= "'.  db_escape($db, $article['article_description']) . '" WHERE articleID =' .$id.';';
+    
+    if(!is_blank($sql)){
+      $result = mysqli_query($db, $sql);
+      if($result) {
+        return true;
+      } else {
+        // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+      }
     }
+    
   }
 
-function update_article_image($link, $id) {
-    global $db;
-
-    $sql = 'UPDATE posts set articleImage="'. $link .'" WHERE articleID = ' .$id.';';
-    $result = mysqli_query($db, $sql);
-    if($result) {
-      return true;
-    } else {
-      // DELETE failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+  function validate_tournament($tournament, $options=[]) {
+    $errors = [];
+    if(is_blank($tournament['organizer'])) {
+        $errors[] = "Please enter the ID of the organizer.";
+    } 
+    if(is_blank($tournament['name'])) {
+        $errors[] = "Please enter the tournament name.";
+    } elseif (!has_length($tournament['name'], array('min' => 2, 'max' => 255))) {
+        $errors[] = "Please enter a valid name.";
     }
+    if(is_blank($tournament['date'])) {
+        $errors[] = "Please enter the date of the tournament.";
+    }
+    if(is_blank($tournament['deadline'])) {
+        $errors[] = "Please enter the deadline for registering.";
+    }
+    return $errors;
   }
 
-  function update_article_title($title, $id) {
+  function insert_tournament($tournament) {
     global $db;
 
-    $sql = 'UPDATE posts set articleTitle= "'. $title .'" WHERE articleID =' .$id.';';
-    $result = mysqli_query($db, $sql);
-    if($result) {
-      return true;
-    } else {
-      // DELETE failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+    $errors = validate_tournament($tournament);
+    if (!empty($errors)) {
+        return $errors;
     }
-  }
-
-  function update_article_description($description, $id) {
-    global $db;
-
-    $sql = 'UPDATE posts set articleDescription="'. $description .'" WHERE articleID = ' .$id.';';
+    $sql = "INSERT INTO tournament";
+    $sql .= "(tournamentOrganizer, tournamentName, tournamentDate, deadline)";
+    $sql .= " VALUES (";
+    $sql .= "'" . db_escape($db, $tournament['organizer']) . "', ";
+    $sql .= "'" . db_escape($db, $tournament['name']) . "', ";
+    $sql .= "'" . db_escape($db, $tournament['date']) . "', ";
+    $sql .= "'" . db_escape($db, $tournament['deadline']) . "'" ;
+    $sql .= ");";
     $result = mysqli_query($db, $sql);
     if($result) {
-      return true;
+        return true;
     } else {
-      // DELETE failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
-    }
-  }
-
-  function insert_tournament($tournamentOrganizer, $tournamentName, $tournamentDate, $deadline) {
-    global $db;
-
-    $sql = 'INSERT INTO tournament(tournamentOrganizer, tournamentName, tournamentDate, deadline) values ("' . $tournamentOrganizer . '","' . $tournamentName . '", "' .$tournamentDate . '", "'. $deadline. '");';
-    $result = mysqli_query($db, $sql);
-    if($result) {
-      return true;
-    } else {
-      // INSERT failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+        // failed to insert tournament
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
     }
   }
 
@@ -157,41 +178,47 @@ function update_article_image($link, $id) {
     }
   }
 
-  function update_tournament($organizer, $name, $date, $deadline, $winner, $firstRunnerUp, $id) {
+  function update_tournament($tournament, $id) {
     global $db;
 
-    $sql = "UPDATE tournament SET ";
-    $sql .= "tournamentOrganizer='" . $organizer . "', ";
-    $sql .= "tournamentName='" . $name . "', ";
-    $sql .= "tournamentDate='" . $date. "', ";
-    $sql .= "deadline='" . $deadline . "', ";
-    $sql .= "winnerID='" . $winner . "', ";
-    $sql .= "firstRunnerUpID='" . $firstRunnerUp . "', ";
-    $sql .= " WHERE articleID = " .$id.';';
-    $result = mysqli_query($db, $sql);
-    if($result) {
-      return true;
-    } else {
-      // DELETE failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+    $sql;
+    if(!is_blank($tournament['name'])) $sql .= 'UPDATE tournament set tournamentName= "'.  db_escape($db, $tournament['name']) . '" WHERE tournamentID =' .$id.';';
+    if(!is_blank($tournament['organizer'])) $sql .= 'UPDATE tournament set tournamentOrganizer= "'.  db_escape($db, $tournament['organizer']) . '" WHERE tournamentID =' .$id.';';
+    if(!is_blank($tournament['date'])) $sql .=  'UPDATE tournament set tournamentDate= "'.  db_escape($db, $tournament['date']) . '" WHERE tournamentID =' .$id.';';
+    if(!is_blank($tournament['deadline'])) $sql .= 'UPDATE tournament set deadline= "'.  db_escape($db, $tournament['deadline']) . '" WHERE tournamentID =' .$id.';';
+    
+    if(!is_blank($sql)){
+      $result = mysqli_query($db, $sql);
+      if($result) {
+        return true;
+      } else {
+        // UPDATE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+      }
     }
   }
 
-  function insert_tournament_organizer($organizerID, $tournamentID) {
+  function insert_tournament_organizer($tournament) {
     global $db;
 
-    $sql = 'INSERT INTO tournamentCoOrganizers(organizerID, tournamentID) values ';
-    $sql .= '("' . $organizerID . '","' . $tournamentID .'");';
-    $result = mysqli_query($db, $sql);
-    if($result) {
-      return true;
-    } else {
-      // INSERT failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
+    if($tournament['coorganizer'] != "None"){
+      $sql = "INSERT INTO tournamentCoOrganizers";
+      $sql .= "(organizerID, tournamentID)";
+      $sql .= " VALUES (";
+      $sql .= db_escape($db, $tournament['coorganizer']) . ",  ";
+      $sql .= db_escape($db, $tournament['tournamentID']);
+      $sql .= ");";
+      $result = mysqli_query($db, $sql);
+      if($result) {
+          return true;
+      } else {
+          // failed to insert tournament
+          echo mysqli_error($db);
+          db_disconnect($db);
+          exit;
+      }
     }
   }
 
@@ -271,10 +298,19 @@ function update_article_image($link, $id) {
     return $result;
   }
 
-  function find_tournament_by_participant_id($id) {
+  function find_tournament_and_participant($id, $tournamentID) {
     global $db;
 
-    $sql = "SELECT * FROM tournamentParticipant WHERE participantID= ". $id. ";";
+    $sql = "SELECT participantID FROM tournamentParticipant WHERE participantID= ". $id. " AND tournamentID = ". $tournamentID . ";";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_tournament_organizer($id, $tournamentID) {
+    global $db;
+
+    $sql = "SELECT tournamentOrganizer FROM tournament WHERE tournamentOrganizer= ". $id. " AND tournamentID = ". $tournamentID . ";";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
@@ -414,6 +450,19 @@ function update_event_image($link, $id) {
         mysqli_free_result($result);
         return $user;
     }
+
+    function find_admins($id) {
+        global $db;
+        $sql = "SELECT id, first_name FROM users WHERE admin = 1 AND ";
+        $sql .= "id NOT IN ";
+        $sql .= "(SELECT organizerID 
+          FROM tournamentcoorganizers WHERE tournamentID = ". $id . ")";
+        $sql .= "AND id NOT IN ";
+        $sql .= "(SELECT tournamentOrganizer FROM tournament WHERE tournamentID = ". $id.");";
+        $result = mysqli_query($db, $sql);
+        //confirm_result_set($result);
+        return $result;
+    }
     
     function find_user_by_username($username) {
         global $db;
@@ -428,6 +477,7 @@ function update_event_image($link, $id) {
     }
 
     function validate_user($user, $options=[]) {
+      $errors = [];
         if(is_blank($user['first_name'])) {
             $errors[] = "Please enter your first name.";
         } elseif (!has_length($user['first_name'], array('min' => 2, 'max' => 255))) {
@@ -467,32 +517,32 @@ function update_event_image($link, $id) {
         }
         $password_required = $options['password_required'] ?? true;
         if($password_required) {
-			if(is_blank($user['username'])) {
-				$errors[] = "Please enter a username.";
-			} elseif (!has_length($user['username'], array('min' => 8, 'max' => 255))) {
-				$errors[] = "Your username must be 8-255 characters in length.";
-			} elseif (!has_unique_username($user['username'], $user['id'] ?? 0)) {
-				$errors[] = "Username invalid: please try a different username";
-			}
-            if(is_blank($user['password'])) {
-              $errors[] = "Please enter a password";
-            } elseif (!has_length($user['password'], array('min' => 12))) {
-              $errors[] = "Password must contain 12 or more characters";
-            } elseif (!preg_match('/[A-Z]/', $user['password'])) {
-              $errors[] = "Password must contain at least 1 uppercase letter";
-            } elseif (!preg_match('/[a-z]/', $user['password'])) {
-              $errors[] = "Password must contain at least 1 lowercase letter";
-            } elseif (!preg_match('/[0-9]/', $user['password'])) {
-              $errors[] = "Password must contain at least 1 number";
-            } elseif (!preg_match('/[^A-Za-z0-9\s]/', $user['password'])) {
-              $errors[] = "Password must contain at least 1 symbol";
-			}
-			if(is_blank($user['confirm_password'])) {
-				$errors[] = "Passwords must match! Please re-enter password to confirm it.";
-			} elseif ($user['password'] !== $user['confirm_password']) {
-				$errors[] = "Passwords must match! Please confirm your new password.";
-			}
-		}
+          if(is_blank($user['username'])) {
+            $errors[] = "Please enter a username.";
+          } elseif (!has_length($user['username'], array('min' => 8, 'max' => 255))) {
+            $errors[] = "Your username must be 8-255 characters in length.";
+          } elseif (!has_unique_username($user['username'], $user['id'] ?? 0)) {
+            $errors[] = "Username invalid: please try a different username";
+          }
+          if(is_blank($user['password'])) {
+            $errors[] = "Please enter a password";
+          } elseif (!has_length($user['password'], array('min' => 12))) {
+            $errors[] = "Password must contain 12 or more characters";
+          } elseif (!preg_match('/[A-Z]/', $user['password'])) {
+            $errors[] = "Password must contain at least 1 uppercase letter";
+          } elseif (!preg_match('/[a-z]/', $user['password'])) {
+            $errors[] = "Password must contain at least 1 lowercase letter";
+          } elseif (!preg_match('/[0-9]/', $user['password'])) {
+            $errors[] = "Password must contain at least 1 number";
+          } elseif (!preg_match('/[^A-Za-z0-9\s]/', $user['password'])) {
+            $errors[] = "Password must contain at least 1 symbol";
+			    }
+          if(is_blank($user['confirm_password'])) {
+            $errors[] = "Passwords must match! Please re-enter password to confirm it.";
+          } elseif ($user['password'] !== $user['confirm_password']) {
+            $errors[] = "Passwords must match! Please confirm your new password.";
+          }
+		    }
         return $errors;
     }
 
