@@ -26,18 +26,18 @@
 
             <!--Bottom part of the header (Navigation Bar)-->
             <div class="topNav">
-            <a href="<?php echo url_for('pages/index.php'); ?>">Home</a>
+            <a href="<?php echo url_for('index.php'); ?>">Home</a>
             <a href="<?php echo url_for('pages/News/index.php'); ?>">News</a>
             <a href="<?php echo url_for('pages/Event/index.php'); ?>">Events</a>
             <a href="<?php echo url_for('pages/Tournament/index.php'); ?>">Tournaments</a>
-            <a href="<?php echo url_for('pages/AboutUs/index.php'); ?>">About Us</a>
+            <a href="<?php echo url_for('pages/about/index.php'); ?>">About Us</a>
             <?php
                 
                 if(is_logged_in()){
                     if(user_is_admin()){
-                        echo "<a href=" . url_for('pages/members.php'). ">Member List</a>";
+                        echo "<a href=" . url_for('pages/members/members.php'). ">Member List</a>";
                     }
-                    echo "<a href=" . url_for('pages/profile.php'). ">Profile</a>";
+                    echo "<a href=" . url_for('pages/profile/index.php'). ">Profile</a>";
                     echo "<a href=" . url_for('pages/log_out.php'). ">Log Out</a>";
                 }
                 else{

@@ -29,7 +29,7 @@
         echo '<h4>Edit a Chess News article now!</h4>';
         echo '<p>Please fill in the forms:</p>';  
 
-        echo ' <?php echo display_errors($errors); ?>';
+        echo display_errors($errors); 
 
         echo '<form width="800px" margin="auto"  action="edit.php?id='. $_GET['id'] .'" method="post">';
         echo '<dl> <dt>Article Title:</dt><dd><input type="text" name="article_title" value="'.$article['article_title'] . '" /></dd> </dl>' ;
