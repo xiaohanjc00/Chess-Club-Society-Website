@@ -21,7 +21,7 @@
       if($user) {
         if(password_verify($password, $user['hashed_password'])) {
           log_in_user($user);
-          redirect_to(url_for('pages/profile/index.php'));
+          redirect_to(url_for('pages/profile.php'));
         } else {
           $errors[] = $login_fail_msg;
         }
