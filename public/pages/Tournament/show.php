@@ -3,6 +3,13 @@
 <?php
 
 if($_GET["show"] == "match"){
+    if ($_GET["update"] == "ratings") {
+        if (update_ratings($_GET["id"])) {
+            echo '<div id="message">Ratings successfully updated!</div>';
+        } else {
+            echo '<div id="message">Ratings update error.</div>';
+        }
+    }
     $match = find_all_tournamentMatches($_GET["id"]);
     $round = 1;
 
@@ -49,6 +56,10 @@ if($_GET["show"] == "match"){
     }
     echo '</tbody>';
     echo '</table>';
+    
+    echo '<form width="800px" margin="auto" action="show.php?update=ratings&&show=match&&id='. $_GET['id'] .'" method="post">';
+    echo '<div><input type="submit" value="Update all participant ratings" /></div>';
+    echo '</form>';
 }
 else if($_GET["show"] == "participant"){
     $match = find_all_tournamentParticipants($_GET["id"]);
@@ -56,7 +67,7 @@ else if($_GET["show"] == "participant"){
     if (mysqli_num_rows($match) > 0) {
         while($row = mysqli_fetch_assoc($match)){
             echo "<p> " .$row["first_name"] . " ".  $row["last_name"] . "</p>";
-         }
+        }
     }
     else{
         echo "<p> No one joined this tournament. </p>";

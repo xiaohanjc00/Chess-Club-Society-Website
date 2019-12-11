@@ -29,7 +29,7 @@ CREATE TABLE `users` (
   `gender` CHAR(1) NOT NULL, -- 'F' OR 'M' OR 'O'
   `phone` VARCHAR(15) NOT NULL,
   `address` VARCHAR(255),
-  `rating` INT(3) NOT NULL DEFAULT 0,
+  `rating` INT(3) NOT NULL DEFAULT 500,
   `email` VARCHAR(255),
   `username` VARCHAR(255),
   `hashed_password` VARCHAR(255),

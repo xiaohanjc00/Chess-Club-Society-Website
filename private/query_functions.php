@@ -1,5 +1,6 @@
-
 <?php 
+
+  // functions for accessing and updating news:
 
   function find_all_articles() {
     global $db;
@@ -106,8 +107,87 @@
         exit;
       }
     }
-    
   }
+
+	// functions for updating ratings after tournaments:
+
+	function update_ratings($t_id) {
+		// updates only possible for a completed tournament
+		if (tournament_ended($t_id)) {
+			$matches_set = find_all_tournamentMatches($t_id);
+			while($match = mysqli_fetch_assoc($matches_set)) {
+				// update rankings of match participants
+				update_ratings_from_match($match['roundWinner'], $match['roundLoser']);
+			}
+			mysqli_free_result($matches_set);
+			return true;
+		}
+		return false;
+	}
+
+	function update_ratings_from_match($winner_id, $loser_id) {
+		// updates each player's rating from the match result
+		$winner_rating = get_rating_by_id($winner_id);
+		$loser_rating = get_rating_by_id($loser_id);
+		if ($winner_rating > $loser_rating) {
+			update_rating($winner_id, $winner_rating + ($winner_rating - $loser_rating));
+			update_rating($loser_id, $loser_rating - ($winner_rating - $loser_rating));
+		} else if ($winner_rating < $loser_rating) {
+			update_rating($winner_id, $winner_rating + $loser_rating + 100);
+			update_rating($loser_id, $loser_rating - $winner_rating - 100);
+		} else {
+			update_rating($winner_id, $winner_rating + 400);
+			update_rating($loser_id, $loser_rating - 400);
+		}
+	}
+
+	function update_rating($user_id, $new_rating) {
+		global $db;
+		$sql = "UPDATE users SET ";
+		$sql .= "rating='" . db_escape($db, $new_rating) . "' ";
+		$sql .= "WHERE id='" . db_escape($db, $user_id) . "' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+		if($result) {
+			return true;
+		} else {
+			echo mysqli_error($db);
+			db_disconnect($db);
+			exit;
+		}
+	}
+
+	function get_rating_by_id($id) {
+		global $db;
+		$sql = "SELECT * FROM users ";
+		$sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+		confirm_result_set($result);
+		$user = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+		return $user['rating'];
+	}
+
+	function tournament_ended($t_id) {
+		global $db;
+		$sql = "SELECT * FROM tournament ";
+		$sql .= "WHERE id='" . db_escape($db, $t_id) . "' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+		confirm_result_set($result);
+		$tournament = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+		if (is_null($tournament['winnerID'])) {
+			// tournament data not yet entered
+			return false;
+		}
+		// tournament complete: all match data has been entered
+		return true;
+	}
+	
+
+  // functions for accessing and updating tournaments:
 
   function validate_tournament($tournament, $options=[]) {
     $errors = [];
@@ -448,6 +528,9 @@
     }
   }
 
+
+// functions for accessing and updating events:
+
  function find_all_events() {
     global $db;
 
@@ -541,21 +624,24 @@ function update_event_image($link, $id) {
     }
   }
 
-  function update_event_description($description, $id) {
-    global $db;
+	function update_event_description($description, $id) {
+	global $db;
 
-    $sql = 'UPDATE opening_event set eventDescription="'. $description .'" WHERE eventID = ' .$id.';';
-    $result = mysqli_query($db, $sql);
-    if($result) {
-      return true;
-    } else {
-      // DELETE failed
-      echo mysqli_error($db);
-      db_disconnect($db);
-      exit;
-    }
-  }
-     
+	$sql = 'UPDATE opening_event set eventDescription="'. $description .'" WHERE eventID = ' .$id.';';
+	$result = mysqli_query($db, $sql);
+	if($result) {
+		return true;
+	} else {
+		// DELETE failed
+		echo mysqli_error($db);
+		db_disconnect($db);
+		exit;
+		}
+	}
+
+
+	// functions for accessing and updating user details:
+
     function find_user_by_id($id) {
         global $db;
         $sql = "SELECT * FROM users ";
@@ -588,7 +674,7 @@ function update_event_image($link, $id) {
       //confirm_result_set($result);
       return $result;
     }
-    
+
     function find_user_by_username($username) {
         global $db;
         $sql = "SELECT * FROM users ";
@@ -780,20 +866,11 @@ function update_event_image($link, $id) {
         mysqli_free_result($result);
     }
 
-    function delete_user($user) {
+    function delete_user($id) {
         global $db;
-        $password_sent = !is_blank($user['password']);
-        $errors = validate_user($user, ['password_required' => $password_sent]);
-        if (!empty($errors)) {
-            return $errors;
-        }
-        $sql = "DELETE * FROM users";
-        if($password_sent) {
-            $hashed_password = password_hash($user['password'], PASSWORD_DEFAULT);
-            $sql .= "hashed_password='" . db_escape($db, $hashed_password) . "', ";
-        }
-        $sql .= "WHERE id='" . db_escape($db, $user['id']) . "' ";
-        $sql .= "LIMIT 1";
+        $sql = "DELETE FROM users ";
+        $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+        $sql .= "LIMIT 1;";
         $result = mysqli_query($db, $sql);
         if($result) {
             return true;
