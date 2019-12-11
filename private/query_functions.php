@@ -130,16 +130,16 @@
 		// updates each player's rating from the match result
 		$winner_rating = get_rating_by_id($winner_id);
 		$loser_rating = get_rating_by_id($loser_id);
-		// calculate new ratings
-		// TODO ...
-		//
-		//
-		//
-		//
-		// update_rating($winner_id, $new_winner_rating);
-		// update_rating($loser_id, $new_loser_rating);
-		update_rating($winner_id, $winner_rating + 100);
-		update_rating($loser_id, $loser_rating - 100);
+		if ($winner_rating > $loser_rating) {
+			update_rating($winner_id, $winner_rating + ($winner_rating - $loser_rating));
+			update_rating($loser_id, $loser_rating - ($winner_rating - $loser_rating));
+		} else if ($winner_rating < $loser_rating) {
+			update_rating($winner_id, $winner_rating + $loser_rating + 100);
+			update_rating($loser_id, $loser_rating - $winner_rating - 100);
+		} else {
+			update_rating($winner_id, $winner_rating + 400);
+			update_rating($loser_id, $loser_rating - 400);
+		}
 	}
 
 	function update_rating($user_id, $new_rating) {
@@ -171,7 +171,6 @@
 	}
 
 	function tournament_ended($t_id) {
-		// returns true when all tournament data has been entered
 		global $db;
 		$sql = "SELECT * FROM tournament ";
 		$sql .= "WHERE id='" . db_escape($db, $t_id) . "' ";
@@ -184,7 +183,7 @@
 			// tournament data not yet entered
 			return false;
 		}
-		// there is a winner: all matches in the tournament are complete
+		// tournament complete: all match data has been entered
 		return true;
 	}
 	
