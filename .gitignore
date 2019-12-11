@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=macos,windows
 
 private/db_prod_constants.php
+private/db_credentials.php
 
 ### macOS ###
 # General
