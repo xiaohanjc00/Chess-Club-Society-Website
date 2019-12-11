@@ -46,6 +46,15 @@
     } elseif (!has_length($article['article_description'], array('min' => 15, 'max' => 5000))) {
         $errors[] = "Please enter a valid description.";
     }
+
+    date_default_timezone_get();
+    $currentDateTime = date('Y-m-d');
+    $currentdatetime1 =  date_create($currentDateTime);
+    $expiryDate =  date_create(date('Y-m-d',strtotime($article['expiry_date'])));
+
+    if($currentdatetime1 >= $expiryDate){
+      $errors[] = "Please enter a valid expiry date. Its value cannot come before todays date";
+    }
     return $errors;
   }
 
@@ -64,8 +73,8 @@
     $sql .= db_escape($db,$article['article_title']) ;
     $sql .= '", "' . db_escape($db, $article['article_description']) ;
     $sql .= '", current_date()';
-    if(!is_blank($article['image_link'])) $sql.= ', "' . db_escape($db, $article['image_link']) ;
-    if(!is_blank($article['expiry_date'])) $sql .= '", "' . db_escape($db,$article['expiry_date']) . '"';
+    if(!is_blank($article['image_link'])) $sql.= ', "' . db_escape($db, $article['image_link']) . '"' ;
+    if(!is_blank($article['expiry_date'])) $sql .= ', "' . db_escape($db,$article['expiry_date']) . '"';
     $sql .= ');';
     $result = mysqli_query($db, $sql);
     if($result) {
@@ -102,6 +111,7 @@
 
   function validate_tournament($tournament, $options=[]) {
     $errors = [];
+    
     if(is_blank($tournament['organizer'])) {
         $errors[] = "Please enter the ID of the organizer.";
     } 
@@ -116,6 +126,49 @@
     if(is_blank($tournament['deadline'])) {
         $errors[] = "Please enter the deadline for registering.";
     }
+
+    date_default_timezone_get();
+    $currentDateTime = date('Y-m-d');
+    $currentdatetime1 =  date_create($currentDateTime);
+    $tournamentDate =  date_create(date('Y-m-d',strtotime($tournament['date'])));
+    $tournamentDeadline =  date_create(date('Y-m-d',strtotime($tournament['deadline'])));
+
+    if($currentdatetime1 > $tournamentDeadline){
+      $errors[] = "Please enter a valid deadline date. Its value cannot come before todays date";
+    }
+    if($currentdatetime1 > $tournamentDate){
+      $errors[] = "Please enter a valid tournament date. Its value cannot come before todays date";
+    }
+    if($tournamentDate < $tournamentDeadline){
+      $errors[] = "The deadline registration date cannot come after the date of the tournament";
+    }
+
+    return $errors;
+  }
+
+  function validate_tournament_update($tournament, $options=[]) {
+    $errors = [];
+    
+    if (!is_blank($tournament['name']) && !has_length($tournament['name'], array('min' => 2, 'max' => 255))) {
+        $errors[] = "Please enter a valid name.";
+    }
+
+    date_default_timezone_get();
+    $currentDateTime = date('Y-m-d');
+    $currentdatetime1 =  date_create($currentDateTime);
+    $tournamentDate =  date_create(date('Y-m-d',strtotime($tournament['date'])));
+    $tournamentDeadline =  date_create(date('Y-m-d',strtotime($tournament['deadline'])));
+
+    if($currentdatetime1 > $tournamentDeadline){
+      $errors[] = "Please enter a valid deadline date. Its value cannot come before todays date";
+    }
+    if($currentdatetime1 > $tournamentDate){
+      $errors[] = "Please enter a valid tournament date. Its value cannot come before todays date";
+    }
+    if($tournamentDate < $tournamentDeadline){
+      $errors[] = "The deadline registration date cannot come after the date of the tournament";
+    }
+
     return $errors;
   }
 
@@ -181,10 +234,14 @@
   function update_tournament($tournament, $id) {
     global $db;
 
-    $sql;
-    if(!is_blank($tournament['name'])) $sql .= 'UPDATE tournament set tournamentName= "'.  db_escape($db, $tournament['name']) . '" WHERE tournamentID =' .$id.';';
-    if(!is_blank($tournament['organizer'])) $sql .= 'UPDATE tournament set tournamentOrganizer= "'.  db_escape($db, $tournament['organizer']) . '" WHERE tournamentID =' .$id.';';
-    if(!is_blank($tournament['date'])) $sql .=  'UPDATE tournament set tournamentDate= "'.  db_escape($db, $tournament['date']) . '" WHERE tournamentID =' .$id.';';
+    $errors = validate_tournament_update($tournament);
+    if (!empty($errors)) {
+        return $errors;
+    }
+    $sql ="";
+    if(!is_blank($tournament['name'])) $sql .= 'UPDATE tournament set tournamentName= "'.  db_escape($db, $tournament['name']) . '" WHERE tournamentID =' .$id.'; ';
+    if(!is_blank($tournament['organizer'])) $sql .= 'UPDATE tournament set tournamentOrganizer= "'.  db_escape($db, $tournament['organizer']) . '" WHERE tournamentID =' .$id.'; ';
+    if(!is_blank($tournament['date'])) $sql .=  'UPDATE tournament set tournamentDate= "'.  db_escape($db, $tournament['date']) . '" WHERE tournamentID =' .$id.'; ';
     if(!is_blank($tournament['deadline'])) $sql .= 'UPDATE tournament set deadline= "'.  db_escape($db, $tournament['deadline']) . '" WHERE tournamentID =' .$id.';';
     
     if(!is_blank($sql)){
@@ -280,13 +337,73 @@
     }
   }
 
-  function find_all_tournamentParticipants() {
+  function insert_tournament_matches($matches) {
     global $db;
 
-    $sql = "SELECT * FROM tournamentParticipant ORDER BY tournamentID DESC";
+    $sql = 'INSERT INTO `tournamentMatches`(firstparticipantID, secondparticipantID, tournamentID, roundNumber)';
+    $sql .= 'VALUES';
+    $sql .= '("' . $matches['firstparticipantID'] . '","' . $matches['secondparticipantID']  .'","' . $matches['tournamentID'] .'","' . $matches['roundNumber'] .'");';
+    $result = mysqli_query($db, $sql);
+    if($result) {
+      return true;
+    } else {
+      // INSERT failed
+      echo mysqli_error($db);
+      db_disconnect($db);
+      exit;
+    }
+  }
+
+  function find_matches($tournamentID, $round) {
+    global $db;
+
+    $sql = 'SELECT * FROM tournamentMatches WHERE tournamentID =' . $tournamentID . ' AND roundNumber ='. $round . ';';
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
+  }
+
+  function find_all_tournamentParticipants($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentParticipant, users WHERE id = participantID AND tournamentID = " .$id .";";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_all_tournamentMatches($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentMatches WHERE tournamentID = " .$id ."  ORDER BY roundNumber;";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_user_tournamentMatches($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentMatches WHERE firstparticipantID = " .$id ." OR  secondparticipantID = ".$id . "ORDER BY roundNumber;";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function set_winner($matchResult){
+    $sql = 'UPDATE tournamentMatches set roundWinner= "'.  db_escape($db, $tournament['winner']) . '" AND roundLoser =  "'.  db_escape($db, $tournament['loser']) . '" ';
+    $sql .= 'WHERE tournamentID ="' .  db_escape($db, $tournament['tournamentID']).'" AND firstparticipantID = "' .  db_escape($db, $tournament['firstparticipantID']) . '" AND secondparticipantID = "' .  db_escape($db, $tournament['secondparticipantID']) . '";';
+    if(!is_blank($sql)){
+      $result = mysqli_query($db, $sql);
+      if($result) {
+        return true;
+      } else {
+        // UPDATE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+      }
+    }
   }
 
   function find_participants_by_tournament_id($id) {
@@ -331,7 +448,7 @@
     }
   }
 
-  function find_all_events() {
+ function find_all_events() {
     global $db;
 
     $sql = "SELECT * FROM opening_event ORDER BY eventDate DESC";
@@ -412,7 +529,7 @@ function update_event_image($link, $id) {
   function update_event_title($title, $id) {
     global $db;
 
-    $sql = 'UPDATE opening_event set eventTitle= "'. $title .'" WHERE eventID =' .$id.';';
+    $sql = 'UPDATE opening_event set articleTitle= "'. $title .'" WHERE articleID =' .$id.';';
     $result = mysqli_query($db, $sql);
     if($result) {
       return true;
@@ -437,7 +554,7 @@ function update_event_image($link, $id) {
       db_disconnect($db);
       exit;
     }
-  } 
+  }
      
     function find_user_by_id($id) {
         global $db;

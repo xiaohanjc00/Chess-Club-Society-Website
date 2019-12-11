@@ -45,8 +45,9 @@ INSERT INTO users(admin, first_name, last_name, dob, gender, phone, address, ema
     (0, 'Jenny','Marston','1938-05-20','F',020862287622,'20 Violet Street, Mitcham MH46YW','jjjj_y@last.com','chesser','word'),
     (0, 'Jude','Stoyanov','1999-04-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight','pass'),
     (1, 'Adam','Stoyanov','1999-04-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight','pass');
-
-
+    (0, 'Adam','Stoyanov','1999-04-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight','pass');
+    (0, 'Adam','Stoyanov','1999-04-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight','pass');
+    (0, 'Adam','Stoyanov','1999-04-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight','pass');
 
 -- create posts table
 DROP TABLE IF EXISTS `posts`;
@@ -138,6 +139,27 @@ CREATE TABLE `tournamentCoOrganizers` (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE `tournamentMatches` (
+  `firstparticipantID` int(11) NOT NULL,
+  `secondparticipantID` int(11) NOT NULL,
+  `tournamentID` int(11) NOT NULL,
+  `roundNumber` varchar(255)  NOT NULL,
+  `roundWinner` int(11)  NULL,
+  `roundLoser` int(11)  NULL,
+  PRIMARY KEY (`firstparticipantID`, `secondparticipantID`,  `tournamentID`),
+  FOREIGN KEY (`tournamentID`)
+    REFERENCES `tournament`(`tournamentID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (firstparticipantID)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (secondparticipantID)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
 
 -- create event table
  CREATE TABLE `opening_event` (

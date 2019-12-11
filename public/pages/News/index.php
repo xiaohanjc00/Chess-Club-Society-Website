@@ -24,7 +24,7 @@
                 $currentDateTime = date('Y-m-d');
                 $currentdatetime1 =  date_create($currentDateTime);
                 $articledatetime2 =  date_create(date('Y-m-d',strtotime($row['articleExpiry'])));
-                if($currentdatetime1 == $articledatetime2 ){
+                if($currentdatetime1 >= $articledatetime2 ){
                     delete_article($row['articleID']); 
                 }
                 else{
@@ -40,7 +40,7 @@
                       echo '</div>';
                     }
                     echo '<h1><a href="show.php?id='.$row['articleID'].'">'.$row['articleTitle'].'</a></h1>';
-                    echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['articleDate'])).'</p>';
+                    echo '<p>Posted on '.date('jS M Y ', strtotime($row['articleDate'])).'</p>';
                     echo '<img class="fakeimg" src="' .$row['articleImage'] .'"">';
                     echo '<p>'. get_words($row['articleDesc']).'</p>';                
                     echo '<p><a href="show.php?id='.$row['articleID'].'">Read More</a></p>';                
