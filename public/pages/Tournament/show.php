@@ -35,8 +35,9 @@ if($_GET["show"] == "match"){
             echo "<tr>";
             echo "<th scope='col'>". $row["firstparticipantID"]. "</th>";
             echo "<th scope='col'>". $row["secondparticipantID"]. "</th>";
-            if($row["roundWinner"] == "NULL"){
-                echo "<th scope='col'> Winner not yet announced </th>";
+            echo $row["roundWinner"];
+            if(is_null($row["roundWinner"])){
+                echo "<th scope='col'> Winner not announced </th>";
             }else{
                 echo "<th scope='col'>". $row["roundWinner"]. "</th>";
             }
@@ -46,6 +47,8 @@ if($_GET["show"] == "match"){
             $round = $row["roundNumber"];
          }
     }
+    echo '</tbody>';
+    echo '</table>';
 }
 else if($_GET["show"] == "participant"){
     $match = find_all_tournamentParticipants($_GET["id"]);

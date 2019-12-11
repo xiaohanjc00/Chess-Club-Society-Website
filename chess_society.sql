@@ -137,6 +137,29 @@ CREATE TABLE `tournamentCoOrganizers` (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE `tournamentMatches` (
+  `firstparticipantID` int(11) NOT NULL,
+  `secondparticipantID`int(11) NOT NULL,
+  `tournamentID`int(11) NOT NULL,
+  `roundNumber` varchar(255) NOT NULL,
+  `roundWinner`int(11) NULL,
+  `roundLoser`int(11) NULL,
+  PRIMARY KEY (`firstparticipantID`, `secondparticipantID`, `tournamentID`, `roundNumber`),
+  FOREIGN KEY (`tournamentID`)
+    REFERENCES `tournament`(`tournamentID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (firstparticipantID)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (`secondparticipantID`)
+    REFERENCES `tournament`(`tournamentID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
 -- create event table
  CREATE TABLE `opening_event` (
   `eventID` int(11) NOT NULL AUTO_INCREMENT,

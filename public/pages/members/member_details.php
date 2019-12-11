@@ -1,4 +1,4 @@
-<?php require_once('../../private/initialise.php'); ?>
+<?php require_once('../../../private/initialise.php'); ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <style type="text/css">
