@@ -110,6 +110,41 @@
     }
   }
 
+	// functions for updating rankings from tournaments:
+
+	function tournament_ended($t_id) {
+		// returns true if the given tournament (id) has a winner
+		global $db;
+		$sql = "SELECT * FROM tournament ";
+		$sql .= "WHERE id='" . db_escape($db, $t_id) . "' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+		confirm_result_set($result);
+		$tournament = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+		if (is_null($tournament['winnerID'])) {
+			return false;
+		}
+		return true;
+	}
+	
+	function update_rankings($t_id) {
+		if (tournament_ended($t_id)) {
+			$result = find_all_tournamentMatches($t_id);
+			$matches = mysqli_fetch_assoc($result);
+			mysqli_free_result($result);
+			// update rankings of participants
+			update_ranking_from_match(matches[something]);
+
+
+		}
+	}
+	
+	function update_ranking_from_match($p1_id, $p2_id) {
+		// updates each player's rating from the match result
+		// maths
+	}
+
   // functions for accessing and updating tournaments:
 
   function validate_tournament($tournament, $options=[]) {
@@ -563,40 +598,7 @@ function update_event_image($link, $id) {
 	}
 
 
-    // functions for updating rankings from tournaments:
-
-    function tournament_ended($t_id) {
-      // returns true if the given tournament (id) has a winner
-      global $db;
-      $sql = "SELECT * FROM tournament ";
-      $sql .= "WHERE id='" . db_escape($db, $t_id) . "' ";
-      $sql .= "LIMIT 1";
-      $result = mysqli_query($db, $sql);
-      confirm_result_set($result);
-      $tournament = mysqli_fetch_assoc($result);
-      mysqli_free_result($result);
-      if ((is_null($tournament['winnerID']))) {
-        return false;
-      }
-      return true;
-    }
-
-    function update_rankings($t_id) {
-      if (tournament_ended($t_id)) {
-		find_all_tournamentMatches($t_id);
-
-		// update rankings of participants
-		update_ranking_from_match();
-      }
-    }
-
-    function update_ranking_from_match($p1_id, $p2_id) {
-		// updates each player's rating from the match result
-
-    }
-
-
-    // functions for accessing and updating user details:
+	// functions for accessing and updating user details:
 
     function find_user_by_id($id) {
         global $db;
