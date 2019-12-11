@@ -10,8 +10,8 @@
 -- > describe tournament;
 -- > describe tournamentCoOrganizers;
 -- > describe tournamentParticipant;
+-- > describe opening_event;
 -- > exit;
-
 
 -- Set up the database:
 
@@ -57,7 +57,6 @@ CREATE TABLE `posts` (
   `articleDesc` TEXT DEFAULT NULL,
   `articleDate` varchar(255) DEFAULT NULL,
   `articleImage` varchar(255) DEFAULT "https://www.kclsu.org/asset/Organisation/6365/36bed7b8-d864-4aec-bb62-ff643dfb4a6c.jpg?thumbnail_width=280&thumbnail_height=280&resize_type=ResizeFitAll",
-
   `articleExpiry` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`articleID`)
 );
@@ -167,7 +166,7 @@ CREATE TABLE `tournamentMatches` (
   `eventTitle` varchar(255) DEFAULT NULL,
   `eventDesc` TEXT DEFAULT NULL,
   `eventDate` varchar(255) DEFAULT NULL,
-  `eventImage` varchar(255) DEFAULT "https://www.kclsu.org/asset/Organisation/6365/36bed7b8-d864-4aec-bb62-ff643dfb4a6c.jpg?thumbnail_width=280&thumbnail_height=280&resize_type=ResizeFitAll",
+  `eventImage` varchar(255) DEFAULT "https://www.kclsu.org/asset/Event/6013/DisabilityHIstoryMonth2019-EventIcon-590x706.png?thumbnail_width=720&thumbnail_height=720&resize_type=ResizeWidth",
   `eventExpiry` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`eventID`)
 );
@@ -176,18 +175,15 @@ CREATE TRIGGER expiryDateEvent BEFORE INSERT ON opening_event
     FOR EACH ROW SET NEW.eventExpiry = IFNULL(NEW.eventExpiry,DATE_ADD(STR_TO_DATE(NEW.eventDate, '%Y-%m-%d'), INTERVAL 14 DAY));
 
 --add data to opening_event table
-insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 1", "Introducing the Guy’s Bar Sports Night Membership Card 19/20!
-From £30 this membership card provides free entry to every sports night throughout the year and a free filter coffee/breakfast tea in The Shed every Thursday following a Sports Night.", "2019-01-09 21:00:00", "2019-01-09 22:00:00");
+insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Opening Event 1", "Introducing the Guy’s Bar Sports Night Membership Card 19/20!
+From £30 this membership card provides free entry to every sports night throughout the year and a free filter coffee/breakfast tea in The Shed every Thursday following a Sports Night.", "2019-09-01 21:00:00", "2019-09-01 22:00:00","https://www.kclsu.org/asset/Event/8770/membership-card-002.jpg?thumbnail_width=720&thumbnail_height=720&resize_type=ResizeWidth");
 
-insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 2", "There are a huge number of ways that you could give your time to disability support charities across London,
+insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Opening Event 2", "There are a huge number of ways that you could give your time to disability support charities across London,
 and so to celebrate Disability History Month, here are three SPOTLIGHT opportunities to take a look at!
-You can find even more on our Volunteering Log or get in touch with volunteering@kclsu.org if there’s something else you’re interested in.", "2019-22-11 00:00:00", "2019-23-11 00:00:00");
+You can find even more on our Volunteering Log or get in touch with volunteering@kclsu.org if there’s something else you’re interested in.", "2019-11-22 00:00:00", "2019-11-23 00:00:00","https://www.kclsu.org/asset/Event/6013/DisabilityHIstoryMonth2019-EventIcon-590x706.png?thumbnail_width=720&thumbnail_height=720&resize_type=ResizeWidth");
 
-insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 3", "Experimental Knitting Workshop: with Knit's College London and artist Rosina Godwin
-ming part of ProjectX, the experimental knitting workshop uses the visual language of textile to explore sustainable issues and mental healing.  Suitable for all abilities,
- the session focuses on the potential of simple techniques to create both art and sculpture.", "2019-04-12 13:00:00", "2019-04-12 15:30:00");
-
-insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry) values ("News event 4", "In recognition of Disability awareness month, we would like to warmly invite you to our upcoming event
+insert into opening_event(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Opening Event 3", "In recognition of Disability awareness month, we would like to warmly invite you to our upcoming event
 ‘The Strive to Survive’.We understand how tough it is for many first Generation/ WP students to have to go through unseen disabilities, mental health issues topped with further pressures of being
  the first in their family to go to uni or coming from a WP background. We understand the struggle! The event will be an opportunity to share your experiences and be engulfed in the warm embrace of
- those who have survived. This is also an opportunity to detox from work and relax an a warm and friendly environment with fellow students who understand your struggles.", "2019-04-21 16:00:00", "2019-04-12 18:00:00");
+ those who have survived. This is also an opportunity to detox from work and relax an a warm and friendly environment with fellow students who understand your struggles.", "2019-12-04 16:00:00", "2019-12-04 18:00:00","https://www.kclsu.org/asset/Event/6013/DisabilityHIstoryMonth2019-EventIcon-590x706.png?thumbnail_width=720&thumbnail_height=720&resize_type=ResizeWidth");
+
