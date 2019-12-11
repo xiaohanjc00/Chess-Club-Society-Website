@@ -5,7 +5,7 @@ require_admin_login();
 ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-<h1 style="font-size: 50px;", text-align="center">Team Members</h1>
+<h1 style="font-size: 50px;", text-align="center">All members</h1>
   <table class="table table-hover table-dark">	<!-- style="width:100%" -->
   <thead>
     <tr>
