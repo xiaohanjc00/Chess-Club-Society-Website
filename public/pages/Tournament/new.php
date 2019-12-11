@@ -1,5 +1,5 @@
-<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
- <?php include(SHARED_PATH . '/header.php'); ?>
+    <?php require_once('../../../private/initialise.php'); ?>
+    <?php include(SHARED_PATH . '/header.php'); ?>
     <?php
     if($_GET["add"] == "tournament"){
             if(is_post_request()) {
@@ -36,7 +36,7 @@
             echo '<h4>Create a new tournament!<h4>';
             echo '<p>Please fill in the forms:</p>';  
 
-           echo display_errors($errors);
+            echo ' <?php echo display_errors($errors); ?>';
             echo '<form width="800px" margin="auto"  action="new.php?add='. $_GET['add'] .'&&id='. $_GET['id'] . '" method="post">';
             echo '<dl> <dt>Tournament Name:</dt><dd><input type="text" name="name" value="'. $tournament['name'] . '" /></dd> </dl>' ;
             echo '<dl> <dt>Tournament date:</dt><dd><input type="date" name="date" value="'. $tournament['date'] . '" /></dd> </dl>' ;
@@ -82,7 +82,7 @@
         echo '<h4>Create a new tournament!<h4>';
         echo '<p>Please fill in the forms:</p>';  
 
-        echo display_errors($errors); 
+        echo ' <?php echo display_errors($errors); ?>';
         echo '<form width="800px" margin="auto"  action="new.php?add='. $_GET['add'] .'&&id='. $_GET['id'] . '" method="post">';
             
         $admins = find_admins($_GET['id']);
@@ -104,62 +104,6 @@
     }
     else if($_GET["add"] == "participant"){
         insert_tournament_participant($_GET["userid"], $_GET["id"]);
-        echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';     
-    }
-    else if($_GET["add"] == "match"){
-
-        function scheduler($teams){
-            $round = [];
-            if (count($teams)%2 != 0){
-                array_push($teams,"not playing");
-            }
-            $away = array_splice($teams,(count($teams)/2));
-            $home = $teams;
-            for ($i=0; $i < count($home)+count($away)-1; $i++){
-                for ($j=0; $j<count($home); $j++){
-                    $round[$i][$j]["Home"]=$home[$j];
-                    $round[$i][$j]["Away"]=$away[$j];
-                }
-                if(count($home)+count($away)-1 > 2){
-                    $splice = array_splice($home,1,1);
-                    array_unshift($away, array_shift($splice));
-                    array_push($home,array_pop($away));
-                }
-            }
-            return $round;
-        }
-
-        function get_match($schedule, $count){
-            if($count < sizeof($schedule)){
-                $games = $schedule[$count];
-                $count = $count + 1;
-                $members = [];
-                $matches = [];
-                foreach($games AS $play){  
-                    if($play["Home"] != "not playing" && $play["Away"] != "not playing" ){
-                        $matches['firstparticipantID'] = $play["Home"]["id"];
-                        $matches['secondparticipantID'] = $play["Away"]["id"];
-                        $matches['tournamentID'] = $_GET["id"];
-                        $matches['roundNumber'] = $count;
-                        insert_tournament_matches($matches);
-                    }
-                }
-                get_match($schedule, $count);
-            }
-        }
-
-        function generate_schedule(){
-            $participant = find_all_tournamentParticipants($_GET["id"]); 
-            $members = [];
-            if (mysqli_num_rows($participant) > 0) {
-                while($row = mysqli_fetch_assoc($participant)){
-                    array_push($members, $row );
-                }
-            }
-            $schedule = scheduler($members);
-            get_match($schedule, 0);
-        }
-        generate_schedule();
         echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
             
     }

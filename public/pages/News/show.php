@@ -25,7 +25,7 @@
                 else{
                     echo '<div class="card">';
                         echo '<h1>'.$row['articleTitle'].'</h1>';
-                        echo '<p>Posted on '.date('jS M Y', strtotime($row['articleDate'])).'</p>';
+                        echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['articleDate'])).'</p>';
                         echo '<img class="fakeimg" src="' .$row['articleImage'] .'"">';
                         echo '<p>'.$row['articleDesc'].'</p>';                            
                     echo '</div>';
@@ -47,5 +47,3 @@
 
   </div>
 </div>
-
-<?php include(SHARED_PATH . '/footer.php'); ?>

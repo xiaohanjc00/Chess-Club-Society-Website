@@ -1,4 +1,5 @@
-<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+    <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+
     <?php include(SHARED_PATH . '/header.php'); ?>
 
     <?php
@@ -47,7 +48,7 @@
             <dt>Image Link:</dt><dd><input type="text" name="image_link" value="<?php echo h($article['image_link']); ?>" /></dd>
         </dl>
         <dl>
-            <dt>Expiry date:</dt><dd><input type="date" name="expiry_date" value="<?php echo h($article['expiry_date']); ?>" /></dd>
+            <dt>Expiry date:</dt><dd><input type="datetime-local" name="expiry_date" value="<?php echo h($article['expiry_date']); ?>" /></dd>
         </dl>
         <div>
             <input type="submit" value="Post new article" />
