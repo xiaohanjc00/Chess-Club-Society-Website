@@ -116,12 +116,14 @@
 		// updates only possible for a completed tournament
 		if (tournament_ended($t_id)) {
 			$matches_set = find_all_tournamentMatches($t_id);
-				while($match = mysqli_fetch_assoc($matches_set)) {
-					// update rankings of match participants
-					update_ratings_from_match($match['roundWinner'], $match['roundLoser']);
-				}
-				mysqli_free_result($matches_set);
+			while($match = mysqli_fetch_assoc($matches_set)) {
+				// update rankings of match participants
+				update_ratings_from_match($match['roundWinner'], $match['roundLoser']);
+			}
+			mysqli_free_result($matches_set);
+			return true;
 		}
+		return false;
 	}
 
 	function update_ratings_from_match($winner_id, $loser_id) {
