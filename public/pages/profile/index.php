@@ -30,7 +30,7 @@
   <div>
     <p>
       <a href="<?php echo url_for('pages/profile/edit.php?id=' . h(u($user['id']))); ?>">Edit Profile</a></br>
-      <a href="<?php echo url_for('MISSING PAGE' . h(u($user['id']))); ?>">Cancel membership</a></br>
+      <a href="<?php echo url_for('pages/profile/delete.php?id=' . h(u($user['id']))); ?>">Cancel membership</a></br>
     </p>
 </div>
 
