@@ -1,73 +1,44 @@
+<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
-<?php 
-
-    function editTournament(){
-        $id = isset($_GET['id']) ? $_GET['id'] : '';
-        try {
-            update_tournament($_POST["organizer"], $_POST["name"], $_POST["date"], $_POST["deadline"], "", "", $id);
-        } catch(PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    
-?>
-<?php
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'>  " ;
-    echo "Tournament organizer: <input type='text' name='organizer' />  ";
-
-    echo "<form  action= edit.php?id=".$_GET['id'] ."  method='post'> ";  
-    echo "Tournament Name: <input type='text' name='name' />  ";
-
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'> ";
-    echo "Tournament Date: <input type='datetime-local' name='date' />"  ;
-
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'> ";
-    echo "Registration deadline: <input type='datetime-local' name='deadline' />"  ;
-
-    echo "<input type='submit' name='editDescription' value ='Edit tournament'/> <br>";
-    echo "</form>";
-    
-    
-    echo "<form  action='index.php' method='post'> ";
-    echo "<input type='submit' name='done' value ='Done'/> <br>";
-    echo "</form>";
-
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-        if(!empty($_POST["organizer"]) && !empty($_POST["name"]) && !empty($_POST["date"]) && !empty($_POST["deadline"])){
-            editTournament();
-        }
-        else{
-            $message = "You need to have all fields filled in !";
-            echo "<script type='text/javascript'>alert('$message');</script>";
-        }
-    } 
-    
-    if(!isset($_GET['id'])) {
-        redirect_to(url_for('index.php'));
-      }
-      $id = $_GET['id'];
-    
-      if (is_post_request()) {
-        // new user details were just submitted
-        $user = [];
-        $user['id'] = $id;
-        $user['first_name'] = $_POST['first_name'] ?? '';
-        $user['last_name'] = $_POST['last_name'] ?? '';
-        $user['dob'] = $_POST['dob'] ?? '';
-        $user['gender'] = $_POST['gender'] ?? '';
-        $user['phone'] = $_POST['phone'] ?? '';
-        $user['address'] = $_POST['address'] ?? '';
-        $user['email'] = $_POST['email'] ?? '';
-    
-        $result = update_user($user);
-        if($result === true) {
-          $_SESSION['message'] = 'Your profile was successfully updated!';
-          redirect_to(url_for('/pages/profile.php?id=' . $id));
+    <?php
+        if(is_post_request()) {
+            $tournament = [];
+            $tournament['organizer'] = $_POST['organizer'] ?? '';
+            $tournament['name'] = $_POST['name'] ?? '';
+            $tournament['date'] = $_POST['date'] ?? '';
+            $tournament['deadline'] = $_POST['deadline'] ?? '';
+            $id = isset($_GET['id']) ? $_GET['id'] : '';
+            $result = update_tournament($tournament, $id);
+            if($result === true) {
+                $_SESSION['message'] = 'New tournament successfully created!';
+                echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+            } else {
+                $errors = $result;
+            }
         } else {
-          $errors = $result;
+            $tournament = [];
+            $tournament['organizer'] = '';
+            $tournament['name'] = '';
+            $tournament['date'] = '';
+            $tournament['deadline'] = '';
         }
-      } else {
-        $user = find_user_by_id($id);
-      }
-    
+    ?>
+
+    <?php
+        echo '<div >' ;
+        echo '<h4>Edit a tournament now!</h4>';
+        echo '<p>Please fill in the forms:</p>';  
+
+        echo display_errors($errors);
+
+        echo '<form width="800px" margin="auto"  action="edit.php?id='. $_GET['id'] .'" method="post">';
+        echo '<dl> <dt>Tournament organizer:</dt><dd><input type="text" name="organizer" value="'.$tournament['organizer'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Tournament Name:</dt><dd><input type="text" name="name" value="'.$tournament['name'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Tournament date:</dt><dd><input type="date" name="date" value="'.$tournament['date'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Registration deadline:</dt><dd><input type="date" name="deadline" value="'.$tournament['deadline'] . '" /></dd> </dl>' ;
+
+        echo '<div> <input type="submit" value="Post new tournament" /> </div>';
+        echo '</form>';
+        echo '</div>';
     ?>

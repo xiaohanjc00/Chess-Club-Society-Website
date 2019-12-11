@@ -1,7 +1,7 @@
+<?php require_once('../../../private/initialise.php'); ?>
 <?php
-  require_once('../../private/initialise.php');
   require_login();
-  $id = $_GET['id'] ?? '1';
+  $id = $_SESSION['user_id'];
   $user = find_user_by_id($id);
   $first_name = h($user['first_name']);
   $last_name = h($user['last_name']);
@@ -12,7 +12,6 @@
   $address = h($user['address']);
   $email = h($user['email']);
 ?>
-
 <?php $page_title = 'Profile'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
@@ -30,8 +29,8 @@
   </div>
   <div>
     <p>
-      <a href="<?php echo url_for('pages/edit_profile.php?id=' . h(u($user['id']))); ?>">Edit Profile</a></br>
-      <a href="<?php echo url_for('pages/delete_profile.php?id=' . h(u($admin['id']))); ?>">Cancel membership</a></br>
+      <a href="<?php echo url_for('pages/profile/edit.php?id=' . h(u($user['id']))); ?>">Edit Profile</a></br>
+      <a href="<?php echo url_for('pages/profile/delete.php?id=' . h(u($user['id']))); ?>">Cancel membership</a></br>
     </p>
 </div>
 

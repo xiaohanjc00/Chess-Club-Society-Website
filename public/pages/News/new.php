@@ -1,67 +1,59 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+    <?php include(SHARED_PATH . '/header.php'); ?>
 
-<?php include(SHARED_PATH . '/header.php'); ?>
-
-<?php include(SHARED_PATH . '/navigation.php'); ?>
-<?php
-       function  createNewArticle(){
-      
-            try {
-                $insertqry;
-                if(empty($_POST["link"])){
-                    $insertqry='INSERT INTO posts(articleTitle, articleDesc, articleDate) values ("' . $_POST["title"] . '","' . $_POST["description"] . '", now());';                    
-                }
-                else{
-                    $insertqry='INSERT INTO posts(articleTitle, articleDesc, articleDate, articleImage@) values ("' . $_POST["title"] . '","' . $_POST["description"] . '", now(),"'. $_POST["link"] .'" );';
-                }
-                $article = mysqli_query($connection, $insertqry);
-            } catch(PDOException $e) {
-                echo $e->getMessage();
-            }
-            echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
-        }
-?>
-
-
-<link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">
-<div class="header">
-  <h2>News</h2>
-</div>
-
-
-  <div class="leftcolumn">
-
- 
-    <form  action="new.php" method="post">
-
-        Article Title: <input type="text" name="title" /><br>
-    
-        Article Description: <input type="text" name="description" /><br>
-        
-        Image Link: <input type="text" name="link" /><br><br>
-        
-        Expiry date: <input type="datetime-local" name="date" /><br><br>
-        
-        <input type="submit" name="Create" />
-    
-    </form>
     <?php
-        if($_SERVER['REQUEST_METHOD']=='POST'){
-            $currentDateTime = date('Y-m-d');
-            $currentdatetime1 =  date_create($currentDateTime);
-            if($_POST["date"] < $currentdatetime1){
-                $message = "The expiry date can't come before the date it's displayed on !";
-                echo "<script type='text/javascript'>alert('$message');</script>";
+        if(is_post_request()) {
+            $article = [];
+            $article['article_title'] = $_POST['article_title'] ?? '';
+            $article['article_description'] = $_POST['article_description'] ?? '';
+            $article['image_link'] = $_POST['image_link'] ?? '';
+            $article['expiry_date'] = $_POST['expiry_date'] ?? '';
+
+            $result = insert_article($article);
+            if($result === true) {
+                $_SESSION['message'] = 'New article successfully created!';
+                echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+            } else {
+                $errors = $result;
             }
-            if(!empty($_POST["description"]) && !empty($_POST["title"])){
-                createNewArticle();
-            }
-            else{
-                $message = "You need to have both a title and a description ";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-            }
-        } 
+        } else {
+            $article = [];
+            $article['article_title'] = '';
+            $article['article_description'] = '';
+            $article['image_link'] = '';
+            $article['expiry_date'] = '';
+        }
     ?>
-    
+
+    <link rel="stylesheet" href="../stylesheets/newsStyle.css">
+
+    <div class="header">
+        <h2>News</h2>
+    </div>
+
+
+    <div >
+        <h4>Write a new Chess News article now!</h4>
+        <p>Please fill in the forms:</p>
+        <?php echo display_errors($errors); ?>
+        <form width="800px" margin="auto" action="<?php echo url_for('pages/News/new.php'); ?>" method="post">
+        <dl>
+            <dt>Article Title:</dt><dd><input type="text" name="article_title" value="<?php echo h($article['article_title']); ?>" /></dd>
+        </dl>
+        <dl>
+            <dt>Article Description:</dt><dd><input type="text" name="article_description" value="<?php echo h($article['article_description']); ?>" /></dd>
+        </dl>
+        <dl>
+            <dt>Image Link:</dt><dd><input type="text" name="image_link" value="<?php echo h($article['image_link']); ?>" /></dd>
+        </dl>
+        <dl>
+            <dt>Expiry date:</dt><dd><input type="date" name="expiry_date" value="<?php echo h($article['expiry_date']); ?>" /></dd>
+        </dl>
+        <div>
+            <input type="submit" value="Post new article" />
+        </div>
+        </form>
+    </div>
+
   
   <?php include(SHARED_PATH . '/footer.php'); ?>

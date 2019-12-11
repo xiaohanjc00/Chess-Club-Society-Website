@@ -2,7 +2,7 @@
 
   function log_in_user($user) {
     session_regenerate_id();
-    $_SESSION['user_id'] = $admin['id'];
+    $_SESSION['user_id'] = $user['id'];
     $_SESSION['last_login'] = time();
     $_SESSION['username'] = $user['username'];
     return true;
@@ -20,7 +20,7 @@
   // needs to check the user is logged in before showing.
   function require_login() {
     if(!is_logged_in()) {
-      redirect_to(url_for('pages/index.php'));
+      redirect_to(url_for('index.php'));
     } else {
       // display page (user is logged in)
     }
@@ -42,6 +42,11 @@
   function user_is_admin() {
     $user = find_user_by_id($_SESSION['user_id']);
     return (is_logged_in() && $user['admin'] == "1");
+  }
+
+  function user_is_member() {
+    $user = find_user_by_id($_SESSION['user_id']);
+    return (is_logged_in() && $user['admin'] == "0");
   }
 
 ?>

@@ -8,7 +8,6 @@
             while($row = mysqli_fetch_assoc($article)){
                 delete_article($row['articleID']) ;
             }
-            
         }
         else{
             echo '<div class="card">';

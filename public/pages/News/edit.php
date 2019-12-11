@@ -1,66 +1,43 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-<?php include(SHARED_PATH . '/navigation.php'); ?>
-<?php 
-
-    function editImage(){
-        $id = isset($_GET['id']) ? $_GET['id'] : '';
-        try {
-            update_article_image($_POST["link"], $id);
-        } catch(PDOException $e) {
-            echo $e->getMessage();
+    <?php
+        if(is_post_request()) {
+            $article = [];
+            $article['article_title'] = $_POST['article_title'] ?? '';
+            $article['article_description'] = $_POST['article_description'] ?? '';
+            $article['image_link'] = $_POST['image_link'] ?? '';
+            $article['expiry_date'] = $_POST['expiry_date'] ?? '';
+            $id = isset($_GET['id']) ? $_GET['id'] : '';
+            $result = update_article($article, $id);
+            if($result === true) {
+                $_SESSION['message'] = 'New article successfully created!';
+                echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+            } else {
+                $errors = $result;
+            }
+        } else {
+            $article = [];
+            $article['article_title'] = '';
+            $article['article_description'] = '';
+            $article['image_link'] = '';
+            $article['expiry_date'] = '';
         }
-    }
-    
-    function editTitle(){
-        $id = isset($_GET['id']) ? $_GET['id'] : '';
-        echo $id;
-         try {
-         update_article_title($_POST["title"], $id);
-       } catch(PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    
-    function editDescription(){
-        $id = isset($_GET['id']) ? $_GET['id'] : '';
-         try {
-             update_article_description($_POST["description"], $id);
-        } catch(PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    
-?>
-<?php
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'>  " ;
-    echo "Image Link: <input type='text' name='link' />  ";
-    echo "<input type='submit' name='image' value ='Add/Edit image'/> <br>";
-    echo "</form>";
+    ?>
+    <?php
+        echo '<div >' ;
+        echo '<h4>Edit a Chess News article now!</h4>';
+        echo '<p>Please fill in the forms:</p>';  
 
-    echo "<form  action= edit.php?id=".$_GET['id'] ."  method='post'> ";  
-    echo "Title: <input type='text' name='title' />  ";
-    echo "<input type='submit' name='editTitle' value ='Edit title'/> <br>";
-    echo "</form>";
+        echo display_errors($errors); 
 
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'> ";
-    echo "Description: <input type='text' name='description' />"  ;
-    echo "<input type='submit' name='editDescription' value ='Edit description'/> <br>";
-    echo "</form>";
+        echo '<form width="800px" margin="auto"  action="edit.php?id='. $_GET['id'] .'" method="post">';
+        echo '<dl> <dt>Article Title:</dt><dd><input type="text" name="article_title" value="'.$article['article_title'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Article Description:</dt><dd><input type="text" name="article_description" value="'.$article['article_description'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Image Link:</dt><dd><input type="text" name="image_link" value="'.$article['image_link'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Expiry date:</dt><dd><input type="datetime-local" name="expiry_date" value="'.$article['expiry_date'] . '" /></dd> </dl>' ;
 
-    echo "<form  action='index.php' method='post'> ";
-    echo "<input type='submit' name='done' value ='Done'/> <br>";
-    echo "</form>";
-
-    if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['image'] ){
-        editImage();
-    }
-    else if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['editTitle'] ) {
-        editTitle();
-    }
-    else if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['editDescription']){
-        editDescription();
-    }
-    
+        echo '<div> <input type="submit" value="Post new article" /> </div>';
+        echo '</form>';
+        echo '</div>';
     ?>

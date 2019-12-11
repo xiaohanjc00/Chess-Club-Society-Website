@@ -1,7 +1,5 @@
+<?php require_once('../../../private/initialise.php'); ?>
 <?php
-
-  require_once('../../private/initialise.php');
-
   if(!isset($_GET['id'])) {
     redirect_to(url_for('index.php'));
   }
@@ -18,30 +16,28 @@
     $user['phone'] = $_POST['phone'] ?? '';
     $user['address'] = $_POST['address'] ?? '';
     $user['email'] = $_POST['email'] ?? '';
+    $user['username'] = $_POST['username'] ?? '';
 
     $result = update_user($user);
     if($result === true) {
       $_SESSION['message'] = 'Your profile was successfully updated!';
-      redirect_to(url_for('/pages/profile.php?id=' . $id));
+      redirect_to(url_for('/pages/profile/index.php?id=' . $id));
     } else {
       $errors = $result;
     }
   } else {
     $user = find_user_by_id($id);
   }
-
 ?>
-
 <?php $page_title = 'Edit Profile'; ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
-<?php include(SHARED_PATH . '/navigation.php'); ?>
 
 <div>
-  <a href="<?php echo url_for('pages/profile.php'); ?>">&laquo; Back to Profile</a>
+  <a href="<?php echo url_for('pages/profile/index.php'); ?>">&laquo; Back to Profile</a>
   <div>
     <h2>Edit Profile</h2>
     <?php echo display_errors($errors); ?>
-    <form action="<?php echo url_for('pages/edit_profile.php?id=' . h(u($id))); ?>" method="post">
+    <form action="<?php echo url_for('pages/profile/edit.php?id=' . h(u($id))); ?>" method="post">
       <dl>
         <dt>First name</dt><dd><input type="text" name="first_name" value="<?php echo h($user['first_name']); ?>" /></dd>
       </dl>

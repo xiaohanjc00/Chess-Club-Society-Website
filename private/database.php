@@ -1,7 +1,8 @@
 
-<?php 
+<?php
 
     require_once('db_credentials.php');
+    // require_once('db_prod_constants.php');
 
     function db_connect() {
         $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -35,4 +36,3 @@
     }
 
 ?>
-
