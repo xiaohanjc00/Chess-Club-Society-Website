@@ -1,7 +1,5 @@
 <?php require_once('../../private/initialise.php'); ?>
-
 <?php include(SHARED_PATH . '/header.php'); ?>
-
 <?php
   $errors = [];
   $username = '';
@@ -21,7 +19,7 @@
       if($user) {
         if(password_verify($password, $user['hashed_password'])) {
           log_in_user($user);
-          redirect_to(url_for('pages/profile.php'));
+          redirect_to(url_for('pages/profile/index.php'));
         } else {
           $errors[] = $login_fail_msg;
         }
@@ -31,7 +29,6 @@
     }
   }
 ?>
-
 
 <div>
   <h2>Log in</h1>
