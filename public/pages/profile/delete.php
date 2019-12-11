@@ -8,7 +8,7 @@
   $id = $_GET['id'];
 
   if (is_post_request()) {
-
+    $user = find_user_by_id($id);
     $result = delete_user($user);
     if($result === true) {
       $_SESSION['message'] = 'Your profile was successfully deleted!';
