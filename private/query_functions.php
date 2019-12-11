@@ -1,4 +1,3 @@
-
 <?php 
 
   // functions for accessing and updating news:
@@ -867,20 +866,11 @@ function update_event_image($link, $id) {
         mysqli_free_result($result);
     }
 
-    function delete_user($user) {
+    function delete_user($id) {
         global $db;
-        $password_sent = !is_blank($user['password']);
-        $errors = validate_user($user, ['password_required' => $password_sent]);
-        if (!empty($errors)) {
-            return $errors;
-        }
-        $sql = "DELETE * FROM users";
-        if($password_sent) {
-            $hashed_password = password_hash($user['password'], PASSWORD_DEFAULT);
-            $sql .= "hashed_password='" . db_escape($db, $hashed_password) . "', ";
-        }
-        $sql .= "WHERE id='" . db_escape($db, $user['id']) . "' ";
-        $sql .= "LIMIT 1";
+        $sql = "DELETE FROM users ";
+        $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+        $sql .= "LIMIT 1;";
         $result = mysqli_query($db, $sql);
         if($result) {
             return true;

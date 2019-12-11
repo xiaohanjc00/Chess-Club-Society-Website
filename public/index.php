@@ -1,6 +1,8 @@
 <?php require_once('../private/initialise.php'); ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
+<?php echo display_session_message(); ?>
+
     <div class="main">
         <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/home.css'); ?>"/>
         <br>
