@@ -137,7 +137,6 @@ CREATE TABLE `tournamentCoOrganizers` (
     ON UPDATE CASCADE
 );
 
-
 -- create event table
  CREATE TABLE `opening_event` (
   `eventID` int(11) NOT NULL AUTO_INCREMENT,

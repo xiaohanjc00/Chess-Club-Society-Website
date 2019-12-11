@@ -1,5 +1,4 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
-
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <link rel="stylesheet" href="../stylesheets/newsStyle.css">
@@ -62,7 +61,6 @@
                       echo "<a href='show.php?show=match&&id=". $row['tournamentID']. "'> See matches </a>"; 
                     }            
                     echo '</div>';
-                    
             }
         }
         else{
@@ -85,11 +83,9 @@
           echo "</div>";
         }
     ?>
-    
-    
+
   </div>
 </div>
-
     
 <?php include(SHARED_PATH . '/footer.php'); ?>
  
