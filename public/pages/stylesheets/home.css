@@ -1,7 +1,10 @@
 #subImage{
-  margin-left: 37%;
-  margin-right: 37%;
-  width: 26%;
+  margin: auto;
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  vertical-align: middle;
+  display: table-cell;
 }
 
 .main{
