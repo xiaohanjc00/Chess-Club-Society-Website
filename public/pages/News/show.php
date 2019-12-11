@@ -1,5 +1,5 @@
-<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
-
+<?php require_once('../../../private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
 <link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">
 <div class="header">
@@ -9,13 +9,7 @@
 <div class="row">
   <div id = "main" class="centercolumn">
   <?php
-        $dbhost = 'localhost';
-        $dbuser = 'root';
-        $dbpass = '';
-        $dbname = 'chessSociety';
-    
-        $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-      
+ 
     try {
         $article = find_article_by_id($_GET['id']);
         if (mysqli_num_rows($article) > 0) {
@@ -31,7 +25,7 @@
                 else{
                     echo '<div class="card">';
                         echo '<h1>'.$row['articleTitle'].'</h1>';
-                        echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['articleDate'])).'</p>';
+                        echo '<p>Posted on '.date('jS M Y', strtotime($row['articleDate'])).'</p>';
                         echo '<img class="fakeimg" src="' .$row['articleImage'] .'"">';
                         echo '<p>'.$row['articleDesc'].'</p>';                            
                     echo '</div>';
@@ -53,3 +47,5 @@
 
   </div>
 </div>
+
+<?php include(SHARED_PATH . '/footer.php'); ?>

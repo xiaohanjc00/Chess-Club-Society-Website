@@ -30,13 +30,13 @@
         echo '<h4>Edit a tournament now!</h4>';
         echo '<p>Please fill in the forms:</p>';  
 
-        echo ' <?php echo display_errors($errors); ?>';
+        echo display_errors($errors);
 
         echo '<form width="800px" margin="auto"  action="edit.php?id='. $_GET['id'] .'" method="post">';
         echo '<dl> <dt>Tournament organizer:</dt><dd><input type="text" name="organizer" value="'.$tournament['organizer'] . '" /></dd> </dl>' ;
         echo '<dl> <dt>Tournament Name:</dt><dd><input type="text" name="name" value="'.$tournament['name'] . '" /></dd> </dl>' ;
-        echo '<dl> <dt>Tournament date:</dt><dd><input type="text" name="date" value="'.$tournament['date'] . '" /></dd> </dl>' ;
-        echo '<dl> <dt>Registration deadline:</dt><dd><input type="datetime-local" name="deadline" value="'.$tournament['deadline'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Tournament date:</dt><dd><input type="date" name="date" value="'.$tournament['date'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Registration deadline:</dt><dd><input type="date" name="deadline" value="'.$tournament['deadline'] . '" /></dd> </dl>' ;
 
         echo '<div> <input type="submit" value="Post new tournament" /> </div>';
         echo '</form>';
