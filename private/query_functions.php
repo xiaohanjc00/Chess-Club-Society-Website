@@ -112,18 +112,47 @@
 	// functions for updating ratings after tournaments:
 
 	function update_ratings($t_id) {
-		// updates only possible for a completed tournament
-		if (tournament_ended($t_id)) {
+		// check that tournament is complete and its results not already used to update ratings
+		if (tournament_ended($t_id) && !tournament_ratings_updated($t_id)) {
 			$matches_set = find_all_tournamentMatches($t_id);
 			while($match = mysqli_fetch_assoc($matches_set)) {
 				// update rankings of match participants
 				update_ratings_from_match($match['roundWinner'], $match['roundLoser']);
 			}
-			mysqli_free_result($matches_set);
+      mysqli_free_result($matches_set);
+      set_tournament_ratings_updated($t_id);
 			return true;
 		}
 		return false;
-	}
+  }
+  
+  function tournament_ratings_updated($id) {
+    global $db;
+		$sql = "SELECT * FROM tournament ";
+		$sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+		confirm_result_set($result);
+		$tournament = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+		return $tournament['ratingsUpdated'] == 1;
+  }
+
+  function set_tournament_ratings_updated($id) {
+    global $db;
+		$sql = "UPDATE tournament SET ";
+		$sql .= "ratingsUpdated='1' ";
+		$sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+		if($result) {
+			return true;
+		} else {
+			echo mysqli_error($db);
+			db_disconnect($db);
+			exit;
+		}
+  }
 
 	function update_ratings_from_match($winner_id, $loser_id) {
 		// updates each player's rating from the match result
