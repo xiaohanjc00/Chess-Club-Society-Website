@@ -5,7 +5,6 @@
 if($_GET["show"] == "match"){
     if ($_GET["update"] == "ratings") {
         if (update_ratings($_GET["id"])) {
-            //set_tournament_winner($_GET["id"]);
             echo '<div id="message">Ratings successfully updated!</div>';
         } else {
             echo '<div id="message">Ratings update error.</div>';
@@ -112,10 +111,10 @@ if($_GET["show"] == "match"){
     
     if(!find_all_tournament_winners($_GET['id']) && !tournament_ratings_updated($_GET['id'])){
         set_tournament_winner($_GET['id'] );
-        update_ratings($_GET["id"]);
-        //echo '<form width="800px" margin="auto" action="show.php?show=match&&update=ratings&&show=match&&id='. $_GET['id'] .'" method="post">';
-        //echo '<div><input type="submit" value="Update all participant ratings" /></div>';
-        //echo '</form>';
+        echo '<form width="800px" margin="auto" action="show.php?update=ratings&&show=match&&id='. $_GET['id'] .'" method="post">';
+        echo '<div><input type="submit" value="Update all participant ratings" /></div>';
+        echo '</form>';
+        //update_ratings($_GET["id"]);
     }
     else{
         $winner = find_user_by_id(get_tournament_winner($_GET["id"]));
