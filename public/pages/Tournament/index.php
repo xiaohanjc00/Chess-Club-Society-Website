@@ -35,8 +35,8 @@
                           echo '<a href="new.php?add=match&&id='.$row['tournamentID'].'">Generate Match</a>';                        
                         }
                         echo  '<a href="edit.php?id='.$row['tournamentID'].'">Edit</a>';
-                        
-                        echo '<a href="delete.php?id='.$row['tournamentID'].'">Delete</a>';
+                        echo '<a href="delete.php?delete=organizer&&id='.$row['tournamentID'].'">Remove organizer</a>';
+                        echo '<a href="delete.php?delete=tournament&&id='.$row['tournamentID'].'">Delete</a>';
                         echo '</div>';  
                         echo '</div>';  
                       }
