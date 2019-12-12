@@ -102,6 +102,7 @@ CREATE TABLE `tournament` (
   `deadline` varchar(255) DEFAULT NULL,
   `winnerID` int(11) DEFAULT NULL,
   `firstRunnerUpID` int(11) DEFAULT NULL,
+  `ratingsUpdated` BIT(1) DEFAULT 0, -- 1 if ratings updated
   PRIMARY KEY (`tournamentID`),
   FOREIGN KEY (tournamentOrganizer)
     REFERENCES users(id)
