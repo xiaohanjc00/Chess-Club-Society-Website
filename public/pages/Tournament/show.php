@@ -57,8 +57,8 @@ if($_GET["show"] == "match"){
                 echo "<th scope='col'> Winner not announced </th>";
                 if(is_logged_in() && user_is_admin()){
                     echo '<th scope = "col">'; 
-                    if($row["roundNumber"] != 1 && !find_previous_round_winners($row["tournamentID"],( $row["roundNumber"]-1))){
-                        echo '<form action="show.php?show=match&&update=none&&id='. $_GET['id'] .'" method="post">';
+                    if(($row["roundNumber"] != 1 && !find_previous_round_winners($row["tournamentID"],( $row["roundNumber"]-1)) OR $row["roundNumber"] == 1)){
+                        echo '<form method="post">';
                             echo '<input type="radio" name="winner" value="'. $row["firstparticipantID"] .'"> First Participant   ';
                             echo '<input type="radio" name="winner" value="'. $row["secondparticipantID"] .'" > Second Participant';
                             echo '<input type="submit"  name="set_winner'.$row["firstparticipantID"]. $row["secondparticipantID"].'" value="Set winner" />';
@@ -88,7 +88,8 @@ if($_GET["show"] == "match"){
                     $id = isset($_GET['id']) ? $_GET['id'] : '';
                     $result = set_winner($match, $id);
                     if($result === true) {
-                        echo '<meta http-equiv="refresh" content="0;URL=show.php/?show=match&&update=none&&id='. $_GET['id'] .'"/>';
+                        $secondsWait = 0;
+                        echo '<meta http-equiv="refresh" content="'.$secondsWait.'">';
                     } else {
                         $errors = $result;
                     }
@@ -109,7 +110,7 @@ if($_GET["show"] == "match"){
     echo '</tbody>';
     echo '</table>';
     
-    if(!find_all_tournament_winners($_GET['id'] )){
+    if(!find_all_tournament_winners($_GET['id']) && !tournament_ratings_updated($_GET['id'])){
         set_tournament_winner($_GET['id'] );
         echo '<form width="800px" margin="auto" action="show.php?show=match&&update=ratings&&show=match&&id='. $_GET['id'] .'" method="post">';
         echo '<div><input type="submit" value="Update all participant ratings" /></div>';

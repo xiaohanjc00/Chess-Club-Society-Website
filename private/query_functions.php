@@ -113,7 +113,7 @@
 
 	function update_ratings($t_id) {
 		// check that tournament is complete and its results not already used to update ratings
-		if (tournament_ended($t_id) && !tournament_ratings_updated($t_id)) {
+		if (tournament_ended($t_id)) {
 			$matches_set = find_all_tournamentMatches($t_id);
 			while($match = mysqli_fetch_assoc($matches_set)) {
 				// update rankings of match participants
@@ -129,7 +129,7 @@
   function tournament_ratings_updated($id) {
     global $db;
 		$sql = "SELECT * FROM tournament ";
-		$sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+		$sql .= "WHERE tournamentID='" . db_escape($db, $id) . "' ";
 		$sql .= "LIMIT 1";
 		$result = mysqli_query($db, $sql);
 		confirm_result_set($result);
@@ -141,8 +141,8 @@
   function set_tournament_ratings_updated($id) {
     global $db;
 		$sql = "UPDATE tournament SET ";
-		$sql .= "ratingsUpdated='1' ";
-		$sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+		$sql .= "ratingsUpdated= 1 ";
+		$sql .= "WHERE tournamentID='" . db_escape($db, $id) . "' ";
 		$sql .= "LIMIT 1";
 		$result = mysqli_query($db, $sql);
 		if($result) {
