@@ -138,6 +138,30 @@
 		return $tournament['ratingsUpdated'] == 1;
   }
 
+  function get_tournament_winner($id) {
+    global $db;
+		$sql = "SELECT winnerID FROM tournament ";
+		$sql .= "WHERE tournamentID='" . db_escape($db, $id) . "' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+		confirm_result_set($result);
+		$tournament = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+		return $tournament['winnerID'];
+  }
+
+  function get_tournament_runner_up($id) {
+    global $db;
+		$sql = "SELECT firstRunnerUpID FROM tournament ";
+		$sql .= "WHERE tournamentID='" . db_escape($db, $id) . "' ";
+		$sql .= "LIMIT 1";
+		$result = mysqli_query($db, $sql);
+		confirm_result_set($result);
+		$tournament = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+		return $tournament['firstRunnerUpID'];
+  }
+
   function set_tournament_ratings_updated($id) {
     global $db;
 		$sql = "UPDATE tournament SET ";

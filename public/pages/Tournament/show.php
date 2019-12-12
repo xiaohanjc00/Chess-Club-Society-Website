@@ -112,9 +112,16 @@ if($_GET["show"] == "match"){
     
     if(!find_all_tournament_winners($_GET['id']) && !tournament_ratings_updated($_GET['id'])){
         set_tournament_winner($_GET['id'] );
-        echo '<form width="800px" margin="auto" action="show.php?show=match&&update=ratings&&show=match&&id='. $_GET['id'] .'" method="post">';
-        echo '<div><input type="submit" value="Update all participant ratings" /></div>';
-        echo '</form>';
+        update_ratings($_GET["id"]);
+        //echo '<form width="800px" margin="auto" action="show.php?show=match&&update=ratings&&show=match&&id='. $_GET['id'] .'" method="post">';
+        //echo '<div><input type="submit" value="Update all participant ratings" /></div>';
+        //echo '</form>';
+    }
+    else{
+        $winner = find_user_by_id(get_tournament_winner($_GET["id"]));
+        $first_runner_up = find_user_by_id(get_tournament_runner_up($_GET["id"]) );
+        echo '<p> The winner of this tournament is :'. $winner['first_name'] . ' ' . $winner['last_name'] . '</p>';
+        echo '<p> The first runner up of this tournament is :'. $first_runner_up['first_name'] . ' ' . $first_runner_up['last_name'] . '</p>';
     }
 }
 else if($_GET["show"] == "participant"){
