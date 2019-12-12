@@ -5,6 +5,7 @@
         redirect_to(url_for('../profile/index.php'));
       }
       $id = $_GET['id'];
+      
 ?>
 
 <?php
