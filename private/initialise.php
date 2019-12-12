@@ -21,7 +21,11 @@
 
     require_once('functions.php');
     require_once('database.php');
-    require_once('query_functions.php');
+    require_once('query_functions_users.php');
+    require_once('query_functions_news.php');
+    require_once('query_functions_events.php');
+    require_once('query_functions_tournaments.php');
+    require_once('query_functions_ratings.php');
     require_once('validation_functions.php');
     require_once('auth_functions.php');
     

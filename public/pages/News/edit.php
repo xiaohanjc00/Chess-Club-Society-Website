@@ -41,3 +41,5 @@
         echo '</form>';
         echo '</div>';
     ?>
+
+<?php include(SHARED_PATH . '/footer.php'); ?>

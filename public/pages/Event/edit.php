@@ -1,7 +1,6 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-<?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php 
 
     function editImage(){

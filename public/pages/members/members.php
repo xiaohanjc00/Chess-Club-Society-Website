@@ -5,7 +5,9 @@ require_admin_login();
 ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-<h1 style="font-size: 50px;", text-align="center">All members</h1>
+<h1 style="font-size: 50px;", text-align="center">Team Members</h1>
+
+
   <table class="table table-hover table-dark">	<!-- style="width:100%" -->
   <thead>
     <tr>
@@ -30,8 +32,19 @@ require_admin_login();
                   echo "<th scope='col'>". $row["gender"]. "</th>";
                   echo "<th scope='col'>". $row["dob"]. "</th>";
                   echo "<th scope='col'>". $row["rating"]. "</th>";
-                  
+                  echo "<th scope='col'>";
+
+                  echo '<form width="800px" margin="auto" action="members.php?" method="post">';
+                  echo '<input type="submit" name ="ban'. $row["id"] .'" value="Ban this user" />';
+                  echo '<input type="hidden" name="bannedemail" value="'.$row["email"] .'" />';
+                  echo '<input type="hidden" name="bannedid" value="'.$row["id"] .'" />';
+                  echo '</form>';
+                  echo "</th>";
                 echo "</tr>";
+                if(isset($_POST["ban". $row["id"] ])) {
+                  ban_user($_POST["bannedemail"]);
+                  delete_user($_POST["bannedid"]);
+                }
             }
         }
         else{
