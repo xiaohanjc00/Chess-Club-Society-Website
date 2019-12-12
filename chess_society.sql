@@ -29,7 +29,7 @@ CREATE TABLE `users` (
   `gender` CHAR(1) NOT NULL, -- 'F' OR 'M' OR 'O'
   `phone` VARCHAR(15) NOT NULL,
   `address` VARCHAR(255),
-  `rating` INT(3) NOT NULL DEFAULT 500,
+  `rating` INT(3) NOT NULL DEFAULT 100,
   `email` VARCHAR(255),
   `username` VARCHAR(255),
   `hashed_password` VARCHAR(255),
@@ -46,7 +46,11 @@ INSERT INTO users(admin, first_name, last_name, dob, gender, phone, address, ema
     (0, 'Jude','Stoyanov','1999-04-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
     (1, 'Adam','Stoyanov','1999-08-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupolo@aol.com','adamstoya', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi');
 
-
+CREATE TABLE `bannedEmails` (
+  `emailID` INT(11) NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(255),
+  PRIMARY KEY (`emailID`)
+);
 
 -- create posts table
 DROP TABLE IF EXISTS `posts`;

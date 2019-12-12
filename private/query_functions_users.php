@@ -220,19 +220,6 @@
         }
     }
 
-    function find_admins($id) {
-        global $db;
-        $sql = "SELECT id, first_name FROM users WHERE admin = 1 AND ";
-        $sql .= "id NOT IN ";
-        $sql .= "(SELECT organizerID 
-            FROM tournamentcoorganizers WHERE tournamentID = ". $id . ")";
-        $sql .= "AND id NOT IN ";
-        $sql .= "(SELECT tournamentOrganizer FROM tournament WHERE tournamentID = ". $id.");";
-        $result = mysqli_query($db, $sql);
-        //confirm_result_set($result);
-        return $result;
-    }
-
     function find_members() {
         global $db;
         $sql = "SELECT * FROM users WHERE admin = 0; ";

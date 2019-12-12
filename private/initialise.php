@@ -21,7 +21,6 @@
 
     require_once('functions.php');
     require_once('database.php');
-    require_once('query_functions.php');
     require_once('query_functions_users.php');
     require_once('query_functions_news.php');
     require_once('query_functions_events.php');
