@@ -19,7 +19,7 @@
               $tournamentDate =  date_create(date('Y-m-d',strtotime($row['tournamentDate'])));
               $tournamentDeadline =  date_create(date('Y-m-d',strtotime($row['deadline'])));
 
-              
+
                 echo '<div class="card">';
                     if(is_logged_in() && user_is_admin()){
                       $organizer = find_tournament_organizer($_SESSION['user_id'], $row['tournamentID']);
@@ -32,19 +32,19 @@
                         echo  '<a href="show.php?show=participant&&id='.$row['tournamentID'].'">Show participants</a>';
                         $match = find_all_tournamentMatches($row['tournamentID']);
                         if ($currentdatetime1 < $tournamentDate && $currentdatetime1 < $tournamentDeadline && mysqli_num_rows($match) == 0){
-                          echo '<a href="new.php?add=match&&id='.$row['tournamentID'].'">Generate Match</a>';                        
+                          echo '<a href="new.php?add=match&&id='.$row['tournamentID'].'">Generate Match</a>';
                         }
                         echo  '<a href="edit.php?id='.$row['tournamentID'].'">Edit</a>';
-                        
+
                         echo '<a href="delete.php?id='.$row['tournamentID'].'">Delete</a>';
-                        echo '</div>';  
-                        echo '</div>';  
+                        echo '</div>';
+                        echo '</div>';
                       }
                     }
-                    echo '<p> Name of the tournament :'. $row['tournamentName'].'</p>'; 
+                    echo '<p> Name of the tournament :'. $row['tournamentName'].'</p>';
                     echo '<p> Date of the tournament :' . $row['tournamentDate'].'</p>';
                     echo '<p> Registration deadline: ' . $row['deadline'].'</p>';
-                    
+
                     if(is_logged_in() && user_is_member() && $currentdatetime1 < $tournamentDeadline){
                       $participant = find_tournament_and_participant($_SESSION['user_id'], $row['tournamentID']);
                       if (mysqli_num_rows($participant) > 0) {
@@ -58,15 +58,15 @@
                       echo "<p> You can no longer register to this tournament ! </p>";
                     }
                     if(is_logged_in() && (user_is_member() && $currentdatetime1 > $tournamentDate) || ( is_logged_in() && user_is_admin() && $currentdatetime1 > $tournamentDeadline)){
-                      echo "<a href='show.php?show=match&&id=". $row['tournamentID']. "'> See matches </a>"; 
-                    }            
+                      echo "<a href='show.php?show=match&&id=". $row['tournamentID']. "'> See matches </a>";
+                    }
                     echo '</div>';
             }
         }
         else{
             echo '<div class="card">';
-                    echo '<p> No tournaments could be found.</p>';         
-                echo '</div>'; 
+                    echo '<p> No tournaments could be found.</p>';
+                echo '</div>';
         }
 
     } catch(PDOException $e) {
@@ -75,7 +75,7 @@
     ?>
   </div>
   <div class ="">
-    
+
     <?php
         if(is_logged_in() && user_is_admin()){
           echo "<div class='card'>";
@@ -86,6 +86,5 @@
 
   </div>
 </div>
-    
+
 <?php include(SHARED_PATH . '/footer.php'); ?>
- 

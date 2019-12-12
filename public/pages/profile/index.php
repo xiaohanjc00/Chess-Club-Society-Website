@@ -29,7 +29,7 @@
   </div>
   <div>
     <p>
-      <a href="<?php echo url_for('pages/MatchHistory/MatchHistory.php?id=' . h(u($user['id']))); ?>">Edit Profile</a></br>
+      <a href="<?php echo url_for('pages/MatchHistory/MatchHistory.php?id=' . h(u($user['id']))); ?>">View match history</a></br>
       <a href="<?php echo url_for('pages/profile/edit.php?id=' . h(u($user['id']))); ?>">Edit Profile</a></br>
       <a href="<?php echo url_for('pages/profile/delete.php?id=' . h(u($user['id']))); ?>">Cancel membership</a></br>
     </p>
