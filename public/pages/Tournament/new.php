@@ -89,7 +89,6 @@
 
         echo "<select name='coorganizer'>";
         if (mysqli_num_rows($admins) > 0) {
-            echo "aaaa";
             while($row = mysqli_fetch_assoc($admins)){
                 echo "<option value=" . $row["id"] .  ">".  $row["first_name"] ." ". $row["last_name"] . "</option>";
             }
