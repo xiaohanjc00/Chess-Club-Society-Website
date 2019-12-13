@@ -59,7 +59,7 @@
     }
     ?>
   </div>
-  <div class="left">
+  <div class="right">
     <?php 
     //if(is_logged_in() && user_is_admin()){
       echo "<div class='card'>";
