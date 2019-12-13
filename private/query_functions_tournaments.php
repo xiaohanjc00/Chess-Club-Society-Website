@@ -45,12 +45,23 @@
         $errors[] = "Please enter a valid name.";
     }
 
+
+    $currentournament = find_tournament_by_id($tournament['tournamentID']);
+
+    if(is_blank($tournament['deadline'])){
+      $tournament['deadline'] = $currentournament['deadline'];
+    }
+    if(is_blank($tournament['date'])){
+      $tournament['date'] = $currentournament['tournamentDate'];
+    }
+
     date_default_timezone_get();
     $currentDateTime = date('Y-m-d');
     $currentdatetime1 =  date_create($currentDateTime);
     $tournamentDate =  date_create(date('Y-m-d',strtotime($tournament['date'])));
     $tournamentDeadline =  date_create(date('Y-m-d',strtotime($tournament['deadline'])));
 
+    
     if($currentdatetime1 > $tournamentDeadline){
       $errors[] = "Please enter a valid deadline date. Its value cannot come before todays date";
     }
@@ -129,6 +140,7 @@
   function update_tournament($tournament, $id) {
     global $db;
 
+    $tournament['tournamentID'] = $id;
     $errors = validate_tournament_update($tournament);
     if (!empty($errors)) {
         return $errors;
@@ -140,7 +152,7 @@
     if(!is_blank($tournament['deadline'])) $sql .= 'UPDATE tournament set deadline= "'.  db_escape($db, $tournament['deadline']) . '" WHERE tournamentID =' .$id.';';
     
     if(!is_blank($sql)){
-      $result = mysqli_query($db, $sql);
+      $result = mysqli_multi_query($db, $sql);
       if($result) {
         return true;
       } else {

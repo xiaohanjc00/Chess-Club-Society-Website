@@ -53,19 +53,20 @@
         $currentdatetime1 =  date_create($currentDateTime);
         $expiryDate =  date_create(date('Y-m-d',strtotime($article['expiry_date'])));
 
-        if($currentdatetime1 >= $expiryDate){
+        if(!is_blank($article['expiry_date']) && $currentdatetime1 >= $expiryDate){
         $errors[] = "Please enter a valid expiry date. Its value cannot come before todays date";
         }
         return $errors;
     }
 
-    function insert_article($article) {
+    function insert_news_article($article) {
         global $db;
 
         $errors = validate_article($article);
         if (!empty($errors)) {
             return $errors;
         }
+        
         $sql = 'INSERT INTO';
         $sql .=' posts(articleTitle, articleDesc, articleDate ';
         if(!is_blank($article['image_link'])){ $sql.= ', articleImage' ;}
@@ -79,7 +80,7 @@
         $sql .= ');';
         $result = mysqli_query($db, $sql);
         if($result) {
-        return true;
+            return true;
         } else {
         echo mysqli_error($db);
         db_disconnect($db);
@@ -97,7 +98,7 @@
         if(!is_blank($article['article_description'])) $sql .= 'UPDATE posts set articleDesc= "'.  db_escape($db, $article['article_description']) . '" WHERE articleID =' .$id.';';
         
         if(!is_blank($sql)){
-        $result = mysqli_query($db, $sql);
+        $result = mysqli_multi_query($db, $sql);
         if($result) {
             return true;
         } else {
