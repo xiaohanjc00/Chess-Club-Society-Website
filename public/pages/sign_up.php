@@ -51,7 +51,7 @@
         <dt>Last name:</dt><dd><input type="text" name="last_name" value="<?php echo h($user['last_name']); ?>" /></dd>
       </dl>
       <dl>
-        <dt>Date of birth:</dt><dd><input type="Date" name="dob" value="<?php echo h($user['dob']); ?>" /></dd>
+        <dt>Date of birth:</dt><dd><input type="date" name="dob" value="<?php echo h($user['dob']); ?>" /></dd>
       </dl>
       <dl>
         <dt>Gender:</dt><dd><input type="text" name="gender" value="<?php echo h($user['gender']); ?>" /></dd>
