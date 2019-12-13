@@ -2,7 +2,6 @@
 
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-<?php include(SHARED_PATH . '/navigation.php'); ?>
 <?php
        function  createNewEvent(){
       

@@ -1,0 +1,19 @@
+#subImage{
+  margin: auto;
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.main{
+  background-color: blanchedalmond;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-bottom: 20px;
+}
+
+h1{
+  font-size: 50px;
+}

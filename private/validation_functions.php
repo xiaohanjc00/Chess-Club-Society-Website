@@ -52,4 +52,15 @@
     return preg_match($email_regex, $value) === 1;
   }
 
+  function has_unique_username($username, $current_id="0") {
+    global $db;
+    $sql = "SELECT * FROM users ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "' ";
+    $sql .= "AND id != '" . db_escape($db, $current_id) . "'";
+    $result = mysqli_query($db, $sql);
+    $user_count = mysqli_num_rows($result);
+    mysqli_free_result($result);
+    return $user_count === 0;
+  }
+
 ?>
