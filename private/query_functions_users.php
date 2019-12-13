@@ -117,7 +117,6 @@
         $sql .= "'" . db_escape($db, $user['email']) . "',";
         $sql .= "'" . db_escape($db, $user['username']) . "',";
         $sql .= "'" . db_escape($db, $hashed_password) . "'";
-	$sql .= "'" . db_escape($db, $user['skill']) . "',";
         $sql .= ")";
         $result = mysqli_query($db, $sql);
         if($result) {
@@ -149,7 +148,6 @@
             $hashed_password = password_hash($user['password'], PASSWORD_DEFAULT);
             $sql .= "hashed_password='" . db_escape($db, $hashed_password) . "', ";
         }
-	$sql .= "skill='" . db_escape($db, $user['skill']) . "', ";
         $sql .= "WHERE id='" . db_escape($db, $user['id']) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
