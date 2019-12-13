@@ -41,6 +41,7 @@
 <div class="main">
   <h2>Join the Chess Society now!</h2>
   <p>Please enter your details:</p>
+  <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/login.css'); ?>"/>
   <?php echo display_errors($errors); ?>
     <form width="800px" margin="auto" action="<?php echo url_for('pages/sign_up.php?'); ?>" method="post">
       <dl>
@@ -50,7 +51,7 @@
         <dt>Last name:</dt><dd><input type="text" name="last_name" value="<?php echo h($user['last_name']); ?>" /></dd>
       </dl>
       <dl>
-        <dt>Date of birth:</dt><dd><input type="text" name="dob" value="<?php echo h($user['dob']); ?>" /></dd>
+        <dt>Date of birth:</dt><dd><input type="Date" name="dob" value="<?php echo h($user['dob']); ?>" /></dd>
       </dl>
       <dl>
         <dt>Gender:</dt><dd><input type="text" name="gender" value="<?php echo h($user['gender']); ?>" /></dd>
@@ -70,11 +71,11 @@
       </dl>
       <dl>
         <dt>Password:</dt>
-        <dd><input type="password" name="password" value="" /></dd>
+        <dd><input type="Password" name="password" value="" /></dd>
       </dl>
       <dl>
         <dt>Confirm Password:</dt>
-        <dd><input type="password" name="confirm_password" value="" /></dd>
+        <dd><input type="Password" name="confirm_password" value="" /></dd>
       </dl>
       <p>
         Password must be at least 12 characters, with at least one uppercase letter, lowercase letter, number and symbol.
