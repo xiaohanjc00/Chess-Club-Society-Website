@@ -1,21 +1,20 @@
-body {
-  font-family: Arial;
-  padding: 20px;
-  background: #f1f1f1;
-}
-
-/*  Title */
-.title {
-  padding: 30px;
-  font-size: 40px;
+.header_title{
+  padding-left: 15%;
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
   text-align: center;
-  background: white;
+  padding-right: 30%;
 }
-
 
 .left {
-  float: left;
+  float: center;
   width: 73%;
+}
+
+.row2{
+  width: 50%;
+  padding-left: 4rem;
 }
 
 .centercolumn {
@@ -23,12 +22,15 @@ body {
   width: 100%;
 }
 
+.row{
+  padding-left: 4rem;
+}
 
 /* Right column */
 .right {
   float: left;
   width: 25%;
-  padding-left: 20px;
+  padding-left: 1rem;
 }
 
 
@@ -43,8 +45,9 @@ body {
 /* Add a card effect for articles */
 .card {
   background-color: white;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 35px;
 }
 
 /* Clear floats after the columns */
@@ -54,13 +57,6 @@ body {
   clear: both;
 }
 
-/* Footer */
-.footer {
-  padding: 20px;
-  text-align: center;
-  background: #ddd;
-  margin-top: 20px;
-}
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
@@ -68,24 +64,6 @@ body {
     width: 100%;
     padding: 0;
   }
-}
-
-
-i {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-}
-
-.up {
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
-}
-
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
 }
 
 .dropdown {
@@ -115,3 +93,4 @@ i {
   display: block;
   text-align: left;
 }
+
