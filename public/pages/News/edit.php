@@ -35,9 +35,9 @@
         echo '<dl> <dt>Article Title:</dt><dd><input type="text" name="article_title" value="'.$article['article_title'] . '" /></dd> </dl>' ;
         echo '<dl> <dt>Article Description:</dt><dd><input type="text" name="article_description" value="'.$article['article_description'] . '" /></dd> </dl>' ;
         echo '<dl> <dt>Image Link:</dt><dd><input type="text" name="image_link" value="'.$article['image_link'] . '" /></dd> </dl>' ;
-        echo '<dl> <dt>Expiry date:</dt><dd><input type="datetime-local" name="expiry_date" value="'.$article['expiry_date'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Expiry date:</dt><dd><input type="date" name="expiry_date" value="'.$article['expiry_date'] . '" /></dd> </dl>' ;
 
-        echo '<div> <input type="submit" value="Post new article" /> </div>';
+        echo '<div> <input type="submit" value="Edit article" /> </div>';
         echo '</form>';
         echo '</div>';
     ?>
