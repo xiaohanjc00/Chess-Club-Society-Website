@@ -37,7 +37,7 @@
       Username:
       <input type="text" name="username" value="<?php echo h($username); ?>"><br>
       Password:
-      <input type="password" name="password" value="" >
+      <input type="Password" name="password" value="" >
       <input type="submit" name="submit" value="Submit" />
   </form>
   <a href="<?php echo url_for('pages/sign_up.php'); ?>">Sign up</a>
