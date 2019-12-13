@@ -1,23 +1,17 @@
-<?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
+<?php require_once('../../../private/initialise.php'); ?>
+<?php include(SHARED_PATH . '/header.php'); ?>
 
+<link rel="stylesheet" href="../stylesheets/newsStyle.css">
 
-<link rel="stylesheet" href=".../.../newsStyle.css">
 <div class="header">
-  <h2>Opening Events</h2>
+  <h2>News</h2>
 </div>
 
 <div class="row">
   <div id = "main" class="centercolumn">
   <?php
-        $dbhost = 'localhost';
-        $dbuser = 'root';
-        $dbpass = '';
-        $dbname = 'chess_society';
-    
-        $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-      
+ 
     try {
-        //echo "a";
         $event = find_event_by_id($_GET['id']);
         if (mysqli_num_rows($event) > 0) {
             while($row = mysqli_fetch_assoc($event)){
@@ -27,14 +21,14 @@
                 $eventdatetime2 =  date_create(date('Y-m-d',strtotime($row['eventDate'])));
                 $dDiff = $eventdatetime2 ->diff($currentdatetime1);
                 if($dDiff->format('%r%a') > 7){
-                    mysqli_query($connection, 'DELETE FROM opening_event WHERE eventID='.$row['eventID'] );
+                    mysqli_query($connection, 'DELETE FROM posts WHERE eventID='.$row['eventID'] );
                 }
                 else{
                     echo '<div class="card">';
                         echo '<h1>'.$row['eventTitle'].'</h1>';
-                        echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['eventDate'])).'</p>';
+                        echo '<p>Posted on '.date('jS M Y', strtotime($row['eventDate'])).'</p>';
                         echo '<img class="fakeimg" src="' .$row['eventImage'] .'"">';
-                        echo '<p>'.$row['eventDesc'].'</p>';                            
+                        echo '<p id="just-line-break">'.$row['eventDesc'].'</p>';                            
                     echo '</div>';
                 }
             }
@@ -49,11 +43,13 @@
         echo $e->getMessage();
     }
 ?>
-    
-    
+
   </div>
-  
-<a href="#" onclick="history.go(-1)">Go Back</a>
-    
+
   </div>
 </div>
+
+<a href="#" onclick="history.go(-1)">Go Back</a>
+
+<?php include(SHARED_PATH . '/footer.php'); ?>
+  
