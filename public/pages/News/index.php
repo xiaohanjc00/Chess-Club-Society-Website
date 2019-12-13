@@ -23,9 +23,11 @@
                 date_default_timezone_get();
                 $currentDateTime = date('Y-m-d');
                 $currentdatetime1 =  date_create($currentDateTime);
-                $articledatetime2 =  date_create(date('Y-m-d',strtotime($row['articleExpiry'])));
-                if($currentdatetime1 == $articledatetime2 ){
-                    delete_article($row['articleID']); 
+                
+                $articledatetime2 =  date_create(date('Y-m-d',strtotime($row['articleExpiry'])));    
+                $interval = $currentdatetime1->diff($articledatetime2);
+                if($interval ->format('%R%a days') <= 0 ){
+                  delete_article($row['articleID']); 
                 }
                 else{
                     echo '<div class="card">';
@@ -46,7 +48,7 @@
                     echo '<p><a href="show.php?id='.$row['articleID'].'">Read More</a></p>';                
                     echo '</div>';
                 }
-            }
+              }
         }
         else{
             echo '<div class="card">';

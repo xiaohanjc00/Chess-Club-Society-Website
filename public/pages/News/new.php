@@ -9,7 +9,7 @@
             $article['image_link'] = $_POST['image_link'] ?? '';
             $article['expiry_date'] = $_POST['expiry_date'] ?? '';
 
-            $result = insert_article($article);
+            $result = insert_news_article($article);
             if($result === true) {
                 $_SESSION['message'] = 'New article successfully created!';
                 echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
