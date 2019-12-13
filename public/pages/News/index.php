@@ -23,7 +23,6 @@
                 date_default_timezone_get();
                 $currentDateTime = date('Y-m-d');
                 $currentdatetime1 =  date_create($currentDateTime);
-                
                 $articledatetime2 =  date_create(date('Y-m-d',strtotime($row['articleExpiry'])));    
                 $interval = $currentdatetime1->diff($articledatetime2);
                 if($interval ->format('%R%a days') <= 0 ){
@@ -53,7 +52,6 @@
         else{
             echo '<div class="card">';
                     echo '<p> No articles could be found.</p>';         
-
                 echo '</div>'; 
             }
 
