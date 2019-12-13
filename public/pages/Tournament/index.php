@@ -3,23 +3,22 @@
 
 <link rel="stylesheet" href="../stylesheets/newsStyle.css">
 
-<div class="header">
-  <h2>Tournament</h2>
-</div>
+  <div class="main">
+    <div class="header">
+      <h2 class="header_title">Tournament</h2>
+    </div>
 
-<div class="row">
-  <div id = "main" class="center">
-  <?php
-    try {
-        $article = find_all_tournaments();
-        if (mysqli_num_rows($article) > 0) {
-            while($row = mysqli_fetch_assoc($article)){
-              $currentDateTime = date('Y-m-d');
-              $currentdatetime1 =  date_create($currentDateTime);
-              $tournamentDate =  date_create(date('Y-m-d',strtotime($row['tournamentDate'])));
-              $tournamentDeadline =  date_create(date('Y-m-d',strtotime($row['deadline'])));
-
-
+    <div class="row2">
+      <div id = "main" class="center">
+      <?php
+        try {
+            $article = find_all_tournaments();
+            if (mysqli_num_rows($article) > 0) {
+                while($row = mysqli_fetch_assoc($article)){
+                  $currentDateTime = date('Y-m-d');
+                  $currentdatetime1 =  date_create($currentDateTime);
+                  $tournamentDate =  date_create(date('Y-m-d',strtotime($row['tournamentDate'])));
+                  $tournamentDeadline =  date_create(date('Y-m-d',strtotime($row['deadline'])));
                 echo '<div class="card">';
                     if(is_logged_in() && user_is_admin()){
                       $organizer = find_tournament_organizer($_SESSION['user_id'], $row['tournamentID']);
@@ -34,16 +33,9 @@
                         if ($currentdatetime1 >= $tournamentDeadline && mysqli_num_rows($match) == 0){
                           echo '<a href="new.php?add=match&&id='.$row['tournamentID'].'">Generate Match</a>';
                         }
-                        echo  '<a href="edit.php?id='.$row['tournamentID'].'">Edit</a>';
-                        echo '<a href="delete.php?delete=organizer&&id='.$row['tournamentID'].'">Remove organizer</a>';
-                        echo '<a href="delete.php?delete=tournament&&id='.$row['tournamentID'].'">Delete</a>';
-                        echo '</div>';  
-                        echo '</div>';  
-                      }
-                    }
-                    echo '<p> Name of the tournament :'. $row['tournamentName'].'</p>';
-                    echo '<p> Date of the tournament :' . $row['tournamentDate'].'</p>';
-                    echo '<p> Registration deadline: ' . $row['deadline'].'</p>';
+                        echo '<p> Name of the tournament :'. $row['tournamentName'].'</p>';
+                        echo '<p> Date of the tournament :' . $row['tournamentDate'].'</p>';
+                        echo '<p> Registration deadline: ' . $row['deadline'].'</p>';
 
                     if(is_logged_in() && user_is_member() && $currentdatetime1 < $tournamentDeadline){
                       $participant = find_tournament_and_participant($_SESSION['user_id'], $row['tournamentID']);
@@ -62,29 +54,24 @@
                     }
                     echo '</div>';
             }
-        }
-        else{
-            echo '<div class="card">';
-                    echo '<p> No tournaments could be found.</p>';
-                echo '</div>';
-        }
 
-    } catch(PDOException $e) {
-        echo $e->getMessage();
-    }
-    ?>
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+        ?>
+      </div>
+      <div class ="">
+
+        <?php
+            if(is_logged_in() && user_is_admin()){
+              echo "<div class='card'>";
+              echo "<a href='new.php?add=tournament&&id=". $_SESSION['user_id']. "'> Create new tournament </a>";
+              echo "</div>";
+            }
+        ?>
+
+      </div>
+    </div>
   </div>
-  <div class ="">
-
-    <?php
-        if(is_logged_in() && user_is_admin()){
-          echo "<div class='card'>";
-          echo "<a href='new.php?add=tournament&&id=". $_SESSION['user_id']. "'> Create new tournament </a>";
-          echo "</div>";
-        }
-    ?>
-
-  </div>
-</div>
 
 <?php include(SHARED_PATH . '/footer.php'); ?>

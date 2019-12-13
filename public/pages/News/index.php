@@ -2,6 +2,10 @@
 <?php include(SHARED_PATH . '/header.php'); ?>
 
 <link rel="stylesheet" href="../stylesheets/newsStyle.css">
+  <div class="main">
+      <div class="header">
+          <h2 class="header_title">News</h2>
+      </div>
 
 <div class="header">
   <h2>News</h2>
@@ -23,7 +27,6 @@
                 date_default_timezone_get();
                 $currentDateTime = date('Y-m-d');
                 $currentdatetime1 =  date_create($currentDateTime);
-                
                 $articledatetime2 =  date_create(date('Y-m-d',strtotime($row['articleExpiry'])));    
                 $interval = $currentdatetime1->diff($articledatetime2);
                 if($interval ->format('%R%a days') <= 0 ){
@@ -54,26 +57,27 @@
             echo '<div class="card">';
                     echo '<p> No articles could be found.</p>';         
                 echo '</div>'; 
-        }
+            }
 
-    } catch(PDOException $e) {
-        echo $e->getMessage();
-    }
-    ?>
-  </div>
-  <div class="right">
-  <?php 
-    if(is_logged_in() && user_is_admin()){
-      echo "<div class='card'>";
-      echo "<form action='new.php'>";
-      echo "<input type='submit' value='Create new article' />";
-      echo "</form>";
-    }
-  ?>
+            } catch(PDOException $e) {
+                echo $e->getMessage();
+            }
+          ?>
+          </div>
 
-    </div>
+          <div class="right">
+          <?php 
+            if(is_logged_in() && user_is_admin()){
+              echo "<div class='card'>";
+              echo "<form action='new.php'>";
+              echo "<input type='submit' value='Create new article' />";
+              echo "</form>";
+            }
+          ?>
+
+          </div>
+      </div>
   </div>
-</div>
 
     
 <?php include(SHARED_PATH . '/footer.php'); ?>
