@@ -30,6 +30,7 @@
                       }
                       else{
                           echo '<div class="card">';
+                        if(is_logged_in() && user_is_admin()){
                           echo '<div class="dropdown">';
                           echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></i>';
                           echo '<span class="caret"></span></button>';
@@ -38,6 +39,7 @@
                           echo '<a href="delete.php?id='.$row['eventID'].'">Delete</a>';
                           echo '</div>';   
                           echo '</div>';
+                        }
                           echo '<h1><a href="show.php?id='.$row['eventID'].'">'.$row['eventTitle'].'</a></h1>';
                           echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['eventDate'])).'</p>';
                           echo '<img class="fakeimg" src="' .$row['eventImage'] .'"">';
@@ -57,22 +59,21 @@
               echo $e->getMessage();
           }
           ?>
-        </div>
-        <div class="rightcolumn">
-        
-          <div class="card">
-              <h3>Opening Event</h3>
+         </div>
+
+          <div class="rightcolumn">
+          <?php 
+            if(is_logged_in() && user_is_admin()){
+              echo "<div class='card'>";
+              echo "<form action='new.php'>";
+              echo "<input type='submit' value='Create new event' />";
+              echo "</form>";
+            }
+          ?>
+
           </div>
-          
-          <div class="card">
-              <form action="new.php">
-                  <input type="submit" value="Create new event" />
-              </form>
-          </div>
-        </div>
       </div>
- </div>
-        </div>
+  </div>
 
     
 <?php include(SHARED_PATH . '/footer.php'); ?>
