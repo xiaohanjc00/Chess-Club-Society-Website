@@ -7,7 +7,7 @@
         <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/home.css'); ?>"/>
         
         <br>
-        <hsta1>Welcome to the Chess Society</h1>
+        <h1>About Us</h1>
         <br>
         <p>
             Whether you’re the next Magnus Carlsen or a complete beginner 

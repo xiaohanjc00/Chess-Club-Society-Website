@@ -3,12 +3,13 @@
 
 <link rel="stylesheet" href="../stylesheets/newsStyle.css">
 
-<div class="header">
-  <h2>Tournament</h2>
-</div>
+<div class="main">
+    <div class="header">
+      <h2 class="header_title">Tournament</h2>
+    </div>
 
-<div class="row">
-  <div id = "main" class="center">
+    <div class="row2">
+      <div id = "main" class="center">
   <?php
     try {
         $article = find_all_tournaments();
@@ -83,7 +84,7 @@
           echo "</div>";
         }
     ?>
-
+   </div>
   </div>
 </div>
 
