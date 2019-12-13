@@ -32,12 +32,13 @@
 
 <div>
   <h2>Log in</h1>
+  <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/login.css'); ?>"/>
   <?php echo display_errors($errors); ?>
   <form width="800px" margin="auto" style="color: #37474f font-size:25px" align="left" action="log_in.php" method="post">
       Username:
       <input type="text" name="username" value="<?php echo h($username); ?>"><br>
       Password:
-      <input type="password" name="password" value="" >
+      <input type="Password" name="password" value="" >
       <input type="submit" name="submit" value="Submit" />
   </form>
   <a href="<?php echo url_for('pages/sign_up.php'); ?>">Sign up</a>
