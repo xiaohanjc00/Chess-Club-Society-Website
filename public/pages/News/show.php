@@ -1,7 +1,8 @@
 <?php require_once('../../../private/initialise.php'); ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-<link rel="stylesheet" href="/lab/stylesheets/newsStyle.css">
+<link rel="stylesheet" href="../stylesheets/newsStyle.css">
+
 <div class="header">
   <h2>News</h2>
 </div>
@@ -27,7 +28,7 @@
                         echo '<h1>'.$row['articleTitle'].'</h1>';
                         echo '<p>Posted on '.date('jS M Y', strtotime($row['articleDate'])).'</p>';
                         echo '<img class="fakeimg" src="' .$row['articleImage'] .'"">';
-                        echo '<p>'.$row['articleDesc'].'</p>';                            
+                        echo '<p id="just-line-break">'.$row['articleDesc'].'</p>';                            
                     echo '</div>';
                 }
             }

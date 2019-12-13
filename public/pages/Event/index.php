@@ -31,6 +31,7 @@
                       else{
                           echo '<div class="card">';
                         if(is_logged_in() && user_is_admin()){
+
                           echo '<div class="dropdown">';
                           echo '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></i>';
                           echo '<span class="caret"></span></button>';
@@ -40,6 +41,7 @@
                           echo '</div>';   
                           echo '</div>';
                         }
+
                           echo '<h1><a href="show.php?id='.$row['eventID'].'">'.$row['eventTitle'].'</a></h1>';
                           echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['eventDate'])).'</p>';
                           echo '<img class="fakeimg" src="' .$row['eventImage'] .'"">';
@@ -54,6 +56,7 @@
                           echo '<p> No events could be found.</p>';         
                       echo '</div>'; 
               }
+            
 
           } catch(PDOException $e) {
               echo $e->getMessage();
@@ -74,6 +77,7 @@
           </div>
       </div>
   </div>
+
 
     
 <?php include(SHARED_PATH . '/footer.php'); ?>

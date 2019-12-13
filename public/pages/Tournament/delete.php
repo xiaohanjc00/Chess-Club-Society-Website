@@ -5,18 +5,8 @@
     if($_GET["delete"] == "tournament"){
         try {
             $article = find_tournament_by_id($_GET['id']);
-            if (mysqli_num_rows($article) > 0) {
-                while($row = mysqli_fetch_assoc($article)){
-                    delete_tournament($row['tournamentID']) ;
-                }
-                
-            }
-            else{
-                echo '<div class="card">';
-                echo '<p> No articles could be found.</p>';         
-                echo '</div>'; 
-            }
-
+            delete_tournament($article['tournamentID']) ;
+         
         } catch(PDOException $e) {
             echo $e->getMessage();
         }

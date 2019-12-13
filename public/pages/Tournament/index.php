@@ -3,12 +3,13 @@
 
 <link rel="stylesheet" href="../stylesheets/newsStyle.css">
 
-<div class="header">
-  <h2>Tournament</h2>
-</div>
+<div class="main">
+    <div class="header">
+      <h2 class="header_title">Tournament</h2>
+    </div>
 
-<div class="row">
-  <div id = "main" class="center">
+    <div class="row2">
+      <div id = "main" class="center">
   <?php
     try {
         $article = find_all_tournaments();
@@ -31,7 +32,7 @@
                         echo  '<a href="new.php?add=coorganizer&&id='.$row['tournamentID'].'">Add CoOrganizer</a>';
                         echo  '<a href="show.php?show=participant&&id='.$row['tournamentID'].'">Show participants</a>';
                         $match = find_all_tournamentMatches($row['tournamentID']);
-                        if ($currentdatetime1 < $tournamentDate && $currentdatetime1 < $tournamentDeadline && mysqli_num_rows($match) == 0){
+                        if ($currentdatetime1 >= $tournamentDeadline && mysqli_num_rows($match) == 0){
                           echo '<a href="new.php?add=match&&id='.$row['tournamentID'].'">Generate Match</a>';
                         }
                         echo  '<a href="edit.php?id='.$row['tournamentID'].'">Edit</a>';
@@ -57,8 +58,8 @@
                     else if(is_logged_in() && user_is_member()){
                       echo "<p> You can no longer register to this tournament ! </p>";
                     }
-                    if(is_logged_in() && (user_is_member() && $currentdatetime1 > $tournamentDate) || ( is_logged_in() && user_is_admin() && $currentdatetime1 > $tournamentDeadline)){
-                      echo "<a href='show.php?show=match&&id=". $row['tournamentID']. "'> See matches </a>";
+                    if(is_logged_in() && (user_is_member() && $currentdatetime1 > $tournamentDate) || ( is_logged_in() && user_is_admin() && $currentdatetime1 >= $tournamentDeadline)){
+                      echo "<a href='show.php?show=match&&update=none&&id=". $row['tournamentID']. "'> See matches </a>";
                     }
                     echo '</div>';
             }
@@ -83,7 +84,7 @@
           echo "</div>";
         }
     ?>
-
+   </div>
   </div>
 </div>
 

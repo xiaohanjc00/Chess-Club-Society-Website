@@ -24,6 +24,8 @@
                 <th scope="col">Tournament Date</th>
                 <th scope="col">Round Number</th>
                 <th scope="col">Round Winner</th>
+                <th scope="col">Old ELO rating</th>
+                <th scope="col">New ELO rating</th>
                 </tr>
             </thead>
         <tbody>
@@ -36,6 +38,9 @@
                     echo "<th scope='col'>". $row["roundNumber"]. "</th>";
                     $name = (get_member_name($row["roundWinner"])->fetch_assoc());
                     echo "<th scope='col'>". $name["first_name"]. "</th>";
+                    $rating = get_elo($id,  $row["tournamentID"]);
+                    echo "<th scope='col'>". $rating['before']. "</th>";
+                    echo "<th scope='col'>". $rating['after']. "</th>";
                     echo "</tr>";
                 }
 

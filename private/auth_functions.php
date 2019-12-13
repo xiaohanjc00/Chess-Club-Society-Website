@@ -35,6 +35,15 @@
     }
   }
 
+  // Function that checks for a logged in system admin
+  function require_system_admin_login() {
+    if(!user_is_system_admin()) {
+      redirect_to(url_for('index.php'));
+    } else {
+      // display page to the admin
+    }
+  }
+
   function is_logged_in() {
     return isset($_SESSION['user_id']);
   }
@@ -47,6 +56,11 @@
   function user_is_member() {
     $user = find_user_by_id($_SESSION['user_id']);
     return (is_logged_in() && $user['admin'] == "0");
+  }
+
+  function user_is_system_admin() {
+    $user = find_user_by_id($_SESSION['user_id']);
+    return (is_logged_in() && $user['system_admin'] == "1");
   }
 
 ?>
