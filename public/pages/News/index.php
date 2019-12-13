@@ -7,10 +7,6 @@
           <h2 class="header_title">News</h2>
       </div>
 
-<div class="header">
-  <h2>News</h2>
-</div>
-
 <div class="row">
   <div id = "main" class="left">
   <?php

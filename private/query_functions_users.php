@@ -60,6 +60,8 @@
         }
         if(is_blank($user['email'])) {
             $errors[] = "Please enter your email address.";
+        } elseif(check_banned($user['email'])){
+            $errors[] = "You have been banned from this society.";
         } elseif (!has_length($user['email'], array('max' => 255))) {
             $errors[] = "Email address must be less than 255 characters.";
         } elseif (!has_valid_email_format($user['email'])) {
@@ -229,5 +231,112 @@
         //confirm_result_set($result);
         return $result;
     }
+
+    function find_all_members() {
+        global $db;
+        $sql = "SELECT * FROM users WHERE system_admin = 0; ";
+        $result = mysqli_query($db, $sql);
+        //confirm_result_set($result);
+        return $result;
+    }
+
+    function find_system_admin($id) {
+        global $db;
+        $sql = "SELECT * FROM users WHERE system_admin = 1 ;";
+        $result = mysqli_query($db, $sql);
+        confirm_result_set($result);
+        return $result;
+    }
+
+    function promote_member($id){
+        global $db;
+
+        $sql = "UPDATE users SET admin = 1 WHERE id =". $id .";";
+        $result = mysqli_query($db, $sql);
+        if($result) {
+            return true;
+        } else {
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }
+
+    function demote_member($id){
+        global $db;
+
+        $sql = "UPDATE users SET admin = 0 WHERE id =". $id .";";
+        $result = mysqli_query($db, $sql);
+        if($result) {
+            return true;
+        } else {
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }
+
+    function promote_admin($id){
+        global $db;
+
+        $sql = "UPDATE users SET system_admin = 1 WHERE id =". $id .";";
+        $result = mysqli_query($db, $sql);
+        if($result) {
+            return true;
+        } else {
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }
+
+    function demote_admin($id){
+        global $db;
+
+        $sql = "UPDATE users SET system_admin = 0 WHERE id =". $id .";";
+        $result = mysqli_query($db, $sql);
+        if($result) {
+            return true;
+        } else {
+            echo mysqli_error($db);
+            db_disconnect($db);
+            exit;
+        }
+    }
+
+    function ban_user($email){
+        global $db; 
+  
+        $sql = 'INSERT INTO';
+        $sql .=' bannedEmails(email) ';
+        $sql .= 'values ("' . $email . '");';
+  
+        $result = mysqli_query($db, $sql);
+        if($result) {
+          return true;
+        } else {
+          echo mysqli_error($db);
+          db_disconnect($db);
+          exit;
+        }
+      }
+  
+      function check_banned($email){
+        global $db; 
+        
+        $sql = 'SELECT * FROM bannedemails;';
+  
+        $result = mysqli_query($db, $sql);
+  
+        while($row = mysqli_fetch_assoc($result)){
+          if($row['email'] == $email){
+            return true;
+          }
+        }
+  
+        return false;
+      }
+
+      
 
 ?>
