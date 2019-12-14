@@ -63,6 +63,11 @@ CREATE TRIGGER expiryDate BEFORE INSERT ON posts
 
 
 -- add data to posts table
+insert into posts(articleTitle, articleDesc, articleDate, articleExpiry) values ("Record attendance at Christmas lunch", "Thank you to everyone who came to our special festive chess society lunch! \n
+We have enjoyed all the fun socials and chess games this term \n
+Looking forward to seeing you back for more chess in the new year! \n
+Have a great winter break and happy new year celebrations! \n", CURRENT_DATE(), "2020-01-10");
+
 insert into posts(articleTitle, articleDesc, articleDate, articleExpiry) values ("Indian Chess legend Vishy Anand turns 50", "Viswanathan Anand turned 50 today, Wednesday 11th December 2019. To celebrate, chess24’s FM Joachim Iglesias takes a look at some of the highlights of the incredible career of the Indian superstar, who became his country’s first grandmaster before going on to win the World Championship title in all possible formats. \n 50 His age
 11 December 1969 His date of birth \n
 6 The age at which Vishy learned to play chess \n
