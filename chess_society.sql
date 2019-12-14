@@ -24,8 +24,10 @@ CREATE TABLE `users` (
 ALTER TABLE users ADD INDEX index_username (username);
 
 -- add data to users table
+INSERT INTO users(admin, system_admin, first_name, last_name, dob, gender, phone, address, email, username, hashed_password) VALUES
+    (1, 1, 'Joe','Baker','1998-03-02','M',02086221092,'20 Richmond Avenue, Croydon CR46YW','jo@bakercake.com','joebaker', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi');
+
 INSERT INTO users(admin, first_name, last_name, dob, gender, phone, address, email, username, hashed_password) VALUES
-    (1, 'Joe','Baker','1998-03-02','M',02086221092,'20 Richmond Avenue, Croydon CR46YW','jo@bakercake.com','joebaker', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
     (1, 'Jane','Black','1978-03-10','F',02086777092,'21 Richmond Avenue, Croydon CR4 6YW','up@down.com','chessMaster', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
     (1, 'Jenny','Marston','1938-05-20','F',02086228762,'345 Violet Street Mitcham MH4 6YW','jjjj_y@last.com','chessJJ', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
     (0, 'Jack','Wilson','1989-04-22','M',07908365587,'29 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
