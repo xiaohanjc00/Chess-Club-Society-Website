@@ -24,8 +24,11 @@
             <br>
             <a href="<?php echo url_for('pages/sign_up.php'); ?>">Click here to become a member today!</a>
 
-            <!--Sub-Image in relation with the text above-->
-            <img id="subImage" src="<?php echo url_for('Images/Chess.jpg'); ?>">
+            
+            <a href="<?php echo url_for('pages/sign_up.php'); ?>">
+                <!--Sub-Image in relation with the text above-->
+                <img id="subImage" src="<?php echo url_for('Images/Chess.jpg'); ?>">
+            </a>
 
         <br>
         
