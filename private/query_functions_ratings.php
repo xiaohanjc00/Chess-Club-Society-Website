@@ -21,7 +21,7 @@
     function tournament_ratings_updated($id) {
         global $db;
         $sql = "SELECT * FROM tournament ";
-        $sql .= "WHERE tournamentID='" . db_escape($db, $id) . "' ";
+        $sql .= "WHERE tournamentID = '" . db_escape($db, $id) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
@@ -33,8 +33,8 @@
     function set_tournament_ratings_updated($id) {
         global $db;
         $sql = "UPDATE tournament SET ";
-        $sql .= "ratingsUpdated=1 ";
-        $sql .= "WHERE tournamentID='" . db_escape($db, $id) . "' ";
+        $sql .= "ratingsUpdated = 1 ";
+        $sql .= "WHERE tournamentID = '" . db_escape($db, $id) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
         if($result) {
@@ -82,8 +82,8 @@
             update_to_minimum($user_id);
         } else{
             $sql = "UPDATE users SET ";
-            $sql .= "rating=" . db_escape($db, $new_rating) ;
-            $sql .= " WHERE id='" . db_escape($db, $user_id) . "' ";
+            $sql .= "rating = " . db_escape($db, $new_rating) ;
+            $sql .= " WHERE id = '" . db_escape($db, $user_id) . "' ";
             $sql .= "LIMIT 1";
             $result = mysqli_query($db, $sql);
             if($result) {
@@ -102,8 +102,8 @@
         global $db;
 
         $sql = "UPDATE users SET ";
-        $sql .= "rating= 100"; 
-        $sql .= " WHERE id='" . db_escape($db, $user_id) . "' ";
+        $sql .= "rating = 100"; 
+        $sql .= " WHERE id = '" . db_escape($db, $user_id) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
         if($result) {
@@ -140,7 +140,7 @@
     function get_rating_by_id($id) {
         global $db;
         $sql = "SELECT * FROM users ";
-        $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+        $sql .= "WHERE id = '" . db_escape($db, $id) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
@@ -152,7 +152,7 @@
     function tournament_ended($t_id) {
         global $db;
         $sql = "SELECT * FROM tournament ";
-        $sql .= "WHERE tournamentID='" . db_escape($db, $t_id) . "' ";
+        $sql .= "WHERE tournamentID = '" . db_escape($db, $t_id) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
@@ -170,16 +170,16 @@
         global $db;
 
         $sql = "SELECT firstparticipantID, firstparticipantoldelo, firstparticipantnewelo, roundNumber FROM tournamentmatches ";
-        $sql .= "WHERE firstparticipantID ='" . db_escape($db, $user_id) . "' AND ";
-        $sql .= "tournamentID =" . db_escape($db, $tournament_id) . " ";
+        $sql .= "WHERE firstparticipantID = '" . db_escape($db, $user_id) . "' AND ";
+        $sql .= "tournamentID = " . db_escape($db, $tournament_id) . " ";
         $sql .= "ORDER BY roundNumber DESC LIMIT 1";
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
         $firstparticipant = mysqli_fetch_assoc($result);
 
         $sql = "SELECT secondparticipantID, secondparticipantoldelo, secondparticipantnewelo, roundNumber FROM tournamentmatches ";
-        $sql .= "WHERE secondparticipantID ='" . db_escape($db, $user_id) . "' AND ";
-        $sql .= "tournamentID =" . db_escape($db, $tournament_id) . " ";
+        $sql .= "WHERE secondparticipantID = '" . db_escape($db, $user_id) . "' AND ";
+        $sql .= "tournamentID = " . db_escape($db, $tournament_id) . " ";
         $sql .= "ORDER BY roundNumber DESC LIMIT 1";
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
