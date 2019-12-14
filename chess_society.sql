@@ -1,20 +1,4 @@
-
--- Using MySQL on Codenvy:
--- $ sudo service mysql start
--- > mysql -u root
--- > show databases;
--- > use chessSociety;
--- > show tables;
--- > describe users;
--- > describe posts;
--- > describe tournament;
--- > describe tournamentCoOrganizers;
--- > describe tournamentParticipant;
--- > describe opening_event;
--- > exit;
-
 -- Set up the database:
-
 CREATE DATABASE chessSociety;
 USE chessSociety;
 
@@ -30,7 +14,7 @@ CREATE TABLE `users` (
   `gender` CHAR(1) NOT NULL, -- 'F' OR 'M' OR 'O'
   `phone` VARCHAR(15) NOT NULL,
   `address` VARCHAR(255),
-  `rating` INT(3) NOT NULL DEFAULT 100,
+  `rating` INT(3) NOT NULL DEFAULT 100, -- chess rating
   `email` VARCHAR(255),
   `username` VARCHAR(255),
   `hashed_password` VARCHAR(255),
@@ -39,14 +23,21 @@ CREATE TABLE `users` (
 
 ALTER TABLE users ADD INDEX index_username (username);
 
--- add some test data to users table
+-- add data to users table
 INSERT INTO users(admin, first_name, last_name, dob, gender, phone, address, email, username, hashed_password) VALUES
-    (1, 'Joe','Baker','1998-03-30','M',020862210922,'20 Richmond Avenue, Croydon CR46YW','jo@bakercake.com','joebaker', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Jane','Xu','1978-03-10','F',020867770922,'21 Richmond Avenue, London CWC2R4EW','up@down.com','chessMaster', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Jenny','Marston','1938-05-20','F',020862287622,'20 Violet Street, Mitcham MH46YW','jjjj_y@last.com','chesser', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Jude','Stoyanov','1999-04-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (1, 'Adam','Stoyanov','1999-08-22','M',020845610922,'20 West Street, Barnet N66YW','stoyupolo@aol.com','adamstoya', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi');
+    (1, 'Joe','Baker','1998-03-02','M',02086221092,'20 Richmond Avenue, Croydon CR46YW','jo@bakercake.com','joebaker', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (1, 'Jane','Black','1978-03-10','F',02086777092,'21 Richmond Avenue, Croydon CR4 6YW','up@down.com','chessMaster', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (1, 'Jenny','Marston','1938-05-20','F',02086228762,'345 Violet Street Mitcham MH4 6YW','jjjj_y@last.com','chessJJ', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Jack','Wilson','1989-04-22','M',07908365587,'29 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'John','Stom','1999-04-22','M',0790836541,'31 New Close, Barnet NW4 TSW','stomjo@aol.com','stomjohn', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Zayn','Marsh','1999-04-22','M',07908365889,'19 Lumlay Drive, Kensington K1T 4FR','marsh@hotmail.com','zaynmarsh', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Harry','Stiles','1999-04-22','O',07908365654,'20 Fort Lane, West Dulwich','direction@bt.com','harryKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Paul','North','2002-04-22','M',07907365321,'20 West Street, Birmingham B66YW','paul@gmail.com','BishopWin', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Anna','West','1984-04-22','F',07908365123,'Flat 35, 1 Storm Drain, East Ruislip','anna.1234@kcl.ac.uk','WestBestRook', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Paula','Smith','2000-04-22','F',07966345687,'4 Knight Close, East Ham E11 4TT','psmith@bt.com','SmithCheckMate', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Michelle','Xu','1991-08-22','F',07449665587,'2 North Close, West Brompton NW1 6WQ','xum@gmail.com','QueenOfChess', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi');
 
+-- table to record banned user emails
 CREATE TABLE `bannedEmails` (
   `emailID` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255),
@@ -171,7 +162,6 @@ CREATE TABLE `tournamentMatches` (
     ON UPDATE CASCADE
 );
 
-
 -- create event table
 DROP TABLE IF EXISTS `events`;
  CREATE TABLE `events` (
@@ -187,7 +177,7 @@ DROP TABLE IF EXISTS `events`;
 CREATE TRIGGER expiryDateEvent BEFORE INSERT ON events
     FOR EACH ROW SET NEW.eventExpiry = IFNULL(NEW.eventExpiry,DATE_ADD(STR_TO_DATE(NEW.eventDate, '%Y-%m-%d'), INTERVAL 14 DAY));
 
---add data to event table
+--add data to events table
 insert into events(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Opening Event 1", "Introducing the Guys Bar Sports Night Membership Card 19/20!
 From 30 pounds this membership card provides free entry to every sports night throughout the year and a free filter coffee/breakfast tea in The Shed every Thursday following a Sports Night.", "2019-09-01 21:00:00", "2019-09-01 22:00:00","https://www.kclsu.org/asset/Event/8770/membership-card-002.jpg?thumbnail_width=720&thumbnail_height=720&resize_type=ResizeWidth");
 
