@@ -9,7 +9,6 @@
 ?>
 
 <?php
-    require_once('MatchHistory_functions.php');
     $matches = find_all_matches($id);
 ?>
 
