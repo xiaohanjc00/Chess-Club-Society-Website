@@ -1,36 +1,12 @@
-  h1{
-    color: #37474f;
-    text-decoration: overline;
-    text-align: center;
-  }
-  
-  h2 {
-    color: #37474f;
-    text-decoration: underline;
-    text-align: left;
-  }
-
-  h3{
-    color: #37474f;
-    text-decoration: underline;
-    text-align: center;
-  }
-
-  h3:hover{
-    color: #45a049;
-    text-decoration: underline;
-    text-align: center;
-  }
-
-  p{
-    color: #37474f;
-    text-indent: 25px;
-    font-size: 20px;
-  }
-  
-  
+ 
+h2 {
+  color: #37474f;
+  text-decoration: underline;
+  text-align: left;
+}
+ 
 .main {
-  font-size: 28px; /* Increased text to enable scrolling */
+  font-size: 16px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
 
