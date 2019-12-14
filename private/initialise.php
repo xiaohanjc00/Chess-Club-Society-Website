@@ -28,7 +28,7 @@
     require_once('query_functions_ratings.php');
     require_once('validation_functions.php');
     require_once('auth_functions.php');
-    require_once('query_functions_matchHistory');
+    require_once('query_functions_matchHistory.php');
     
     $db = db_connect();
     $errors = [];    
