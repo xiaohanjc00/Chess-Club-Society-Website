@@ -110,7 +110,7 @@
     }
 
     else if($_GET["add"] == "participant"){
-        insert_tournament_participant($_GET["userid"], $_GET["id"]);
+        insert_tournament_participant($_GET["userid"], $_GET['id']);
         echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';     
     }
 
@@ -151,7 +151,7 @@
                     if($play["Home"] != "not playing" && $play["Away"] != "not playing" ){
                         $matches['firstparticipantID'] = $play["Home"]["id"];
                         $matches['secondparticipantID'] = $play["Away"]["id"];
-                        $matches['tournamentID'] = $_GET["id"];
+                        $matches['tournamentID'] = $_GET['id'];
                         $matches['roundNumber'] = $count;
                         insert_tournament_matches($matches);
                     }
@@ -161,7 +161,7 @@
         }
 
         function generate_schedule(){
-            $participant = find_all_tournamentParticipants($_GET["id"]); 
+            $participant = find_all_tournamentParticipants($_GET['id']); 
             $members = [];
             if (mysqli_num_rows($participant) > 0) {
                 while($row = mysqli_fetch_assoc($participant)){
