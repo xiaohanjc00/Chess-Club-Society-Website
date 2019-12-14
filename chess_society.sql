@@ -69,14 +69,14 @@ insert into posts(articleTitle, articleDesc, articleDate, articleExpiry) values 
 4 The number of times he reached the World Championship final but didn't win \n
 2817 His peak rating \n
 15th His current world ranking \n 
-(News article found in : https://chess24.com/en/read/news/indian-chess-legend-vishy-anand-turns-50)", CURRENT_DATE(), "2020-10-20");
+(Source: https://chess24.com/en/read/news/indian-chess-legend-vishy-anand-turns-50)", CURRENT_DATE(), "2020-10-20");
 
 insert into posts(articleTitle, articleDesc, articleDate, articleExpiry) values ("Magnus Carlsen wins Chess World Championship 2018 after beating Fabiano Caruana in tie-breakers",
 "Magnus Carlsen retained his world chess crown after finally seeing off the challenge of American Fabiano Caruana in a best-of-four tie-breakers. \n
 Carlsen won the first three tie-breakers to end the impasse after the pair had drawn all 12 of their matches, something unprecedented in the 132-year history of the competition. \n
 The Norwegian grandmaster sealed the third defence of a world title that he first won in 2013, dominated the much faster format used to decide a drawn match. \n
 Carlsen also takes away the €1m (£880,000) top prize. \n
-(News article found in : https://www.independent.co.uk/sport/general/world-chess-championship-2018-magnus-carlsen-fabiano-caruana-a8656916.html)", CURRENT_DATE(), "2020-10-20");
+(Source: https://www.independent.co.uk/sport/general/world-chess-championship-2018-magnus-carlsen-fabiano-caruana-a8656916.html)", CURRENT_DATE(), "2020-10-20");
 
 insert into posts(articleTitle, articleDesc, articleDate, articleExpiry) values ("World Chess Championship: All you need to know about the most nail-biting sporting event right now", "Why should I care? \n
 The world’s poster boy of chess is taking on a Kremlin-backed Russian grandmaster on Wednesday in a match that is already stoking Cold War sentiment. \n
@@ -88,7 +88,7 @@ Karjakin, who was born in the Ukrainian Crimea, became a Russian citizen in 2009
 'I would describe him as a political opportunist,' said British grandmaster Nigel Short, speaking to The Guardian. 'Karjakin is totally backed by Putin and the Russian machine. The state wants him to do well.' \n
 Carlsen, who became a grandmaster at 13, won his first world championship in 2013, and has the highest chess rating in history. \n
 The 25-year-old G-Star Raw model, selected as one of Cosmopolitan’s sexiest men of 2013, was asked to be in JJ Abrams’ 2013 Star Trek Into Darkness movie, but could not get a US work permit in time for shooting. \n
-(News article found in : https://www.independent.co.uk/news/world/world-chess-championship-everything-need-to-know-explained-magnus-carlsen-a7447331.html)", CURRENT_DATE(), "2020-10-20");
+(Source: https://www.independent.co.uk/news/world/world-chess-championship-everything-need-to-know-explained-magnus-carlsen-a7447331.html)", CURRENT_DATE(), "2020-10-20");
 
 
 
@@ -177,15 +177,20 @@ DROP TABLE IF EXISTS `events`;
 CREATE TRIGGER expiryDateEvent BEFORE INSERT ON events
     FOR EACH ROW SET NEW.eventExpiry = IFNULL(NEW.eventExpiry,DATE_ADD(STR_TO_DATE(NEW.eventDate, '%Y-%m-%d'), INTERVAL 14 DAY));
 
+
 --add data to events table
-insert into events(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Opening Event 1", "Introducing the Guys Bar Sports Night Membership Card 19/20!
+
+-- Source: https://www.kclsu.org/ents/event/7069/
+insert into events(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Upcoming Event: Sports Night!", "Introducing the Guys Bar Sports Night Membership Card 19/20!
 From 30 pounds this membership card provides free entry to every sports night throughout the year and a free filter coffee/breakfast tea in The Shed every Thursday following a Sports Night.", "2019-09-01 21:00:00", "2019-09-01 22:00:00","https://www.kclsu.org/asset/Event/8770/membership-card-002.jpg?thumbnail_width=720&thumbnail_height=720&resize_type=ResizeWidth");
 
-insert into events(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Opening Event 2", "There are a huge number of ways that you could give your time to disability support charities across London,
+-- Source: https://www.kclsu.org/ents/event/7694/
+insert into events(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Upcoming Event: SPOTLIGHT", "There are a huge number of ways that you could give your time to disability support charities across London,
 and so to celebrate Disability History Month, here are three SPOTLIGHT opportunities to take a look at!
 You can find even more on our Volunteering Log or get in touch with volunteering@kclsu.org if there’s something else you’re interested in.", "2019-11-22 00:00:00", "2019-11-23 00:00:00","https://www.kclsu.org/asset/Event/6013/DisabilityHIstoryMonth2019-EventIcon-590x706.png?thumbnail_width=720&thumbnail_height=720&resize_type=ResizeWidth");
 
-insert into events(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Opening Event 3", "In recognition of Disability awareness month, we would like to warmly invite you to our upcoming event
+-- Source: https://www.kclsu.org/ents/event/7069/
+insert into events(eventTitle, eventDesc, eventDate, eventExpiry,eventImage) values ("Upcoming Event: Strive to Survive", "In recognition of Disability awareness month, we would like to warmly invite you to our upcoming event
 The Strive to Survive .We understand how tough it is for many first Generation/ WP students to have to go through unseen disabilities, mental health issues topped with further pressures of being
  the first in their family to go to uni or coming from a WP background. We understand the struggle! The event will be an opportunity to share your experiences and be engulfed in the warm embrace of
  those who have survived. This is also an opportunity to detox from work and relax an a warm and friendly environment with fellow students who understand your struggles.", "2019-12-04 16:00:00", "2019-12-04 18:00:00","https://www.kclsu.org/asset/Event/6013/DisabilityHIstoryMonth2019-EventIcon-590x706.png?thumbnail_width=720&thumbnail_height=720&resize_type=ResizeWidth");

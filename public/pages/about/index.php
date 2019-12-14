@@ -21,17 +21,16 @@
                 while more experienced players can test their skills against
                 worthy opposition.
             </p>
+            <br>
+            <a href="<?php echo url_for('pages/sign_up.php'); ?>">Click here to become a member today!</a>
 
-            <!--Sub-Image in relation with the text above-->
-            <img id="subImage" src="<?php echo url_for('Images/Chess.jpg'); ?>">
+            
+            <a href="<?php echo url_for('pages/sign_up.php'); ?>">
+                <!--Sub-Image in relation with the text above-->
+                <img id="subImage" src="<?php echo url_for('Images/Chess.jpg'); ?>">
+            </a>
 
         <br>
-
-        <!--Other information essential for the home page-->
-        <h2 style="font-size: 30px;">Upcoming events</h2>
-        <li>........</li>
-        <li>........</li>
-        <li>........</li>
         
     </div>
 
