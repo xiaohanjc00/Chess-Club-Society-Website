@@ -14,7 +14,7 @@ CREATE TABLE `users` (
   `gender` CHAR(1) NOT NULL, -- 'F' OR 'M' OR 'O'
   `phone` VARCHAR(15) NOT NULL,
   `address` VARCHAR(255),
-  `rating` INT(3) NOT NULL DEFAULT 100, -- chess rating
+  `rating` INT(4) NOT NULL DEFAULT 100, -- chess rating
   `email` VARCHAR(255),
   `username` VARCHAR(255),
   `hashed_password` VARCHAR(255),
@@ -24,18 +24,20 @@ CREATE TABLE `users` (
 ALTER TABLE users ADD INDEX index_username (username);
 
 -- add data to users table
-INSERT INTO users(admin, first_name, last_name, dob, gender, phone, address, email, username, hashed_password) VALUES
-    (1, 'Joe','Baker','1998-03-02','M',02086221092,'20 Richmond Avenue, Croydon CR46YW','jo@bakercake.com','joebaker', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (1, 'Jane','Black','1978-03-10','F',02086777092,'21 Richmond Avenue, Croydon CR4 6YW','up@down.com','chessMaster', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (1, 'Jenny','Marston','1938-05-20','F',02086228762,'345 Violet Street Mitcham MH4 6YW','jjjj_y@last.com','chessJJ', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Jack','Wilson','1989-04-22','M',07908365587,'29 West Street, Barnet N66YW','stoyupol@aol.com','JudeKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'John','Stom','1999-04-22','M',0790836541,'31 New Close, Barnet NW4 TSW','stomjo@aol.com','stomjohn', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Zayn','Marsh','1999-04-22','M',07908365889,'19 Lumlay Drive, Kensington K1T 4FR','marsh@hotmail.com','zaynmarsh', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Harry','Stiles','1999-04-22','O',07908365654,'20 Fort Lane, West Dulwich','direction@bt.com','harryKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Paul','North','2002-04-22','M',07907365321,'20 West Street, Birmingham B66YW','paul@gmail.com','BishopWin', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Anna','West','1984-04-22','F',07908365123,'Flat 35, 1 Storm Drain, East Ruislip','anna.1234@kcl.ac.uk','WestBestRook', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Paula','Smith','2000-04-22','F',07966345687,'4 Knight Close, East Ham E11 4TT','psmith@bt.com','SmithCheckMate', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
-    (0, 'Michelle','Xu','1991-08-22','F',07449665587,'2 North Close, West Brompton NW1 6WQ','xum@gmail.com','QueenOfChess', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi');
+INSERT INTO users(admin, system_admin, first_name, last_name, dob, gender, phone, address, rating, email, username, hashed_password) VALUES
+    (1, 1, 'Joe','Baker','1998-03-02','M',02086221092,'20 Richmond Avenue, Croydon CR46YW', 2040, 'jo@bakercake.com','joebaker', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi');
+
+INSERT INTO users(admin, first_name, last_name, dob, gender, phone, address, rating, email, username, hashed_password) VALUES
+    (1, 'Jane','Black','1978-03-10','F',02086777092,'21 Richmond Avenue, Croydon CR4 6YW',2100,'up@down.com','chessMaster', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (1, 'Jenny','Marston','1938-05-20','F',02086228762,'345 Violet Street Mitcham MH4 6YW',1600,'jjjj_y@last.com','chessJJ', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Jack','Wilson','1989-04-22','M',07908365587,'29 West Street, Barnet N66YW',1300,'stoyupol@aol.com','JudeKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'John','Stom','1999-04-22','M',0790836541,'31 New Close, Barnet NW4 TSW',1700,'stomjo@aol.com','stomjohn', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Zayn','Marsh','1999-04-22','M',07908365889,'19 Lumlay Drive, Kensington K1T 4FR',304,'marsh@hotmail.com','zaynmarsh', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Harry','Stiles','1999-04-22','O',07908365654,'20 Fort Lane, West Dulwich',250,'direction@bt.com','harryKnight', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Paul','North','2002-04-22','M',07907365321,'20 West Street, Birmingham B66YW',400,'paul@gmail.com','BishopWin', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Anna','West','1984-04-22','F',07908365123,'Flat 35, 1 Storm Drain, East Ruislip',280,'anna.1234@kcl.ac.uk','WestBestRook', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Paula','Smith','2000-04-22','F',07966345687,'4 Knight Close, East Ham E11 4TT',300,'psmith@bt.com','SmithCheckMate', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi'),
+    (0, 'Michelle','Xu','1991-08-22','F',07449665587,'2 North Close, West Brompton NW1 6WQ',2100,'xum@gmail.com','QueenOfChess', '$2y$10$1CgBgnp06.htQ2psJ/j7puESFfhVDz6OKR4SBRXDZV3Vzhtgt1rJi');
 
 -- table to record banned user emails
 CREATE TABLE `bannedEmails` (
@@ -61,6 +63,11 @@ CREATE TRIGGER expiryDate BEFORE INSERT ON posts
 
 
 -- add data to posts table
+insert into posts(articleTitle, articleDesc, articleDate, articleExpiry) values ("Record attendance at Christmas lunch", "Thank you to everyone who came to our special festive chess society lunch! \n
+We have enjoyed all the fun socials and chess games this term \n
+Looking forward to seeing you back for more chess in the new year! \n
+Have a great winter break and happy new year celebrations! \n", CURRENT_DATE(), "2020-01-10");
+
 insert into posts(articleTitle, articleDesc, articleDate, articleExpiry) values ("Indian Chess legend Vishy Anand turns 50", "Viswanathan Anand turned 50 today, Wednesday 11th December 2019. To celebrate, chess24’s FM Joachim Iglesias takes a look at some of the highlights of the incredible career of the Indian superstar, who became his country’s first grandmaster before going on to win the World Championship title in all possible formats. \n 50 His age
 11 December 1969 His date of birth \n
 6 The age at which Vishy learned to play chess \n
@@ -156,8 +163,8 @@ CREATE TABLE `tournamentMatches` (
     REFERENCES users(id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  FOREIGN KEY (`secondparticipantID`)
-    REFERENCES `tournament`(`tournamentID`)
+  FOREIGN KEY (secondparticipantID)
+    REFERENCES users(id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
