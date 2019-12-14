@@ -59,8 +59,8 @@ CREATE TABLE `posts` (
 CREATE TRIGGER expiryDate BEFORE INSERT ON posts
     FOR EACH ROW SET NEW.articleExpiry = IFNULL(NEW.articleExpiry,DATE_ADD(STR_TO_DATE(NEW.articleDate, '%Y-%m-%d'), INTERVAL 14 DAY));
 
--- add data to posts table
 
+-- add data to posts table
 insert into posts(articleTitle, articleDesc, articleDate, articleExpiry) values ("Indian Chess legend Vishy Anand turns 50", "Viswanathan Anand turned 50 today, Wednesday 11th December 2019. To celebrate, chess24’s FM Joachim Iglesias takes a look at some of the highlights of the incredible career of the Indian superstar, who became his country’s first grandmaster before going on to win the World Championship title in all possible formats. \n 50 His age
 11 December 1969 His date of birth \n
 6 The age at which Vishy learned to play chess \n

@@ -1,6 +1,9 @@
 <?php require_once('../../private/initialise.php'); ?>
 
 <?php
+    if (is_logged_in()) {
+        redirect_to(url_for('pages/profile/index.php'));
+    }
     if(is_post_request()) {
         $user = [];
         $user['first_name'] = $_POST['first_name'] ?? '';
