@@ -1,7 +1,7 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-  <?php
+<?php
     if($_GET["delete"] == "tournament"){
         try {
             $article = find_tournament_by_id($_GET['id']);
@@ -55,4 +55,4 @@
     }
 ?>
   
-  <?php include(SHARED_PATH . '/footer.php'); ?>
+<?php include(SHARED_PATH . '/footer.php'); ?>

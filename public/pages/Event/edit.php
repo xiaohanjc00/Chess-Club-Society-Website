@@ -1,65 +1,50 @@
 <?php require_once(realpath(dirname(__FILE__) . '/../../..'). '/private/initialise.php'); ?>
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-<?php 
-
-    function editImage(){
-        $id = isset($_GET['id']) ? $_GET['id'] : '';
-        try {
-            update_event_image($_POST["link"], $id);
-        } catch(PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    
-    function editTitle(){
-        $id = isset($_GET['id']) ? $_GET['id'] : '';
-        echo $id;
-         try {
-         update_event_title($_POST["title"], $id);
-       } catch(PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    
-    function editDescription(){
-        $id = isset($_GET['id']) ? $_GET['id'] : '';
-         try {
-             update_event_description($_POST["description"], $id);
-        } catch(PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    
-?>
 <?php
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'>  " ;
-    echo "Image Link: <input type='text' name='link' />  ";
-    echo "<input type='submit' name='image' value ='Add/Edit image'/> <br>";
-    echo "</form>";
+    if(is_post_request()) {
+        $event = [];
+        $event['event_title'] = $_POST['event_title'] ?? '';
+        $event['event_description'] = $_POST['event_description'] ?? '';
+        $event['image_link'] = $_POST['image_link'] ?? '';
+        $event['expiry_date'] = $_POST['expiry_date'] ?? '';
+        $id = isset($_GET['id']) ? $_GET['id'] : '';
+        $result = update_event($event, $id);
 
-    echo "<form  action= edit.php?id=".$_GET['id'] ."  method='post'> ";  
-    echo "Title: <input type='text' name='title' />  ";
-    echo "<input type='submit' name='editTitle' value ='Edit title'/> <br>";
-    echo "</form>";
+        if($result === true) {
+            $_SESSION['message'] = 'New event successfully created!';
+            echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+        } 
+        else {
+            $errors = $result;
+        }
 
-    echo "<form  action=edit.php?id=".$_GET['id'] ." method='post'> ";
-    echo "Description: <input type='text' name='description' />"  ;
-    echo "<input type='submit' name='editDescription' value ='Edit description'/> <br>";
-    echo "</form>";
-
-    echo "<form  action='index.php' method='post'> ";
-    echo "<input type='submit' name='done' value ='Done'/> <br>";
-    echo "</form>";
-
-    if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['image'] ){
-        editImage();
+    } 
+    else {
+        $event = [];
+        $event['event_title'] = '';
+        $event['event_description'] = '';
+        $event['image_link'] = '';
+        $event['expiry_date'] = '';
     }
-    else if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['editTitle'] ) {
-        editTitle();
-    }
-    else if($_SERVER['REQUEST_METHOD']=='POST' && $_POST['editDescription']){
-        editDescription();
-    }
-    
-    ?>
+?>
+
+<?php
+    echo '<div class="main">' ;
+    echo '<h4>Edit a Chess News event now!</h4>';
+    echo '<p>Please fill in the forms:</p>';  
+
+    echo display_errors($errors); 
+
+    echo '<form width="800px" margin="auto"  action="edit.php?id='. $_GET['id'] .'" method="post">';
+    echo '<dl> <dt>event Title:</dt><dd><input type="text" name="event_title" value="'.$event['event_title'] . '" /></dd> </dl>' ;
+    echo '<dl> <dt>event Description:</dt><dd><input type="text" name="event_description" value="'.$event['event_description'] . '" /></dd> </dl>' ;
+    echo '<dl> <dt>Image Link:</dt><dd><input type="text" name="image_link" value="'.$event['image_link'] . '" /></dd> </dl>' ;
+    echo '<dl> <dt>Expiry date:</dt><dd><input type="date" name="expiry_date" value="'.$event['expiry_date'] . '" /></dd> </dl>' ;
+
+    echo '<div> <input type="submit" value="Edit event" /> </div>';
+    echo '</form>';
+    echo '</div>';
+?>
+
+<?php include(SHARED_PATH . '/footer.php'); ?>
