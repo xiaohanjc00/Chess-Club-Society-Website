@@ -26,7 +26,7 @@
 ?>
 
 <?php
-    echo '<div >' ;
+    echo '<div class="main" >' ;
     echo '<h4>Edit a tournament now!</h4>';
     echo '<p>Please fill in the forms:</p>';  
 
