@@ -31,12 +31,7 @@
 
     <link rel="stylesheet" href="../stylesheets/newsStyle.css">
 
-    <div class="header">
-        <h2>Events</h2>
-    </div>
-
-
-    <div >
+    <div class="main" style="padding:5%;">
         <h4>Post a new event now!</h4>
         <p>Please fill in the forms:</p>
 

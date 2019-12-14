@@ -101,3 +101,7 @@
 #line-break-and-tab {
   white-space: pre-wrap;
 }
+
+input{
+  font-size: 16px;
+}
