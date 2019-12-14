@@ -88,5 +88,6 @@
             </div>
         </div>
     </div>
+    </div>
    
 <?php include(SHARED_PATH . '/footer.php'); ?>

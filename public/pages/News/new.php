@@ -31,12 +31,8 @@
 
     <link rel="stylesheet" href="../stylesheets/newsStyle.css">
 
-    <div class="header">
-        <h2>News</h2>
-    </div>
+    <div class="main">
 
-
-    <div >
         <h4>Write a new Chess News article now!</h4>
         <p>Please fill in the forms:</p>
 

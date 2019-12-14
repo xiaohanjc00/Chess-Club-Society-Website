@@ -30,7 +30,7 @@
 ?>
 
 <?php
-    echo '<div >' ;
+    echo '<div class="main">' ;
     echo '<h4>Edit a Chess News event now!</h4>';
     echo '<p>Please fill in the forms:</p>';  
 

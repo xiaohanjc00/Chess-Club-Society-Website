@@ -32,11 +32,7 @@
 
         echo "<link rel='stylesheet' href='../stylesheets/newsStyle.css'>";
 
-        echo "<div class='header'>";
-        echo "<h2>Tournament</h2>";
-        echo "</div>";
-
-        echo '<div >' ;
+        echo '<div class="main">' ;
         echo '<h4>Create a new tournament!<h4>';
         echo '<p>Please fill in the forms:</p>';  
 

@@ -35,15 +35,15 @@
     }
 ?>
 
-<?php $page_title = 'Edit Profile'; ?>
+<?php $page_title = 'Edit Profile';?>
 
 <?php include(SHARED_PATH . '/header.php'); ?>
 
-    <div>
+    <div class="main">
         <a href="<?php echo url_for('pages/profile/index.php'); ?>">&laquo; Back to Profile</a>
 
         <div> 
-
+            <br>
             <h2>Edit Profile</h2>
 
             <?php echo display_errors($errors); ?>

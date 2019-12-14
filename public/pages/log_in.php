@@ -40,7 +40,7 @@
 
 ?>
 
-    <div>
+    <div class="main">
         <h2>Log in</h2>
 
         <link rel="stylesheet" media="all" href="<?php echo url_for('pages/stylesheets/login.css'); ?>"/>
@@ -55,7 +55,7 @@
               <input type="Password" name="password" value="" >
               <input type="submit" name="submit" value="Submit" />
         </form>
-        
+
         <a href="<?php echo url_for('pages/sign_up.php'); ?>">Sign up</a>
     </div>
 

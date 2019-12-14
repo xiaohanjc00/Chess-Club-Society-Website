@@ -19,16 +19,18 @@
 
 <?php echo display_session_message(); ?>
 
-    <div>
-        <div>
-              <dl><dt>First name: </dt><dd><?php echo $first_name ?></dd></dl>
-              <dl><dt>Last name: </dt><dd><?php echo $last_name ?></dd></dl>
-              <dl><dt>Chess rating: </dt><dd><?php echo $rating ?></dd></dl>
-              <dl><dt>Date of birth: </dt><dd><?php echo $dob ?></dd></dl>
-              <dl><dt>Gender: </dt><dd><?php echo $gender ?></dd></dl>
-              <dl><dt>Phone number: </dt><dd><?php echo $phone ?></dd></dl>
-              <dl><dt>Mailing address: </dt><dd><?php echo $address ?></dd></dl>
-              <dl><dt>Email: </dt><dd><?php echo $email ?></dd></dl>
+    <div class="main" style="padding:20px;padding-top:5%;padding-left:10%;">
+        <div>  
+            <h1><?php echo $first_name ?>  <?php echo $last_name ?></h1>
+
+            <dl><dt>First name: </dt><dd><?php echo $first_name ?></dd></dl>
+            <dl><dt>Last name: </dt><dd><?php echo $last_name ?></dd></dl>
+            <dl><dt>Chess rating: </dt><dd><?php echo $rating ?></dd></dl>
+            <dl><dt>Date of birth: </dt><dd><?php echo $dob ?></dd></dl>
+            <dl><dt>Gender: </dt><dd><?php echo $gender ?></dd></dl>
+            <dl><dt>Phone number: </dt><dd><?php echo $phone ?></dd></dl>
+            <dl><dt>Mailing address: </dt><dd><?php echo $address ?></dd></dl>
+            <dl><dt>Email: </dt><dd><?php echo $email ?></dd></dl>
         </div>
 
         <div>
