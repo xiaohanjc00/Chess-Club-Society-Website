@@ -41,7 +41,7 @@
                     echo "<a href=" . url_for('pages/log_out.php'). ">Log Out</a>";
                 }
                 else{
-                    echo "<a href=" . url_for('pages/log_in.php'). ">Login</a>";
+                    echo "<a href=" . url_for('pages/log_in.php'). ">Login / Sign up</a>";
                 }
             ?>
         </div>
