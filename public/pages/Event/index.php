@@ -48,11 +48,10 @@
                                     echo '</div>';
                                 }
 
-                                echo '<h1><a href="show.php?id='.$row['eventID'].'">'.$row['eventTitle'].'</a></h1>';
+                                echo '<h1>'. $row['eventTitle'] .'</h1>';
                                 echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['eventDate'])).'</p>';
                                 echo '<img class="fakeimg" src="' .$row['eventImage'] .'"">';
-                                echo '<p>'. get_words($row['eventDesc']).'</p>';                
-                                echo '<p><a href="show.php?id='.$row['eventID'].'">Read More</a></p>';                
+                                echo '<p>'. get_words($row['eventDesc']).'</p>';           
                                 echo '</div>';
                             }
                         }
