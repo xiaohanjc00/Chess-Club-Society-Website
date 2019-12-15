@@ -23,7 +23,7 @@ if($_GET["show"] == "match"){
     echo '<thead>';
         echo '<tr>';
         echo '<th scope="col">First Participant</th>';
-        echo '<th scope="col">Second Participant</th>';			
+        echo '<th scope="col">Second Participant</th>';
         echo '<th scope="col"> Winner</th>';
         echo '</tr>';
     echo '</thead>';
@@ -38,7 +38,7 @@ if($_GET["show"] == "match"){
                 echo '<thead>';
                     echo '<tr>';
                     echo '<th scope="col">First Participant</th>';
-                    echo '<th scope="col">Second Participant</th>';			
+                    echo '<th scope="col">Second Participant</th>';
                     echo '<th scope="col"> Winner</th>';
                     echo '</tr>';
                 echo '</thead>';
@@ -47,15 +47,15 @@ if($_GET["show"] == "match"){
             $first_user = find_user_by_id($row["firstparticipantID"]);
 
             $second_user = find_user_by_id($row["secondparticipantID"]);
-  
-            
+
+
             echo "<tr>";
             echo "<th scope='col'>". $first_user['first_name'] . " " . $first_user['last_name'] . "</th>";
             echo "<th scope='col'>". $second_user['first_name'] . " " . $second_user['last_name'] . "</th>";
             if(is_null($row["roundWinner"])){
                 echo "<th scope='col'> Winner not announced </th>";
                 if(is_logged_in() && user_is_admin()){
-                    echo '<th scope = "col">'; 
+                    echo '<th scope = "col">';
                     if(($row["roundNumber"] != 1 && !find_previous_round_winners($row["tournamentID"],( $row["roundNumber"]-1)) OR $row["roundNumber"] == 1)){
                         echo '<form method="post">';
                             echo '<input type="radio" name="winner" value="'. $row["firstparticipantID"] .'"> First Participant   ';
@@ -68,7 +68,7 @@ if($_GET["show"] == "match"){
             }else{
                 $match_winner = find_user_by_id($row["roundWinner"]);
                 echo "<th scope='col'>". $match_winner["first_name"]. " " .$match_winner["last_name"]. "</th>";
-                
+
             }
             echo "</tr>";
                 if(isset($_POST['set_winner'.$row["firstparticipantID"]. $row["secondparticipantID"]])) {
@@ -102,14 +102,14 @@ if($_GET["show"] == "match"){
                     $match['tournamentID'] = '';
                     $match['loser'] = '';
                 }
-            
+
             $round = $row["roundNumber"];
-         
+
     }
     echo '</tbody>';
     echo '</table>';
-    
-    if(!find_all_tournament_winners($_GET['id']) && !tournament_ratings_updated($_GET['id'])){
+
+    if(is_logged_in() && user_is_admin() && !find_all_tournament_winners($_GET['id']) && !tournament_ratings_updated($_GET['id'])){
         set_tournament_winner($_GET['id'] );
         echo '<form width="800px" margin="auto" action="show.php?update=ratings&&show=match&&id='. $_GET['id'] .'" method="post">';
         echo '<div><input type="submit" value="Update all participant ratings" /></div>';
