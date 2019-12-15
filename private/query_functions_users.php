@@ -322,7 +322,7 @@
       function check_banned($email){
         global $db; 
         
-        $sql = 'SELECT * FROM bannedemails;';
+        $sql = 'SELECT * FROM bannedEmails;';
   
         $result = mysqli_query($db, $sql);
   

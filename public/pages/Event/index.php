@@ -6,7 +6,7 @@
 
     <div class="main">
         <div class="header">
-            <h2 class="header_title">Opening Events</h2>
+            <h2 class="header_title">Events</h2>
         </div>
 
         <div class="row">

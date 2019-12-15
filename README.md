@@ -2,7 +2,7 @@
 
 Team Albany
 
-Members of the team:
+Members:
   - Zeineb Bouchamaoui 
   - Antoine Gosset
   - Xiaohan Jiang Chen
@@ -14,25 +14,13 @@ Members of the team:
   ____________________________________________
   USER ACCESS CREDENTIALS:
   
-  System Administrator: Joe Baker
+  System Administrator: Joe Baker  |  Username: joebaker  |  Password: JOE123:chess-soc1
   
-  Username: joebaker
   
-  Password: the1:THEtheEHT
-  __
+  Administrator: Jenny Marston  |  Username: chessJJ  |  Password: QUEEN-of-CHESS-2000
   
-  Administrator: Jane Black
   
-  Username: chessMaster
-  
-  Password: 
-  __
-  
-  Member: Anna West
-  
-  Username: WestBestRook
-  
-  Password: 
+  Member: Zayn Marsh  |  Username: zaynmarsh  |  Password: Z-g00D_at_chess
   
   ____________________________________________
   
