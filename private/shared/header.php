@@ -37,6 +37,10 @@
                     if(user_is_admin()){
                         echo "<a href=" . url_for('pages/members/members.php'). ">Member List</a>";
                     }
+                    if(user_is_system_admin()){
+                        echo "<a href=" . url_for('pages/members/all_members.php'). ">Members and Officers List</a>";
+                    }
+
                     echo "<a href=" . url_for('pages/profile/index.php'). ">Profile</a>";
                     echo "<a href=" . url_for('pages/log_out.php'). ">Log Out</a>";
                 }

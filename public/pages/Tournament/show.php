@@ -56,7 +56,7 @@ if($_GET["show"] == "match"){
                 echo "<th scope='col'> Winner not announced </th>";
                 if(is_logged_in() && user_is_admin()){
                     echo '<th scope = "col">';
-                    if(($row["roundNumber"] != 1 && !find_previous_round_winners($row["tournamentID"],( $row["roundNumber"]-1)) OR $row["roundNumber"] == 1)){
+                    if($currentdatetime1  >= $tournamentDate && (($row["roundNumber"] != 1 && !find_previous_round_winners($row["tournamentID"],( $row["roundNumber"]-1)) OR $row["roundNumber"] == 1))){
                         echo '<form method="post">';
                             echo '<input type="radio" name="winner" value="'. $row["firstparticipantID"] .'"> First Participant   ';
                             echo '<input type="radio" name="winner" value="'. $row["secondparticipantID"] .'" > Second Participant';
@@ -116,7 +116,7 @@ if($_GET["show"] == "match"){
         echo '</form>';
         //update_ratings($_GET["id"]);
     }
-    else{
+    else if(!find_all_tournament_winners($_GET['id']) ){
         $winner = find_user_by_id(get_tournament_winner($_GET["id"]));
         $first_runner_up = find_user_by_id(get_tournament_runner_up($_GET["id"]) );
         echo '<p> The winner of this tournament is :'. $winner['first_name'] . ' ' . $winner['last_name'] . '</p>';

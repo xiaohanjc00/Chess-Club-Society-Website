@@ -11,7 +11,9 @@ require_admin_login();
   <table class="table table-hover table-dark">	<!-- style="width:100%" -->
   <thead>
     <tr>
+      <th scope="col">Username</th>
       <th scope="col">Name</th>
+      <th scope="col">Email</th>
       <th scope="col">Address</th>				
       <th scope="col">Phone Number</th>
       <th scope="col">Gender</th>
@@ -26,7 +28,9 @@ require_admin_login();
             while($row = mysqli_fetch_assoc($members)){
               
                 echo "<tr>";
+                  echo "<th scope='col'>". $row["username"]. "</th>";
                   echo "<th scope='col'>". $row["first_name"]. " " . $row["last_name"]."</th>";
+                  echo "<th scope='col'>". $row["email"]. "</th>";
                   echo "<th scope='col'>". $row["address"]. "</th>";
                   echo "<th scope='col'>". $row["phone"]. "</th>";
                   echo "<th scope='col'>". $row["gender"]. "</th>";
@@ -44,6 +48,8 @@ require_admin_login();
                 if(isset($_POST["ban". $row["id"] ])) {
                   ban_user($_POST["bannedemail"]);
                   delete_user($_POST["bannedid"]);
+                  $secondsWait = 0;
+                  echo '<meta http-equiv="refresh" content="'.$secondsWait.'">';
                 }
             }
         }
