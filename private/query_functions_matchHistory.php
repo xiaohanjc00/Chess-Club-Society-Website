@@ -17,7 +17,7 @@
 
         $sql = "SELECT first_name ";
         $sql .= "FROM users ";
-        $sql .= "WHERE id = '".$member_id. "'; ";
+        $sql .= "WHERE id = ".$member_id. "; ";
 
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);

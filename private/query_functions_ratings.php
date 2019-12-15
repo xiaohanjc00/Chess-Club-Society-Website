@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	// functions for updating ratings after tournaments:
 
@@ -17,7 +17,7 @@
         }
         return false;
     }
-    
+
     function tournament_ratings_updated($id) {
         global $db;
         $sql = "SELECT * FROM tournament ";
@@ -55,7 +55,7 @@
             update_to_minimum($loser_id);
         } else{
             update_rating($loser_id, $winner_id, 0);
-        }       
+        }
     }
 
     function update_rating($user_id, $opponent_id, $score) {
@@ -95,14 +95,14 @@
             }
         }
 
-        
+
     }
 
     function update_to_minimum($user_id) {
         global $db;
 
         $sql = "UPDATE users SET ";
-        $sql .= "rating = 100"; 
+        $sql .= "rating = 100";
         $sql .= " WHERE id = '" . db_escape($db, $user_id) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);
@@ -119,7 +119,7 @@
     function get_match_number($id){
         global $db;
         $sql = "SELECT firstparticipantID, count(*) ";
-        $sql .= "FROM tournamentmatches";
+        $sql .= "FROM tournamentMatches";
         $sql .= " WHERE firstparticipantID = '" . $id . "' ";
         $sql .= "GROUP BY firstparticipantID;";
         $result = mysqli_query($db, $sql);
@@ -127,7 +127,7 @@
         $match1 = mysqli_fetch_assoc($result);
         mysqli_free_result($result);
         $sql = "SELECT secondparticipantID, count(*) ";
-        $sql .= "FROM tournamentmatches";
+        $sql .= "FROM tournamentMatches";
         $sql .= " WHERE secondparticipantID = '" . $id . "' ";
         $sql .= "GROUP BY secondparticipantID;";
         $result = mysqli_query($db, $sql);
@@ -164,14 +164,14 @@
         }
         // tournament complete: all match data has been entered
         return true;
-    }    
+    }
 
     function get_elo($user_id, $tournament_id){
         global $db;
 
         $sql = "SELECT firstparticipantID, firstparticipantoldelo, firstparticipantnewelo, roundNumber FROM tournamentMatches ";
         $sql .= "WHERE firstparticipantID = '" . db_escape($db, $user_id) . "' AND ";
-        $sql .= "tournamentID = '" . db_escape($db, $tournament_id) . "' ";
+        $sql .= "tournamentID = " . db_escape($db, $tournament_id) . " ";
         $sql .= "ORDER BY roundNumber DESC LIMIT 1";
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
@@ -179,24 +179,25 @@
 
         $sql = "SELECT secondparticipantID, secondparticipantoldelo, secondparticipantnewelo, roundNumber FROM tournamentMatches ";
         $sql .= "WHERE secondparticipantID = '" . db_escape($db, $user_id) . "' AND ";
-        $sql .= "tournamentID = " . db_escape($db, $tournament_id) . "' ";
+        $sql .= "tournamentID = " . db_escape($db, $tournament_id) . " ";
         $sql .= "ORDER BY roundNumber DESC LIMIT 1";
+
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
         $secondparticipant = mysqli_fetch_assoc($result);
-        
+
         if($firstparticipant['roundNumber'] < $secondparticipant['roundNumber']){
             $rating['before'] = $secondparticipant['secondparticipantoldelo'];
             $rating['after'] = $secondparticipant['secondparticipantnewelo'];
-            
+
             return $rating;
         } else {
             $rating['before'] = $firstparticipant['firstparticipantoldelo'];
             $rating['after'] = $firstparticipant['firstparticipantnewelo'];
-            
+
             return $rating;
         }
-        
+
     }
 
 ?>

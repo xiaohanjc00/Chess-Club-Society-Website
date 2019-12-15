@@ -4,8 +4,8 @@
     if(!isset($_GET['id'])) {
         redirect_to(url_for('../profile/index.php'));
     }
-    
-    $id = $_GET['id'];   
+
+    $id = $_GET['id'];
     $matches = find_all_matches($id);
 ?>
 
@@ -37,7 +37,7 @@
 
                         $name = (get_member_name($row["roundWinner"])->fetch_assoc());
                         echo "<th scope='col'>". $name["first_name"]. "</th>";
-                        
+
                         $rating = get_elo($id,  $row["tournamentID"]);
                         echo "<th scope='col'>". $rating['before']. "</th>";
                         echo "<th scope='col'>". $rating['after']. "</th>";

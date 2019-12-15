@@ -12,7 +12,7 @@
             }
 
         }
-        
+
         $tournamentMatch = find_all_tournamentMatches($_GET['id']);
         $round = 1;
         $currentTournament = find_tournament_by_id($_GET['id']);
@@ -26,7 +26,7 @@
         echo '<thead>';
         echo '<tr>';
         echo '<th scope="col">First Participant</th>';
-        echo '<th scope="col">Second Participant</th>';			
+        echo '<th scope="col">Second Participant</th>';
         echo '<th scope="col"> Winner</th>';
         echo '</tr>';
         echo '</thead>';
@@ -41,7 +41,7 @@
                 echo '<thead>';
                 echo '<tr>';
                 echo '<th scope="col">First Participant</th>';
-                echo '<th scope="col">Second Participant</th>';			
+                echo '<th scope="col">Second Participant</th>';
                 echo '<th scope="col"> Winner</th>';
                 echo '</tr>';
                 echo '</thead>';
@@ -52,7 +52,7 @@
 
             $second_user = find_user_by_id($row["secondparticipantID"]);
 
-            
+
             echo "<tr>";
             echo "<th scope='col'>". $first_user['first_name'] . " " . $first_user['last_name'] . "</th>";
             echo "<th scope='col'>". $second_user['first_name'] . " " . $second_user['last_name'] . "</th>";
@@ -61,7 +61,7 @@
                 echo "<th scope='col'> Winner not announced </th>";
 
                 if(is_logged_in() && user_is_admin()){
-                    echo '<th scope = "col">'; 
+                    echo '<th scope = "col">';
 
                     if($currentdatetime1  >= $tournamentDate && (($row["roundNumber"] != 1 && !find_previous_round_winners($row["tournamentID"],( $row["roundNumber"]-1)) OR $row["roundNumber"] == 1))){
                         echo '<form method="post">';
@@ -77,7 +77,7 @@
             }
             else{
                 $match_winner = find_user_by_id($row["roundWinner"]);
-                echo "<th scope='col'>". $match_winner["first_name"]. " " .$match_winner["last_name"]. "</th>"; 
+                echo "<th scope='col'>". $match_winner["first_name"]. " " .$match_winner["last_name"]. "</th>";
             }
 
             echo "</tr>";
@@ -105,14 +105,14 @@
                 if($result === true) {
                     $secondsWait = 0;
                     echo '<meta http-equiv="refresh" content="'.$secondsWait.'">';
-                } 
+                }
 
                 else {
                     $errors = $result;
                 }
 
-            } 
-            
+            }
+
             else {
                 $match = [];
                 $match['firstparticipantID'] = '';
@@ -123,9 +123,9 @@
                 $match['tournamentID'] = '';
                 $match['loser'] = '';
             }
-            
+
             $round = $row["roundNumber"];
-            
+
         }
 
         echo '</tbody>';
@@ -143,7 +143,7 @@
             echo '<p> The winner of this tournament is :'. $winner['first_name'] . ' ' . $winner['last_name'] . '</p>';
             echo '<p> The first runner up of this tournament is :'. $first_runner_up['first_name'] . ' ' . $first_runner_up['last_name'] . '</p>';
         }
-        
+
     }
 
     else if($_GET["show"] == "participant"){
