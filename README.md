@@ -20,7 +20,7 @@ Members:
   Administrator: Jenny Marston  |  Username: chessJJ  |  Password: QUEEN-of-CHESS-2000
   
   
-  Member:   |  Username: zaynmarsh  |  Password: Z-g00D_at_chess
+  Member: Zayn Marsh  |  Username: zaynmarsh  |  Password: Z-g00D_at_chess
   
   ____________________________________________
   
