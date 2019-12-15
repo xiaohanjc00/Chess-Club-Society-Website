@@ -36,7 +36,7 @@
         echo '<input type="text" name="organizer" value="'.$tournament['organizer'] . '" /></dd> </dl>' ;
    
        
-        $admins = find_admins_not_organisers($_GET['id']);
+        $admins = find_admins($_GET['id']);
 
         echo "<select name='coorganizer'>";
         if (mysqli_num_rows($admins) > 0) {
