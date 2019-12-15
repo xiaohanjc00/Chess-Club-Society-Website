@@ -68,7 +68,6 @@ if($_GET["show"] == "match"){
             }else{
                 $match_winner = find_user_by_id($row["roundWinner"]);
                 echo "<th scope='col'>". $match_winner["first_name"]. " " .$match_winner["last_name"]. "</th>";
-
             }
             echo "</tr>";
                 if(isset($_POST['set_winner'.$row["firstparticipantID"]. $row["secondparticipantID"]])) {
