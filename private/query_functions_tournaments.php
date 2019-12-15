@@ -198,7 +198,7 @@
   function find_organizers_by_tournament_id($id) {
     global $db;
     global $db;
-    $sql = "SELECT id, first_name, last_name FROM users, tournamentcoorganizers WHERE tournamentID = ". $id." AND ";
+    $sql = "SELECT id, first_name, last_name FROM users, tournamentCoOrganizers WHERE tournamentID = ". $id." AND ";
     $sql .= "id =  organizerID;";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -470,7 +470,7 @@
     $sql = "SELECT id, first_name FROM users WHERE admin = 1 AND ";
     $sql .= "id NOT IN ";
     $sql .= "(SELECT organizerID 
-      FROM tournamentcoorganizers WHERE tournamentID = ". $id . ")";
+      FROM tournamentCoOrganizers WHERE tournamentID = ". $id . ")";
     $sql .= "AND id NOT IN ";
     $sql .= "(SELECT tournamentOrganizer FROM tournament WHERE tournamentID = ". $id.");";
     $result = mysqli_query($db, $sql);
