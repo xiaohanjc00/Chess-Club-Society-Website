@@ -5,7 +5,7 @@
     if($_GET["show"] == "match"){
         if ($_GET["update"] == "ratings") {
 
-            if (update_ratings($_GET["id"])) {
+            if (update_ratings($_GET['id'])) {
                 echo '<div id="message">Ratings successfully updated!</div>';
             } else {
                 echo '<div id="message">Ratings update error.</div>';
@@ -13,9 +13,9 @@
 
         }
         
-        $tournamentMatch = find_all_tournamentMatches($_GET["id"]);
+        $tournamentMatch = find_all_tournamentMatches($_GET['id']);
         $round = 1;
-        $currentTournament = find_tournament_by_id($_GET["id"]);
+        $currentTournament = find_tournament_by_id($_GET['id']);
         $currentDateTime = date('Y-m-d');
         $currentdatetime1 =  date_create($currentDateTime);
         $tournamentDate =  date_create(date('Y-m-d',strtotime($currentTournament['tournamentDate'])));
@@ -138,8 +138,8 @@
             echo '</form>';
         }
         else if(!find_all_tournament_winners($_GET['id']) ){
-            $winner = find_user_by_id(get_tournament_winner($_GET["id"]));
-            $first_runner_up = find_user_by_id(get_tournament_runner_up($_GET["id"]) );
+            $winner = find_user_by_id(get_tournament_winner($_GET['id']));
+            $first_runner_up = find_user_by_id(get_tournament_runner_up($_GET['id']) );
             echo '<p> The winner of this tournament is :'. $winner['first_name'] . ' ' . $winner['last_name'] . '</p>';
             echo '<p> The first runner up of this tournament is :'. $first_runner_up['first_name'] . ' ' . $first_runner_up['last_name'] . '</p>';
         }
@@ -148,7 +148,7 @@
 
     else if($_GET["show"] == "participant"){
 
-        $match = find_all_tournamentParticipants($_GET["id"]);
+        $match = find_all_tournamentParticipants($_GET['id']);
         echo "<h3> Participants : </h3>";
 
         if (mysqli_num_rows($match) > 0) {

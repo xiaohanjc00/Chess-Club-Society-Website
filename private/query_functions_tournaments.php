@@ -151,7 +151,7 @@
 
     function find_admins($id) {
         global $db;
-        $sql = "SELECT id, first_name FROM users WHERE admin = 1 AND ";
+        $sql = "SELECT id, first_name, last_name FROM users WHERE admin = 1 AND ";
         $sql .= "id NOT IN ";
         $sql .= "(SELECT organizerID 
           FROM tournamentcoorganizers WHERE tournamentID = ". $id . ")";

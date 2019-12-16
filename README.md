@@ -9,6 +9,31 @@ Members of the team:
   - Kerun Qian
   - David Spencer
   
-  URL: Yet to be determined
+  URL: http://seglab19albany.dx.am/public/index.php
   
+  ____________________________________________
+  USER ACCESS CREDENTIALS:
   
+  System Administrator: Joe Baker
+  
+  Username: joebaker
+  
+  Password: the1:THEtheEHT
+  __
+  
+  Administrator: Jane Black
+  
+  Username: chessMaster
+  
+  Password: 
+  __
+  
+  Member: Anna West
+  
+  Username: WestBestRook
+  
+  Password: 
+  
+  ____________________________________________
+  
+All of the submitted code uses ideas from the recommended PHP training videos: Kevin Skoglund's series on LinkedIn Learning.
