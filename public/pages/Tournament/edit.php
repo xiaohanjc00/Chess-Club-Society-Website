@@ -32,11 +32,25 @@
 
     echo display_errors($errors);
 
-    echo '<form width="800px" margin="auto"  action="edit.php?id='. $_GET['id'] .'" method="post">';
-    echo '<dl> <dt>Tournament organizer:</dt><dd><input type="text" name="organizer" value="'.$tournament['organizer'] . '" /></dd> </dl>' ;
-    echo '<dl> <dt>Tournament Name:</dt><dd><input type="text" name="name" value="'.$tournament['name'] . '" /></dd> </dl>' ;
-    echo '<dl> <dt>Tournament date:</dt><dd><input type="date" name="date" value="'.$tournament['date'] . '" /></dd> </dl>' ;
-    echo '<dl> <dt>Registration deadline:</dt><dd><input type="date" name="deadline" value="'.$tournament['deadline'] . '" /></dd> </dl>' ;
+        echo '<form width="800px" margin="auto"  action="edit.php?id='. $_GET['id'] .'" method="post">';
+        echo '<input type="text" name="organizer" value="'.$tournament['organizer'] . '" /></dd> </dl>' ;
+   
+       
+        $admins = find_admins_not_organisers($_GET['id']);
+
+        echo "<select name='coorganizer'>";
+        if (mysqli_num_rows($admins) > 0) {
+            while($row = mysqli_fetch_assoc($admins)){
+                echo "<option value=" . $row["id"] .  ">".  $row["first_name"] ." ". $row["last_name"] . "</option>";
+            }
+        }
+        else{
+            echo "<option value='None'> No user found </option>";
+        }
+        echo "</select>";
+        echo '<dl> <dt>Tournament Name:</dt><dd><input type="text" name="name" value="'.$tournament['name'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Tournament date:</dt><dd><input type="date" name="date" value="'.$tournament['date'] . '" /></dd> </dl>' ;
+        echo '<dl> <dt>Registration deadline:</dt><dd><input type="date" name="deadline" value="'.$tournament['deadline'] . '" /></dd> </dl>' ;
 
     echo '<div> <input type="submit" value="Post new tournament" /> </div>';
     echo '</form>';
