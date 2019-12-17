@@ -347,8 +347,23 @@
     return $result;
   }
 
+
+  function validate_winner($matchResult, $options=[]) {
+    $errors = [];
+    
+    if(is_blank($matchResult['winner'])) {
+        $errors[] = "Please select the winner.";
+    } 
+    return $errors;
+  }
+  
   function set_winner($matchResult){
     global $db;
+
+    $errors = validate_winner($matchResult);
+    if (!empty($errors)) {
+        return $errors;
+    }
 
     $sql = 'UPDATE tournamentMatches set roundWinner= '.  db_escape($db, $matchResult['winner']) ;
     $sql .= ' WHERE roundNumber = ' . db_escape($db, $matchResult['matchID']) .' AND tournamentID =' .  db_escape($db, $matchResult['tournamentID']).' AND firstparticipantID = ' .  db_escape($db, $matchResult['firstparticipantID']) . ' AND secondparticipantID = ' .  db_escape($db, $matchResult['secondparticipantID']) . '; ';
