@@ -62,11 +62,9 @@
 
                 if(is_logged_in() && user_is_admin()){
                     echo '<th scope = "col">';
-<<<<<<< HEAD
 
-=======
->>>>>>> c783e654926532f25d5c1c77b31fe925750fc670
                     if($currentdatetime1  >= $tournamentDate && (($row["roundNumber"] != 1 && !find_previous_round_winners($row["tournamentID"],( $row["roundNumber"]-1)) OR $row["roundNumber"] == 1))){
+                        echo display_errors($errors);
                         echo '<form method="post">';
                         echo '<input type="radio" name="winner" value="'. $row["firstparticipantID"] .'"> First Participant   ';
                         echo '<input type="radio" name="winner" value="'. $row["secondparticipantID"] .'" > Second Participant';
@@ -81,10 +79,6 @@
             else{
                 $match_winner = find_user_by_id($row["roundWinner"]);
                 echo "<th scope='col'>". $match_winner["first_name"]. " " .$match_winner["last_name"]. "</th>";
-<<<<<<< HEAD
-=======
-
->>>>>>> c783e654926532f25d5c1c77b31fe925750fc670
             }
 
             echo "</tr>";
@@ -95,16 +89,23 @@
                 $match['firstparticipantID'] = $row["firstparticipantID"];
                 $match['secondparticipantID'] = $row["secondparticipantID"];
                 $match['matchID'] = $row["roundNumber"];
-                $match['winner'] = $_POST["winner"] ;
+                if(!empty($_POST['winner'])){
+                  $match['winner'] = $_POST["winner"] ;
+                  if($_POST["winner"]   == $row["secondparticipantID"] ){
+                      $match['loser'] = $row["firstparticipantID"];
+                  }
+
+                  else{
+                      $match['loser'] = $row["secondparticipantID"];
+                  }
+                }
+                else{
+                    $match['winner'] = '';
+                    $match['loser'] = '';
+                }
                 $match['tournamentID'] = $row["tournamentID"];
 
-                if($_POST["winner"]   == $row["secondparticipantID"] ){
-                    $match['loser'] = $row["firstparticipantID"];
-                }
 
-                else{
-                    $match['loser'] = $row["secondparticipantID"];
-                }
 
                 $id = isset($_GET['id']) ? $_GET['id'] : '';
                 $result = set_winner($match, $id);
@@ -118,7 +119,6 @@
                     $errors = $result;
                 }
 
-<<<<<<< HEAD
             }
 
             else {
@@ -134,34 +134,6 @@
 
             $round = $row["roundNumber"];
 
-=======
-            $round = $row["roundNumber"];
-
-    }
-    echo '</tbody>';
-    echo '</table>';
-
-    if(is_logged_in() && user_is_admin() && !find_all_tournament_winners($_GET['id']) && !tournament_ratings_updated($_GET['id'])){
-        set_tournament_winner($_GET['id'] );
-        echo '<form width="800px" margin="auto" action="show.php?update=ratings&&show=match&&id='. $_GET['id'] .'" method="post">';
-        echo '<div><input type="submit" value="Update all participant ratings" /></div>';
-        echo '</form>';
-        //update_ratings($_GET["id"]);
-    }
-    else if(!find_all_tournament_winners($_GET['id']) ){
-        $winner = find_user_by_id(get_tournament_winner($_GET["id"]));
-        $first_runner_up = find_user_by_id(get_tournament_runner_up($_GET["id"]) );
-        echo '<p> The winner of this tournament is :'. $winner['first_name'] . ' ' . $winner['last_name'] . '</p>';
-        echo '<p> The first runner up of this tournament is :'. $first_runner_up['first_name'] . ' ' . $first_runner_up['last_name'] . '</p>';
-    }
-}
-else if($_GET["show"] == "participant"){
-    $match = find_all_tournamentParticipants($_GET["id"]);
-    echo "<h3> Participants : </h3>";
-    if (mysqli_num_rows($match) > 0) {
-        while($row = mysqli_fetch_assoc($match)){
-            echo "<p> " .$row["first_name"] . " ".  $row["last_name"] . "</p>";
->>>>>>> c783e654926532f25d5c1c77b31fe925750fc670
         }
 
         echo '</tbody>';

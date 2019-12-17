@@ -1,206 +1,7 @@
 <?php 
     // functions for accessing and updating tournaments:
 
-    function find_all_tournaments() {
-        global $db;
-        
-        $sql = "SELECT * FROM tournament ORDER BY tournamentDate DESC";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-
-    function find_tournament_by_id($id) {
-        global $db;
-        $sql = "SELECT * FROM tournament ";
-        $sql .= "WHERE tournamentID='" . db_escape($db, $id) . "' ";
-        $sql .= "LIMIT 1";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        $tournament = mysqli_fetch_assoc($result);
-        mysqli_free_result($result);
-        return $tournament;
-    }
-
-    function find_all_tournamentOrganizers() {
-        global $db;
-    
-        $sql = "SELECT * FROM tournamentCoOrganizers ORDER BY tournamentID DESC";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-      }
-    
-    function find_organizers_by_tournament_id($id) {
-        global $db;
-        global $db;
-        $sql = "SELECT id, first_name, last_name FROM users, tournamentcoorganizers WHERE tournamentID = ". $id." AND ";
-        $sql .= "id =  organizerID;";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-    
-    function find_tournament_by_organizer_id($id) {
-        global $db;
-    
-        $sql = "SELECT * FROM tournamentCoOrganizers WHERE organizerID= ". $id. ";";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-
-    function find_matches($tournamentID, $round) {
-        global $db;
-    
-        $sql = 'SELECT * FROM tournamentMatches WHERE tournamentID =' . $tournamentID . ' AND roundNumber ='. $round . ';';
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-
-    function find_previous_round_winners($tournamentID, $round) {
-        global $db;
-    
-        $sql = 'SELECT roundWinner FROM tournamentMatches WHERE tournamentID =' . $tournamentID . ' AND roundNumber ='. $round . ';';
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        while($row = mysqli_fetch_assoc($result)){
-          if(is_null($row['roundWinner'])){
-            return true;
-          }
-        }
-        return false;
-    }
-
-    function find_all_tournament_winners($tournamentID) {
-        global $db;
-        $sql = 'SELECT roundWinner FROM tournamentMatches WHERE tournamentID = ' . $tournamentID . ';';
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        while($row = mysqli_fetch_assoc($result)){
-          if(is_null($row['roundWinner'])){
-            return true;
-          }
-        }
-        return false;
-    }
-    
-    function find_all_tournamentParticipants($id) {
-        global $db;
-    
-        $sql = "SELECT * FROM tournamentParticipant, users WHERE id = participantID AND tournamentID = " .$id .";";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-    
-    function find_all_tournamentMatches($id) {
-        global $db;
-    
-        $sql = "SELECT * FROM tournamentMatches WHERE tournamentID = " .$id ."  ORDER BY roundNumber;";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-    
-    function find_user_tournamentMatches($id) {
-        global $db;
-    
-        $sql = "SELECT * FROM tournamentMatches WHERE firstparticipantID = " .$id ." OR  secondparticipantID = ".$id . "ORDER BY roundNumber;";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-
-    function find_participants_by_tournament_id($id) {
-        global $db;
-    
-        $sql = "SELECT * FROM tournamentParticipant WHERE tournamentID= ". $id. ";";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-    
-    function find_tournament_and_participant($id, $tournamentID) {
-        global $db;
-    
-        $sql = "SELECT participantID FROM tournamentParticipant WHERE participantID= ". $id. " AND tournamentID = ". $tournamentID . ";";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-    
-    function find_all_coorganizer($tournamentID) {
-        global $db;
-    
-        $sql = "SELECT tournamentOrganizer FROM tournament WHERE tournamentID = ". $tournamentID . ";";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-    
-    function find_tournament_organizer($id, $tournamentID) {
-        global $db;
-    
-        $sql = "SELECT tournamentOrganizer FROM tournament WHERE tournamentOrganizer= ". $id. " AND tournamentID = ". $tournamentID . ";";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-
-    function find_admins($id) {
-        global $db;
-        $sql = "SELECT id, first_name, last_name FROM users WHERE admin = 1 AND ";
-        $sql .= "id NOT IN ";
-        $sql .= "(SELECT organizerID 
-          FROM tournamentcoorganizers WHERE tournamentID = ". $id . ")";
-        $sql .= "AND id NOT IN ";
-        $sql .= "(SELECT tournamentOrganizer FROM tournament WHERE tournamentID = ". $id.");";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-
-    function find_admins_not_organisers($id) {
-        global $db;
-        $sql = "SELECT id, first_name, last_name FROM users WHERE admin = 1 AND ";
-        $sql .= "id NOT IN ";
-        $sql .= "(SELECT tournamentOrganizer 
-          FROM tournament WHERE tournamentID = ". $id . ")";
-        $sql .= "AND id NOT IN ";
-        $sql .= "(SELECT tournamentOrganizer FROM tournament WHERE tournamentID = ". $id.");";
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
-    }
-    
-    function get_tournament_winner($tournamentID){
-        global $db;
-    
-        $sql = "SELECT winnerID FROM tournament WHERE tournamentID = ".$tournamentID. ";" ;
-    
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        $winner = mysqli_fetch_assoc($result);
-        mysqli_free_result($result);
-        return $winner['winnerID'];
-    }
-    
-    function get_tournament_runner_up($tournamentID){
-        global $db;
-    
-        $sql = "SELECT firstRunnerUpID FROM tournament WHERE tournamentID = ".$tournamentID. ";" ;
-    
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        $winner = mysqli_fetch_assoc($result);
-        mysqli_free_result($result);
-        return $winner['firstRunnerUpID'];
-    }
-    
-        
-    function validate_tournament($tournament, $options=[]) {
+  function validate_tournament($tournament, $options=[]) {
     $errors = [];
     
     if(is_blank($tournament['organizer'])) {
@@ -300,6 +101,27 @@
     }
   }
 
+  function find_all_tournaments() {
+    global $db;
+
+    $sql = "SELECT * FROM tournament ORDER BY tournamentDate DESC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_tournament_by_id($id) {
+    global $db;
+    $sql = "SELECT * FROM tournament ";
+    $sql .= "WHERE tournamentID='" . db_escape($db, $id) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $tournament = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $tournament;
+  }
+
   function delete_tournament($id) {
     global $db;
 
@@ -364,6 +186,33 @@
     }
   }
 
+  function find_all_tournamentOrganizers() {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentCoOrganizers ORDER BY tournamentID DESC";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_organizers_by_tournament_id($id) {
+    global $db;
+    global $db;
+    $sql = "SELECT id, first_name, last_name FROM users, tournamentcoorganizers WHERE tournamentID = ". $id." AND ";
+    $sql .= "id =  organizerID;";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_tournament_by_organizer_id($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentCoOrganizers WHERE organizerID= ". $id. ";";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
 
   function delete_tournament_organizer($tournament) {
     global $db;
@@ -435,9 +284,86 @@
       exit;
     }
   }
+  function find_matches($tournamentID, $round) {
+    global $db;
+
+    $sql = 'SELECT * FROM tournamentMatches WHERE tournamentID =' . $tournamentID . ' AND roundNumber ='. $round . ';';
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_previous_round_winners($tournamentID, $round) {
+    global $db;
+
+    $sql = 'SELECT roundWinner FROM tournamentMatches WHERE tournamentID =' . $tournamentID . ' AND roundNumber ='. $round . ';';
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    while($row = mysqli_fetch_assoc($result)){
+      if(is_null($row['roundWinner'])){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function find_all_tournament_winners($tournamentID) {
+    global $db;
+    $sql = 'SELECT roundWinner FROM tournamentMatches WHERE tournamentID = ' . $tournamentID . ';';
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    while($row = mysqli_fetch_assoc($result)){
+      if(is_null($row['roundWinner'])){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function find_all_tournamentParticipants($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentParticipant, users WHERE id = participantID AND tournamentID = " .$id .";";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_all_tournamentMatches($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentMatches WHERE tournamentID = " .$id ."  ORDER BY roundNumber;";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_user_tournamentMatches($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentMatches WHERE firstparticipantID = " .$id ." OR  secondparticipantID = ".$id . "ORDER BY roundNumber;";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+
+  function validate_winner($matchResult, $options=[]) {
+    $errors = [];
+    
+    if(is_blank($matchResult['winner'])) {
+        $errors[] = "Please select the winner.";
+    } 
+    return $errors;
+  }
   
   function set_winner($matchResult){
     global $db;
+
+    $errors = validate_winner($matchResult);
+    if (!empty($errors)) {
+        return $errors;
+    }
 
     $sql = 'UPDATE tournamentMatches set roundWinner= '.  db_escape($db, $matchResult['winner']) ;
     $sql .= ' WHERE roundNumber = ' . db_escape($db, $matchResult['matchID']) .' AND tournamentID =' .  db_escape($db, $matchResult['tournamentID']).' AND firstparticipantID = ' .  db_escape($db, $matchResult['firstparticipantID']) . ' AND secondparticipantID = ' .  db_escape($db, $matchResult['secondparticipantID']) . '; ';
@@ -488,6 +414,42 @@
 		
   }
 
+  function find_participants_by_tournament_id($id) {
+    global $db;
+
+    $sql = "SELECT * FROM tournamentParticipant WHERE tournamentID= ". $id. ";";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_tournament_and_participant($id, $tournamentID) {
+    global $db;
+
+    $sql = "SELECT participantID FROM tournamentParticipant WHERE participantID= ". $id. " AND tournamentID = ". $tournamentID . ";";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_all_coorganizer($tournamentID) {
+    global $db;
+
+    $sql = "SELECT tournamentOrganizer FROM tournament WHERE tournamentID = ". $tournamentID . ";";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function find_tournament_organizer($id, $tournamentID) {
+    global $db;
+
+    $sql = "SELECT tournamentOrganizer FROM tournament WHERE tournamentOrganizer= ". $id. " AND tournamentID = ". $tournamentID . ";";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
   function delete_tournament_participant($participantID, $tournamentID) {
     global $db;
 
@@ -502,5 +464,44 @@
       exit;
     }
   }
+
+  function find_admins($id) {
+    global $db;
+    $sql = "SELECT id, first_name FROM users WHERE admin = 1 AND ";
+    $sql .= "id NOT IN ";
+    $sql .= "(SELECT organizerID 
+      FROM tournamentcoorganizers WHERE tournamentID = ". $id . ")";
+    $sql .= "AND id NOT IN ";
+    $sql .= "(SELECT tournamentOrganizer FROM tournament WHERE tournamentID = ". $id.");";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+  }
+
+  function get_tournament_winner($tournamentID){
+    global $db;
+
+    $sql = "SELECT winnerID FROM tournament WHERE tournamentID = ".$tournamentID. ";" ;
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $winner = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $winner['winnerID'];
+  }
+
+  function get_tournament_runner_up($tournamentID){
+    global $db;
+
+    $sql = "SELECT firstRunnerUpID FROM tournament WHERE tournamentID = ".$tournamentID. ";" ;
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $winner = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $winner['firstRunnerUpID'];
+  }
+
+
 
 ?>
